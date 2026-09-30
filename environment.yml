@@ -1,0 +1,8 @@
+name: photochem-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - photochem=0.9.1
+  - jupyterlab
+  - matplotlib
