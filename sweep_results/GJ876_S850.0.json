@@ -1,0 +1,41 @@
+{
+ "star": "GJ876",
+ "S_Wm2": 850.0,
+ "T_surf_K": 287.6095060809617,
+ "rce_converged": true,
+ "pCO2_bar": 0.09145566479327288,
+ "P_total_bar": 1.1922861080814917,
+ "vmr": {
+  "CO2": 0.07969722585752503,
+  "CO": 0.03684212578331538,
+  "O2": 1.1113279193847506e-13,
+  "H2O": 0.008360172255958469,
+  "CH4": 0.00012874756082293087,
+  "H2": 0.003541540283918528,
+  "N2": 0.8714301737095596
+ },
+ "target_status": "ok",
+ "coupling_converged": true,
+ "iterations": 2,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 1301.8251235485077,
+ "history": [
+  {
+   "pCO2_bar": 0.14384198470059148,
+   "T_rce_K": 288.15739022528174,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 1642162529765128.8,
+   "photochem_wall_s": 868.5129158496857,
+   "limiting_species": "O2"
+  },
+  {
+   "pCO2_bar": 0.09145566479327288,
+   "T_rce_K": 288.23407164493534,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 611051307435562.2,
+   "photochem_wall_s": 338.11162281036377,
+   "limiting_species": "O2"
+  }
+ ]
+}

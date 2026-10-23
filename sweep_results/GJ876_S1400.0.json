@@ -1,0 +1,33 @@
+{
+ "star": "GJ876",
+ "S_Wm2": 1400.0,
+ "T_surf_K": 310.62112239066715,
+ "rce_converged": true,
+ "pCO2_bar": 1e-05,
+ "P_total_bar": 1.065241274803054,
+ "vmr": {
+  "CO2": 9.664911325503967e-06,
+  "CO": 0.0009136306572529078,
+  "O2": 3.2709710363477532e-24,
+  "H2O": 0.02440392709913554,
+  "CH4": 2.330853835537794e-05,
+  "H2": 0.002600775339781455,
+  "N2": 0.9664911325503965
+ },
+ "target_status": "target not reachable: too warm even at minimum CO2",
+ "coupling_converged": false,
+ "iterations": 1,
+ "photochem_stop": "runaway: C4H4 accumulating",
+ "photochem_steady": false,
+ "wall_s": 514.0918793678284,
+ "history": [
+  {
+   "pCO2_bar": 1e-05,
+   "T_rce_K": 306.68209221013274,
+   "photochem_stop": "runaway: C4H4 accumulating",
+   "photochem_t_s": 19222878755261.164,
+   "photochem_wall_s": 365.44078946113586,
+   "limiting_species": "C4H4"
+  }
+ ]
+}

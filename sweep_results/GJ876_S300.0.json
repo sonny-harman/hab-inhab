@@ -1,0 +1,33 @@
+{
+ "star": "GJ876",
+ "S_Wm2": 300.0,
+ "T_surf_K": 174.72475351929094,
+ "rce_converged": true,
+ "pCO2_bar": 10.0,
+ "P_total_bar": 2.8918288568247768,
+ "vmr": {
+  "CO2": 0.6253471875846451,
+  "CO": 0.016552427043960954,
+  "O2": 2.660474410376356e-13,
+  "H2O": 3.615791542053803e-07,
+  "CH4": 0.0008447065964826138,
+  "H2": 0.002066050016769643,
+  "N2": 0.35518917748473183
+ },
+ "target_status": "target not reachable: maximum-greenhouse CO2 used",
+ "coupling_converged": true,
+ "iterations": 1,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 641.2001070976257,
+ "history": [
+  {
+   "pCO2_bar": 10.0,
+   "T_rce_K": 193.3449219457111,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 8449787062012211.0,
+   "photochem_wall_s": 594.405858039856,
+   "limiting_species": "CO"
+  }
+ ]
+}
