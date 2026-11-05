@@ -6,3 +6,4 @@ dependencies:
   - photochem=0.9.1
   - jupyterlab
   - matplotlib
+  - scipy
