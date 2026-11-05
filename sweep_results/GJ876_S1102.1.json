@@ -1,0 +1,41 @@
+{
+ "star": "GJ876",
+ "S_Wm2": 1102.08,
+ "T_surf_K": 290.0426616233046,
+ "rce_converged": true,
+ "pCO2_bar": 0.0013583584934599498,
+ "P_total_bar": 1.0766198702924656,
+ "vmr": {
+  "CO2": 0.001312377287009415,
+  "CO": 0.011022790899505964,
+  "O2": 2.3093568891641166e-22,
+  "H2O": 0.008652731210192638,
+  "CH4": 8.082315336297891e-05,
+  "H2": 0.002357585896011119,
+  "N2": 0.96614943207414
+ },
+ "target_status": "ok",
+ "coupling_converged": false,
+ "iterations": 2,
+ "photochem_stop": "runaway: C4H4 accumulating",
+ "photochem_steady": false,
+ "wall_s": 513.1109051704407,
+ "history": [
+  {
+   "pCO2_bar": 0.0024979363076378896,
+   "T_rce_K": 288.128571818878,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 1646235123754712.8,
+   "photochem_wall_s": 238.93174123764038,
+   "limiting_species": "CO"
+  },
+  {
+   "pCO2_bar": 0.0013583584934599498,
+   "T_rce_K": 288.16317115994644,
+   "photochem_stop": "runaway: C4H4 accumulating",
+   "photochem_t_s": 44946493421143.195,
+   "photochem_wall_s": 186.44461750984192,
+   "limiting_species": "C4H4"
+  }
+ ]
+}

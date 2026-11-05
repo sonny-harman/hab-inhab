@@ -1,0 +1,49 @@
+{
+ "star": "GJ876",
+ "S_Wm2": 918.75,
+ "T_surf_K": 288.23113263697775,
+ "rce_converged": true,
+ "pCO2_bar": 0.03792227410866373,
+ "P_total_bar": 1.1351066242610774,
+ "vmr": {
+  "CO2": 0.03472236187148763,
+  "CO": 0.03695731987318847,
+  "O2": 1.782222126669825e-15,
+  "H2O": 0.008727360840096848,
+  "CH4": 9.581782674070398e-05,
+  "H2": 0.0038779440952041743,
+  "N2": 0.915619189186625
+ },
+ "target_status": "ok",
+ "coupling_converged": true,
+ "iterations": 3,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 898.6295251846313,
+ "history": [
+  {
+   "pCO2_bar": 0.06151453030396866,
+   "T_rce_K": 288.1254541631699,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 3059707465296453.5,
+   "photochem_wall_s": 262.13331413269043,
+   "limiting_species": "CO"
+  },
+  {
+   "pCO2_bar": 0.03571999846347338,
+   "T_rce_K": 288.17743289336954,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 1358562018260535.5,
+   "photochem_wall_s": 254.3036732673645,
+   "limiting_species": "CO"
+  },
+  {
+   "pCO2_bar": 0.03792227410866373,
+   "T_rce_K": 288.15965159075927,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 731546402852563.0,
+   "photochem_wall_s": 166.97367548942566,
+   "limiting_species": "CO"
+  }
+ ]
+}
