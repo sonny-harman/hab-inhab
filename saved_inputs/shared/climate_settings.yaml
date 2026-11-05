@@ -1,0 +1,14 @@
+atmosphere-grid:
+  number-of-layers: 50
+
+planet:
+  planet-mass: 5.972e+27
+  planet-radius: 637100000.0
+  surface-albedo: 0.2
+  number-of-zenith-angles: 4
+  photon-scale-factor: 1.0
+
+optical-properties:
+  k-method: RandomOverlapResortRebin
+  opacities: {k-distributions: true, CIA: true, rayleigh: true, photolysis-xs: true,
+    water-continuum: MT_CKD}

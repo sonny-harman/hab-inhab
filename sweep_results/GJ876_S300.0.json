@@ -1,4 +1,5 @@
 {
+ "run_id": "GJ876_S0300.00_CO2-1.000e01bar",
  "star": "GJ876",
  "S_Wm2": 300.0,
  "T_surf_K": 174.72475351929094,
@@ -19,15 +20,70 @@
  "iterations": 1,
  "photochem_stop": "composition steady over last decade",
  "photochem_steady": true,
- "wall_s": 641.2001070976257,
+ "wall_s": 657.5386402606964,
  "history": [
   {
    "pCO2_bar": 10.0,
    "T_rce_K": 193.3449219457111,
    "photochem_stop": "composition steady over last decade",
    "photochem_t_s": 8449787062012211.0,
-   "photochem_wall_s": 594.405858039856,
+   "photochem_wall_s": 603.755363702774,
    "limiting_species": "CO"
   }
- ]
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 29166.274132597737,
+  "target_toa_pressure_dyn_cm2": 1.1526203824163743,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 22792.894753605287,
+   "H2O": 270000000.0,
+   "CO2": 10000000.0,
+   "CH4": 9318.897604138216,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 174.72475351929094,
+  "P_surf_bar": 1.1161948207136745,
+  "P_trop_bar": 0.022262026980347033
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "saved_inputs": {
+  "directory": "GJ876_S0300.00_CO2-1.000e01bar",
+  "files": {
+   "atmosphere": "GJ876_S0300.00_CO2-1.000e01bar_photochem_atmosphere.txt",
+   "settings": "GJ876_S0300.00_CO2-1.000e01bar_photochem_settings.yaml",
+   "flux": "GJ876_S0300.00_CO2-1.000e01bar_flux.txt",
+   "profile": "GJ876_S0300.00_CO2-1.000e01bar_PTKzz_profile.txt",
+   "climate": "GJ876_S0300.00_CO2-1.000e01bar_climate_profile.txt"
+  }
+ }
 }
