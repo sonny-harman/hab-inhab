@@ -1,4 +1,5 @@
 {
+ "run_id": "GJ876_S1079.17_CO2-2.278e-03bar",
  "star": "GJ876",
  "S_Wm2": 1079.17,
  "T_surf_K": 289.70236981409136,
@@ -19,14 +20,14 @@
  "iterations": 2,
  "photochem_stop": "runaway: C4H4 accumulating",
  "photochem_steady": false,
- "wall_s": 502.5653443336487,
+ "wall_s": 421.8784272670746,
  "history": [
   {
    "pCO2_bar": 0.004249409119515082,
    "T_rce_K": 288.0848813675737,
    "photochem_stop": "composition steady over last decade",
    "photochem_t_s": 968111437591650.9,
-   "photochem_wall_s": 241.10805416107178,
+   "photochem_wall_s": 212.6785364151001,
    "limiting_species": "CO"
   },
   {
@@ -34,8 +35,63 @@
    "T_rce_K": 288.1489124277706,
    "photochem_stop": "runaway: C4H4 accumulating",
    "photochem_t_s": 117200123803825.81,
-   "photochem_wall_s": 171.05162382125854,
+   "photochem_wall_s": 143.01416969299316,
    "limiting_species": "C4H4"
   }
- ]
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 337401.02718388493,
+  "target_toa_pressure_dyn_cm2": 1.1483220973227697,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 2196.754072280199,
+   "H2O": 270000000.0,
+   "CO2": 2277.5195440170346,
+   "CH4": 84.19153639902834,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 289.70236981409136,
+  "P_surf_bar": 1.0139885379624813,
+  "P_trop_bar": 0.32832405180664354
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "saved_inputs": {
+  "directory": "GJ876_S1079.17_CO2-2.278e-03bar",
+  "files": {
+   "atmosphere": "GJ876_S1079.17_CO2-2.278e-03bar_photochem_atmosphere.txt",
+   "settings": "GJ876_S1079.17_CO2-2.278e-03bar_photochem_settings.yaml",
+   "flux": "GJ876_S1079.17_CO2-2.278e-03bar_flux.txt",
+   "profile": "GJ876_S1079.17_CO2-2.278e-03bar_PTKzz_profile.txt",
+   "climate": "GJ876_S1079.17_CO2-2.278e-03bar_climate_profile.txt"
+  }
+ }
 }

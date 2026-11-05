@@ -1,0 +1,97 @@
+{
+ "run_id": "Sun3Ga_S1193.75_CO2-3.971e-03bar",
+ "star": "Sun",
+ "S_Wm2": 1193.75,
+ "T_surf_K": 287.71107789934786,
+ "rce_converged": true,
+ "pCO2_bar": 0.003970831698054311,
+ "P_total_bar": 1.0538770410591178,
+ "vmr": {
+  "CO2": 0.0039008965131198943,
+  "CO": 3.64496112143698e-05,
+  "O2": 4.373518860686292e-15,
+  "H2O": 0.008172908072438324,
+  "CH4": 2.4927274792879983e-05,
+  "H2": 0.005477038845462973,
+  "N2": 0.9823877740855437
+ },
+ "target_status": "ok",
+ "coupling_converged": true,
+ "iterations": 2,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 470.7656362056732,
+ "history": [
+  {
+   "pCO2_bar": 0.005753073612500228,
+   "T_rce_K": 287.77676898825086,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 2.1858658397056496e+16,
+   "photochem_wall_s": 355.9277763366699,
+   "limiting_species": "H2"
+  },
+  {
+   "pCO2_bar": 0.003970831698054311,
+   "T_rce_K": 288.10144138504785,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 73326809921571.1,
+   "photochem_wall_s": 34.848278284072876,
+   "limiting_species": "CO"
+  }
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 340921.8714058614,
+  "target_toa_pressure_dyn_cm2": 1.1483591293987694,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 5529.2087642145425,
+   "H2O": 270000000.0,
+   "CO2": 3970.831698054311,
+   "CH4": 25.164712199722523,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 287.71107789934786,
+  "P_surf_bar": 1.0178375092060405,
+  "P_trop_bar": 0.3431078547470682
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "saved_inputs": {
+  "directory": "Sun3Ga_S1193.75_CO2-3.971e-03bar",
+  "files": {
+   "atmosphere": "Sun3Ga_S1193.75_CO2-3.971e-03bar_photochem_atmosphere.txt",
+   "settings": "Sun3Ga_S1193.75_CO2-3.971e-03bar_photochem_settings.yaml",
+   "flux": "Sun3Ga_S1193.75_CO2-3.971e-03bar_flux.txt",
+   "profile": "Sun3Ga_S1193.75_CO2-3.971e-03bar_PTKzz_profile.txt",
+   "climate": "Sun3Ga_S1193.75_CO2-3.971e-03bar_climate_profile.txt"
+  }
+ }
+}

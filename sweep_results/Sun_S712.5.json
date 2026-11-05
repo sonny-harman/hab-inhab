@@ -1,4 +1,5 @@
 {
+ "run_id": "Sun3Ga_S0712.50_CO2-1.158e00bar",
  "star": "Sun",
  "S_Wm2": 712.5,
  "T_surf_K": 287.8116019700392,
@@ -19,14 +20,14 @@
  "iterations": 2,
  "photochem_stop": "composition steady over last decade",
  "photochem_steady": true,
- "wall_s": 838.2623376846313,
+ "wall_s": 931.0953567028046,
  "history": [
   {
    "pCO2_bar": 1.5036641929260663,
    "T_rce_K": 288.0909110522055,
    "photochem_stop": "composition steady over last decade",
    "photochem_t_s": 5.2775356250186456e+16,
-   "photochem_wall_s": 459.2480618953705,
+   "photochem_wall_s": 511.9896922111511,
    "limiting_species": "CO"
   },
   {
@@ -34,8 +35,63 @@
    "T_rce_K": 288.01216404659885,
    "photochem_stop": "composition steady over last decade",
    "photochem_t_s": 86745865012185.47,
-   "photochem_wall_s": 278.91863083839417,
+   "photochem_wall_s": 300.10861444473267,
    "limiting_species": "CO"
   }
- ]
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 405943.54359809635,
+  "target_toa_pressure_dyn_cm2": 1.157095622479943,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 5619.878134659783,
+   "H2O": 270000000.0,
+   "CO2": 1157591.7457358127,
+   "CH4": 839.556849780623,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 287.8116019700392,
+  "P_surf_bar": 2.172416975025829,
+  "P_trop_bar": 0.4067766729399365
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "saved_inputs": {
+  "directory": "Sun3Ga_S0712.50_CO2-1.158e00bar",
+  "files": {
+   "atmosphere": "Sun3Ga_S0712.50_CO2-1.158e00bar_photochem_atmosphere.txt",
+   "settings": "Sun3Ga_S0712.50_CO2-1.158e00bar_photochem_settings.yaml",
+   "flux": "Sun3Ga_S0712.50_CO2-1.158e00bar_flux.txt",
+   "profile": "Sun3Ga_S0712.50_CO2-1.158e00bar_PTKzz_profile.txt",
+   "climate": "Sun3Ga_S0712.50_CO2-1.158e00bar_climate_profile.txt"
+  }
+ }
 }

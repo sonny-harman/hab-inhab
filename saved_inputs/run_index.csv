@@ -1,0 +1,38 @@
+run_id,star,S_Wm2,pCO2_bar,T_surf_K,P_total_bar,state,iterations,photochem_stop
+GJ876_S1400.00_CO2-1.000e-05bar,GJ876,1400.0,1e-05,,,NO STEADY STATE,1,runaway: C4H4 accumulating
+GJ876_S1331.25_CO2-1.000e-05bar,GJ876,1331.25,1e-05,,,NO STEADY STATE,1,runaway: C4H4 accumulating
+GJ876_S1262.50_CO2-1.659e-05bar,GJ876,1262.5,1.6594205667088504e-05,,,NO STEADY STATE,1,runaway: C4H4 accumulating
+GJ876_S1193.75_CO2-1.927e-04bar,GJ876,1193.75,0.0001926818833631336,,,NO STEADY STATE,1,runaway: C4H4 accumulating
+GJ876_S1125.00_CO2-1.398e-03bar,GJ876,1125.0,0.001397660169296616,,,NO STEADY STATE,1,runaway: C4H4 accumulating
+GJ876_S1102.08_CO2-1.358e-03bar,GJ876,1102.08,0.0013583584934599498,,,NO STEADY STATE,2,runaway: C4H4 accumulating
+GJ876_S1079.17_CO2-2.278e-03bar,GJ876,1079.17,0.0022775195440170345,,,NO STEADY STATE,2,runaway: C4H4 accumulating
+GJ876_S1067.71_CO2-3.204e-03bar,GJ876,1067.71,0.0032039889228950946,288.202,1.0886,holds 288 K,3,composition steady over last decade
+GJ876_S1056.25_CO2-4.052e-03bar,GJ876,1056.25,0.004051871841590352,288.202,1.0907,holds 288 K,3,composition steady over last decade
+GJ876_S0987.50_CO2-1.352e-02bar,GJ876,987.5,0.013523572793963188,287.945,1.1061,holds 288 K,3,composition steady over last decade
+GJ876_S0918.75_CO2-3.792e-02bar,GJ876,918.75,0.03792227410866373,288.231,1.1351,holds 288 K,3,composition steady over last decade
+GJ876_S0850.00_CO2-9.146e-02bar,GJ876,850.0,0.09145566479327288,287.61,1.1923,holds 288 K,2,composition steady over last decade
+GJ876_S0781.25_CO2-2.152e-01bar,GJ876,781.25,0.21515280426018862,287.631,1.323,holds 288 K,2,composition steady over last decade
+GJ876_S0712.50_CO2-4.720e-01bar,GJ876,712.5,0.4719851912435883,287.688,1.593,holds 288 K,2,composition steady over last decade
+GJ876_S0643.75_CO2-9.800e-01bar,GJ876,643.75,0.9800139537503884,288.113,2.1265,holds 288 K,2,composition steady over last decade
+GJ876_S0575.00_CO2-1.857e00bar,GJ876,575.0,1.8574973234878074,288.015,3.0483,holds 288 K,2,composition steady over last decade
+GJ876_S0506.25_CO2-3.330e00bar,GJ876,506.25,3.3304578806796568,287.284,4.5954,holds 288 K,1,composition steady over last decade
+GJ876_S0437.50_CO2-6.003e00bar,GJ876,437.5,6.002556975205175,288.035,7.4022,holds 288 K,2,composition steady over last decade
+GJ876_S0368.75_CO2-1.000e01bar,GJ876,368.75,10.0,191.955,11.696,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S0300.00_CO2-1.000e01bar,GJ876,300.0,10.0,174.725,2.8918,288 K NOT REACHABLE,1,composition steady over last decade
+Sun3Ga_S1400.00_CO2-4.651e-05bar,Sun,1400.0,4.650803656537028e-05,287.875,1.0506,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1331.25_CO2-2.637e-04bar,Sun,1331.25,0.0002636973566514961,287.913,1.0503,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1262.50_CO2-1.092e-03bar,Sun,1262.5,0.0010915420051272147,287.695,1.0508,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1193.75_CO2-3.971e-03bar,Sun,1193.75,0.003970831698054311,287.711,1.0539,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1125.00_CO2-1.294e-02bar,Sun,1125.0,0.012935835106506921,288.332,1.0636,holds 288 K,3,composition steady over last decade
+Sun3Ga_S1056.25_CO2-3.250e-02bar,Sun,1056.25,0.03250180182577771,288.258,1.084,holds 288 K,3,photochem criterion
+Sun3Ga_S0987.50_CO2-7.320e-02bar,Sun,987.5,0.07319692619954782,288.194,1.1261,holds 288 K,3,composition steady over last decade
+Sun3Ga_S0918.75_CO2-1.538e-01bar,Sun,918.75,0.15375814185130413,288.081,1.2128,holds 288 K,3,photochem criterion
+Sun3Ga_S0850.00_CO2-3.064e-01bar,Sun,850.0,0.30643629608532746,287.449,1.3881,holds 288 K,2,photochem criterion
+Sun3Ga_S0781.25_CO2-6.139e-01bar,Sun,781.25,0.6138658083700249,287.64,1.7207,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0712.50_CO2-1.158e00bar,Sun,712.5,1.1575917457358127,287.812,2.2935,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0643.75_CO2-2.044e00bar,Sun,643.75,2.0437973833956318,288.126,3.2215,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0575.00_CO2-3.425e00bar,Sun,575.0,3.4250794949629704,288.008,4.6724,holds 288 K,3,photochem criterion
+Sun3Ga_S0506.25_CO2-5.309e00bar,Sun,506.25,5.308844442309884,268.726,6.6538,288 K NOT REACHABLE,2,photochem criterion
+Sun3Ga_S0437.50_CO2-1.000e01bar,Sun,437.5,10.0,222.466,11.6463,288 K NOT REACHABLE,2,composition steady over last decade
+Sun3Ga_S0368.75_CO2-1.000e01bar,Sun,368.75,10.0,203.946,8.5767,288 K NOT REACHABLE,2,composition steady over last decade
+Sun3Ga_S0300.00_CO2-1.000e01bar,Sun,300.0,10.0,188.091,1.9567,288 K NOT REACHABLE,1,composition steady over last decade
