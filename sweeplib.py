@@ -326,7 +326,7 @@ def make_readme(saved_dir="saved_inputs"):
     saved simulation) and <saved_dir>/run_index.csv, generated from the *_run.json files."""
     import csv, glob
     metas = [json.load(open(p)) for p in sorted(glob.glob(f"{saved_dir}/*/*_run.json"))]
-    metas.sort(key=lambda m: (m["star"], m.get("haze", {}).get("enabled", False), -m["S_Wm2"], m.get("haze", {}).get("particle_radius_cm", 0)))
+    metas.sort(key=lambda m: (m["star"], m.get("haze", {}).get("enabled", False), -m["S_Wm2"], m.get("haze", {}).get("particle_radius_cm", 0), (m.get("co_experiment") or {}).get("CO_vdep_cm_s", -1)))
     if not metas: raise RuntimeError("no saved runs found")
     ex = metas[0]; pl = ex["planet"]; v = ex["versions"]
     sci = lambda x: f"{x:.2e}"
@@ -380,6 +380,10 @@ def make_readme(saved_dir="saved_inputs"):
       "`H2CN + HCN -> HCaer2` and `C4H + HCCCN -> HCaer3` are kept, so hydrocarbons and nitriles are removed as haze particles (`HCaer1-3`, default radius 1e-4 cm). "
       "`_hazeR1e-5cm` means the same with an explicit haze particle radius of 1e-5 cm. Haze acts in the photochemistry only; the climate model ignores haze optical effects. "
       "These reruns replace the no-haze GJ 876 runs that had no steady state (same star and instellation, no suffix). Haze carbon-loss rates are in `haze_diagnostics.csv`.\n")
+    A("**CO deposition experiments.** A name ending in `_COvdep0_COflux0` or `_COvdep1.2e-4_COflux0` is a rerun of the run with the same star and instellation "
+      "(and the same haze setting) with a changed CO surface boundary condition: `COvdep` is the CO deposition velocity in cm/s (the baseline runs use 1e-8; `1.2e-4` is the abiotic maximum) "
+      "and `COflux0` means the surface CO flux (baseline 1e9 molecules/cm^2/s) is set to zero. Each starts from the converged saved state of its baseline run, then repeats the full coupled loop "
+      "(CO2 re-solved for 288 K). The starting run is named in the `co_experiment` entry of `_run.json`. Comparison notebook: `archean_co_deposition.ipynb`.\n")
     dT_hold, dT_unreach = [], []
     for m in metas:
         if m["photochem_stop"].startswith("runaway"): continue
@@ -417,6 +421,8 @@ def make_readme(saved_dir="saved_inputs"):
         A(f"### `{m['run_id']}`\n")
         hz = m.get("haze", {})
         if hz.get("enabled"): star_name += f", haze chemistry on (haze particle radius {hz['particle_radius_cm']:g} cm)"
+        ce = m.get("co_experiment")
+        if ce: star_name += f", CO deposition velocity {ce['CO_vdep_cm_s']:g} cm/s and CO surface flux {ce['CO_flux_cm-2_s-1']:g} (started from `{ce['start_from']}`)"
         A(f"- **Setup:** {star_name}, spectrum scaled to {m['S_Wm2']:g} W/m^2 at the planet; CO2 fixed at {m['pCO2_bar']:.3e} bar, N2 at {m['N2_bar']:g} bar.")
         A(f"- **State:** {st}: {note}")
         it = m["iterations"]

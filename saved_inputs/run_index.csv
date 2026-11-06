@@ -7,41 +7,115 @@ GJ876_S1125.00_CO2-1.398e-03bar,GJ876,1125.0,0.001397660169296616,,,NO STEADY ST
 GJ876_S1102.08_CO2-1.358e-03bar,GJ876,1102.08,0.0013583584934599498,,,NO STEADY STATE,2,runaway: C4H4 accumulating
 GJ876_S1079.17_CO2-2.278e-03bar,GJ876,1079.17,0.0022775195440170345,,,NO STEADY STATE,2,runaway: C4H4 accumulating
 GJ876_S1067.71_CO2-3.204e-03bar,GJ876,1067.71,0.0032039889228950946,288.202,1.0886,holds 288 K,3,composition steady over last decade
+GJ876_S1067.71_CO2-3.167e-03bar_COvdep0_COflux0,GJ876,1067.71,0.003166859064704018,288.261,1.095,holds 288 K,1,composition steady over last decade
+GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0,GJ876,1067.71,0.003765384373926783,288.257,1.0569,holds 288 K,2,photochem criterion
 GJ876_S1056.25_CO2-4.052e-03bar,GJ876,1056.25,0.004051871841590352,288.202,1.0907,holds 288 K,3,composition steady over last decade
+GJ876_S1056.25_CO2-4.001e-03bar_COvdep0_COflux0,GJ876,1056.25,0.004000867939715815,288.222,1.0971,holds 288 K,1,composition steady over last decade
+GJ876_S1056.25_CO2-4.638e-03bar_COvdep1.2e-4_COflux0,GJ876,1056.25,0.004637668324897524,288.242,1.0578,holds 288 K,2,photochem criterion
 GJ876_S0987.50_CO2-1.352e-02bar,GJ876,987.5,0.013523572793963188,287.945,1.1061,holds 288 K,3,composition steady over last decade
+GJ876_S0987.50_CO2-1.338e-02bar_COvdep0_COflux0,GJ876,987.5,0.01338196639380794,287.921,1.1135,holds 288 K,1,composition steady over last decade
+GJ876_S0987.50_CO2-1.427e-02bar_COvdep1.2e-4_COflux0,GJ876,987.5,0.014267133689230787,287.958,1.0679,holds 288 K,2,photochem criterion
 GJ876_S0918.75_CO2-3.792e-02bar,GJ876,918.75,0.03792227410866373,288.231,1.1351,holds 288 K,3,composition steady over last decade
+GJ876_S0918.75_CO2-3.768e-02bar_COvdep0_COflux0,GJ876,918.75,0.03767673689824949,288.159,1.1348,holds 288 K,1,max wall time
+GJ876_S0918.75_CO2-3.768e-02bar_COvdep1.2e-4_COflux0,GJ876,918.75,0.03767673689824949,287.832,1.092,holds 288 K,1,photochem criterion
 GJ876_S0850.00_CO2-9.146e-02bar,GJ876,850.0,0.09145566479327288,287.61,1.1923,holds 288 K,2,composition steady over last decade
+GJ876_S0850.00_CO2-9.569e-02bar_COvdep0_COflux0,GJ876,850.0,0.09568801781827986,288.344,1.2065,holds 288 K,1,composition steady over last decade
+GJ876_S0850.00_CO2-9.569e-02bar_COvdep1.2e-4_COflux0,GJ876,850.0,0.09568801781827986,288.057,1.152,holds 288 K,1,photochem criterion
 GJ876_S0781.25_CO2-2.152e-01bar,GJ876,781.25,0.21515280426018862,287.631,1.323,holds 288 K,2,composition steady over last decade
+GJ876_S0781.25_CO2-2.213e-01bar_COvdep0_COflux0,GJ876,781.25,0.22133884253982053,288.192,1.3393,holds 288 K,1,composition steady over last decade
+GJ876_S0781.25_CO2-2.213e-01bar_COvdep1.2e-4_COflux0,GJ876,781.25,0.22133884253982053,287.938,1.2833,holds 288 K,1,photochem criterion
 GJ876_S0712.50_CO2-4.720e-01bar,GJ876,712.5,0.4719851912435883,287.688,1.593,holds 288 K,2,composition steady over last decade
+GJ876_S0712.50_CO2-4.787e-01bar_COvdep0_COflux0,GJ876,712.5,0.478680692739855,288.031,1.6097,holds 288 K,1,composition steady over last decade
+GJ876_S0712.50_CO2-4.787e-01bar_COvdep1.2e-4_COflux0,GJ876,712.5,0.478680692739855,287.739,1.5534,holds 288 K,1,photochem criterion
 GJ876_S0643.75_CO2-9.800e-01bar,GJ876,643.75,0.9800139537503884,288.113,2.1265,holds 288 K,2,composition steady over last decade
+GJ876_S0643.75_CO2-9.800e-01bar_COvdep0_COflux0,GJ876,643.75,0.9799684236708548,288.117,2.1358,holds 288 K,1,composition steady over last decade
+GJ876_S0643.75_CO2-9.800e-01bar_COvdep1.2e-4_COflux0,GJ876,643.75,0.9799684236708548,287.718,2.0805,holds 288 K,1,photochem criterion
 GJ876_S0575.00_CO2-1.857e00bar,GJ876,575.0,1.8574973234878074,288.015,3.0483,holds 288 K,2,composition steady over last decade
+GJ876_S0575.00_CO2-1.852e00bar_COvdep0_COflux0,GJ876,575.0,1.852095319498807,287.9,3.0515,holds 288 K,1,photochem criterion
+GJ876_S0575.00_CO2-1.852e00bar_COvdep1.2e-4_COflux0,GJ876,575.0,1.852095319498807,287.382,2.9979,holds 288 K,1,photochem criterion
 GJ876_S0506.25_CO2-3.330e00bar,GJ876,506.25,3.3304578806796568,287.284,4.5954,holds 288 K,1,composition steady over last decade
+GJ876_S0506.25_CO2-3.383e00bar_COvdep0_COflux0,GJ876,506.25,3.3831134670653853,288.165,4.6591,holds 288 K,1,composition steady over last decade
+GJ876_S0506.25_CO2-3.383e00bar_COvdep1.2e-4_COflux0,GJ876,506.25,3.3831134670653853,287.625,4.6085,holds 288 K,1,photochem criterion
 GJ876_S0437.50_CO2-6.003e00bar,GJ876,437.5,6.002556975205175,288.035,7.4022,holds 288 K,2,composition steady over last decade
+GJ876_S0437.50_CO2-6.007e00bar_COvdep0_COflux0,GJ876,437.5,6.006579081313547,288.062,7.4136,holds 288 K,1,photochem criterion
+GJ876_S0437.50_CO2-6.007e00bar_COvdep1.2e-4_COflux0,GJ876,437.5,6.006579081313547,287.413,7.3676,holds 288 K,1,photochem criterion
 GJ876_S0368.75_CO2-1.000e01bar,GJ876,368.75,10.0,191.955,11.696,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S0368.75_CO2-1.000e01bar_COvdep0_COflux0,GJ876,368.75,10.0,197.304,2.6466,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0,GJ876,368.75,10.0,198.163,2.4898,288 K NOT REACHABLE,1,composition steady over last decade
 GJ876_S0300.00_CO2-1.000e01bar,GJ876,300.0,10.0,174.725,2.8918,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S0300.00_CO2-1.000e01bar_COvdep0_COflux0,GJ876,300.0,10.0,181.574,1.3279,288 K NOT REACHABLE,1,photochem criterion
+GJ876_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0,GJ876,300.0,10.0,182.338,1.2557,288 K NOT REACHABLE,1,composition steady over last decade
 GJ876_S1400.00_CO2-1.000e-05bar_haze,GJ876,1400.0,1e-05,305.677,1.0597,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep0_COflux0,GJ876,1400.0,1e-05,305.286,1.059,288 K NOT REACHABLE,1,photochem criterion
+GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0,GJ876,1400.0,1e-05,305.014,1.0586,288 K NOT REACHABLE,1,composition steady over last decade
 GJ876_S1331.25_CO2-1.000e-05bar_haze,GJ876,1331.25,1e-05,294.092,1.0549,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep0_COflux0,GJ876,1331.25,1e-05,293.783,1.0547,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0,GJ876,1331.25,1e-05,293.539,1.0543,288 K NOT REACHABLE,1,composition steady over last decade
 GJ876_S1262.50_CO2-2.207e-05bar_haze,GJ876,1262.5,2.2073670605764136e-05,287.89,1.0541,holds 288 K,3,photochem criterion
+GJ876_S1262.50_CO2-2.226e-05bar_haze_COvdep0_COflux0,GJ876,1262.5,2.2260922961047274e-05,287.889,1.054,holds 288 K,1,composition steady over last decade
+GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0,GJ876,1262.5,2.51065001624994e-05,287.868,1.0534,holds 288 K,2,composition steady over last decade
 GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm,GJ876,1193.75,0.0001656721555951412,288.066,1.0597,holds 288 K,2,photochem criterion
 GJ876_S1193.75_CO2-1.738e-04bar_haze,GJ876,1193.75,0.0001738453767581957,288.328,1.0595,holds 288 K,3,composition steady over last decade
+GJ876_S1193.75_CO2-1.689e-04bar_haze_COvdep0_COflux0,GJ876,1193.75,0.00016893551594699657,288.213,1.0594,holds 288 K,1,photochem criterion
+GJ876_S1193.75_CO2-2.198e-04bar_haze_COvdep1.2e-4_COflux0,GJ876,1193.75,0.00021982003650889353,287.861,1.0536,holds 288 K,2,photochem criterion
 GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm,GJ876,1125.0,0.000966008133878604,288.352,1.075,holds 288 K,3,composition steady over last decade
 GJ876_S1125.00_CO2-8.944e-04bar_haze,GJ876,1125.0,0.0008944188337695108,288.112,1.0739,holds 288 K,4,composition steady over last decade
+GJ876_S1125.00_CO2-9.089e-04bar_haze_COvdep0_COflux0,GJ876,1125.0,0.0009089279271576173,288.2,1.0741,holds 288 K,1,composition steady over last decade
+GJ876_S1125.00_CO2-1.227e-03bar_haze_COvdep1.2e-4_COflux0,GJ876,1125.0,0.0012274506472577862,288.376,1.0542,holds 288 K,2,photochem criterion
 GJ876_S1102.08_CO2-1.540e-03bar_haze,GJ876,1102.08,0.0015400770374343882,288.359,1.0821,holds 288 K,3,composition steady over last decade
+GJ876_S1102.08_CO2-1.477e-03bar_haze_COvdep0_COflux0,GJ876,1102.08,0.0014771216049509629,288.154,1.0844,holds 288 K,1,composition steady over last decade
+GJ876_S1102.08_CO2-1.963e-03bar_haze_COvdep1.2e-4_COflux0,GJ876,1102.08,0.0019630931130822046,288.36,1.055,holds 288 K,2,photochem criterion
 GJ876_S1079.17_CO2-2.475e-03bar_haze,GJ876,1079.17,0.0024748484766207012,288.161,1.0869,holds 288 K,3,composition steady over last decade
+GJ876_S1079.17_CO2-2.464e-03bar_haze_COvdep0_COflux0,GJ876,1079.17,0.0024638684333584604,288.34,1.0938,holds 288 K,1,composition steady over last decade
+GJ876_S1079.17_CO2-3.046e-03bar_haze_COvdep1.2e-4_COflux0,GJ876,1079.17,0.0030460233832834073,288.298,1.0561,holds 288 K,2,photochem criterion
 Sun3Ga_S1400.00_CO2-4.651e-05bar,Sun,1400.0,4.650803656537028e-05,287.875,1.0506,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep0_COflux0,Sun,1400.0,4.5710912856601434e-05,287.814,1.0506,holds 288 K,1,composition steady over last decade
+Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep1.2e-4_COflux0,Sun,1400.0,4.5710912856601434e-05,287.792,1.0504,holds 288 K,1,composition steady over last decade
 Sun3Ga_S1331.25_CO2-2.637e-04bar,Sun,1331.25,0.0002636973566514961,287.913,1.0503,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep0_COflux0,Sun,1331.25,0.000257923906120527,287.816,1.0503,holds 288 K,1,composition steady over last decade
+Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep1.2e-4_COflux0,Sun,1331.25,0.000257923906120527,287.75,1.0497,holds 288 K,1,photochem criterion
 Sun3Ga_S1262.50_CO2-1.092e-03bar,Sun,1262.5,0.0010915420051272147,287.695,1.0508,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep0_COflux0,Sun,1262.5,0.0011379016645884888,287.904,1.0508,holds 288 K,1,composition steady over last decade
+Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep1.2e-4_COflux0,Sun,1262.5,0.0011379016645884888,287.762,1.0497,holds 288 K,1,composition steady over last decade
 Sun3Ga_S1193.75_CO2-3.971e-03bar,Sun,1193.75,0.003970831698054311,287.711,1.0539,holds 288 K,2,composition steady over last decade
+Sun3Ga_S1193.75_CO2-4.020e-03bar_COvdep0_COflux0,Sun,1193.75,0.004020379160082772,287.792,1.0539,holds 288 K,1,photochem criterion
+Sun3Ga_S1193.75_CO2-4.236e-03bar_COvdep1.2e-4_COflux0,Sun,1193.75,0.004235570988761922,287.819,1.0522,holds 288 K,2,composition steady over last decade
 Sun3Ga_S1125.00_CO2-1.294e-02bar,Sun,1125.0,0.012935835106506921,288.332,1.0636,holds 288 K,3,composition steady over last decade
+Sun3Ga_S1125.00_CO2-1.276e-02bar_COvdep0_COflux0,Sun,1125.0,0.012759135338536067,288.207,1.0633,holds 288 K,1,photochem criterion
+Sun3Ga_S1125.00_CO2-1.388e-02bar_COvdep1.2e-4_COflux0,Sun,1125.0,0.013876877873396344,288.289,1.0616,holds 288 K,2,composition steady over last decade
 Sun3Ga_S1056.25_CO2-3.250e-02bar,Sun,1056.25,0.03250180182577771,288.258,1.084,holds 288 K,3,photochem criterion
+Sun3Ga_S1056.25_CO2-3.214e-02bar_COvdep0_COflux0,Sun,1056.25,0.03213992506588183,288.126,1.0836,holds 288 K,1,composition steady over last decade
+Sun3Ga_S1056.25_CO2-3.559e-02bar_COvdep1.2e-4_COflux0,Sun,1056.25,0.0355869470940711,288.18,1.0834,holds 288 K,2,photochem criterion
 Sun3Ga_S0987.50_CO2-7.320e-02bar,Sun,987.5,0.07319692619954782,288.194,1.1261,holds 288 K,3,composition steady over last decade
+Sun3Ga_S0987.50_CO2-7.252e-02bar_COvdep0_COflux0,Sun,987.5,0.07251759641155156,288.056,1.1254,holds 288 K,1,photochem criterion
+Sun3Ga_S0987.50_CO2-8.219e-02bar_COvdep1.2e-4_COflux0,Sun,987.5,0.0821899808849234,288.173,1.131,holds 288 K,2,photochem criterion
 Sun3Ga_S0918.75_CO2-1.538e-01bar,Sun,918.75,0.15375814185130413,288.081,1.2128,holds 288 K,3,photochem criterion
+Sun3Ga_S0918.75_CO2-1.526e-01bar_COvdep0_COflux0,Sun,918.75,0.15258012744881674,287.954,1.2114,holds 288 K,1,composition steady over last decade
+Sun3Ga_S0918.75_CO2-1.780e-01bar_COvdep1.2e-4_COflux0,Sun,918.75,0.17804916399562815,288.101,1.2302,holds 288 K,2,photochem criterion
 Sun3Ga_S0850.00_CO2-3.064e-01bar,Sun,850.0,0.30643629608532746,287.449,1.3881,holds 288 K,2,photochem criterion
+Sun3Ga_S0850.00_CO2-3.167e-01bar_COvdep0_COflux0,Sun,850.0,0.3166647141661736,288.059,1.4034,holds 288 K,1,composition steady over last decade
+Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0,Sun,850.0,0.3723843750820232,288.113,1.4326,holds 288 K,2,photochem criterion
 Sun3Ga_S0781.25_CO2-6.139e-01bar,Sun,781.25,0.6138658083700249,287.64,1.7207,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0781.25_CO2-6.254e-01bar_COvdep0_COflux0,Sun,781.25,0.6254436899218291,288.057,1.7396,holds 288 K,1,composition steady over last decade
+Sun3Ga_S0781.25_CO2-7.437e-01bar_COvdep1.2e-4_COflux0,Sun,781.25,0.7436592053684709,288.162,1.8203,holds 288 K,2,photochem criterion
 Sun3Ga_S0712.50_CO2-1.158e00bar,Sun,712.5,1.1575917457358127,287.812,2.2935,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0712.50_CO2-1.167e00bar_COvdep0_COflux0,Sun,712.5,1.1669453476361349,288.042,2.3109,holds 288 K,1,composition steady over last decade
+Sun3Ga_S0712.50_CO2-1.414e00bar_COvdep1.2e-4_COflux0,Sun,712.5,1.413592642966765,288.455,2.5202,holds 288 K,2,composition steady over last decade
 Sun3Ga_S0643.75_CO2-2.044e00bar,Sun,643.75,2.0437973833956318,288.126,3.2215,holds 288 K,2,composition steady over last decade
+Sun3Ga_S0643.75_CO2-2.042e00bar_COvdep0_COflux0,Sun,643.75,2.041623303311133,288.112,3.2269,holds 288 K,1,photochem criterion
+Sun3Ga_S0643.75_CO2-2.461e00bar_COvdep1.2e-4_COflux0,Sun,643.75,2.4607395174582276,288.413,3.6144,holds 288 K,2,composition steady over last decade
 Sun3Ga_S0575.00_CO2-3.425e00bar,Sun,575.0,3.4250794949629704,288.008,4.6724,holds 288 K,3,photochem criterion
+Sun3Ga_S0575.00_CO2-3.408e00bar_COvdep0_COflux0,Sun,575.0,3.407675623936459,287.869,4.6616,holds 288 K,1,photochem criterion
+Sun3Ga_S0575.00_CO2-8.097e00bar_COvdep1.2e-4_COflux0,Sun,575.0,8.097171416105622,290.752,9.5227,288 K NOT REACHABLE,4,composition steady over last decade
 Sun3Ga_S0506.25_CO2-5.309e00bar,Sun,506.25,5.308844442309884,268.726,6.6538,288 K NOT REACHABLE,2,photochem criterion
+Sun3Ga_S0506.25_CO2-5.309e00bar_COvdep0_COflux0,Sun,506.25,5.308844442309884,268.755,6.664,288 K NOT REACHABLE,1,composition steady over last decade
+Sun3Ga_S0506.25_CO2-3.162e00bar_COvdep1.2e-4_COflux0,Sun,506.25,3.1622776601683795,249.093,4.3695,288 K NOT REACHABLE,6,photochem criterion
 Sun3Ga_S0437.50_CO2-1.000e01bar,Sun,437.5,10.0,222.466,11.6463,288 K NOT REACHABLE,2,composition steady over last decade
+Sun3Ga_S0437.50_CO2-1.000e01bar_COvdep0_COflux0,Sun,437.5,10.0,222.488,11.6604,288 K NOT REACHABLE,1,photochem criterion
+Sun3Ga_S0437.50_CO2-1.000e00bar_COvdep1.2e-4_COflux0,Sun,437.5,1.0,221.548,2.1046,288 K NOT REACHABLE,6,composition steady over last decade
 Sun3Ga_S0368.75_CO2-1.000e01bar,Sun,368.75,10.0,203.946,8.5767,288 K NOT REACHABLE,2,composition steady over last decade
+Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep0_COflux0,Sun,368.75,10.0,204.016,7.8437,288 K NOT REACHABLE,1,composition steady over last decade
+Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0,Sun,368.75,10.0,202.428,7.6828,288 K NOT REACHABLE,1,composition steady over last decade
 Sun3Ga_S0300.00_CO2-1.000e01bar,Sun,300.0,10.0,188.091,1.9567,288 K NOT REACHABLE,1,composition steady over last decade
+Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep0_COflux0,Sun,300.0,10.0,187.756,1.9479,288 K NOT REACHABLE,1,composition steady over last decade
+Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0,Sun,300.0,10.0,188.174,1.8185,288 K NOT REACHABLE,1,composition steady over last decade

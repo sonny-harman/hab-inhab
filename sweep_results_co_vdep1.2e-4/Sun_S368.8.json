@@ -1,0 +1,99 @@
+{
+ "run_id": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0",
+ "star": "Sun",
+ "S_Wm2": 368.75,
+ "T_surf_K": 202.42841775947525,
+ "rce_converged": true,
+ "pCO2_bar": 10.0,
+ "P_total_bar": 7.682804161803965,
+ "vmr": {
+  "CO2": 0.8614438080704427,
+  "CO": 4.506534898793059e-06,
+  "O2": 1.322013581190731e-14,
+  "H2O": 2.209155911320104e-06,
+  "CH4": 0.00012657227393662315,
+  "H2": 0.0003668168831051437,
+  "N2": 0.13805607378701085
+ },
+ "target_status": "target not reachable: maximum-greenhouse CO2 used",
+ "coupling_converged": true,
+ "iterations": 1,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 439.49314284324646,
+ "history": [
+  {
+   "pCO2_bar": 10.0,
+   "T_rce_K": 203.94552988883058,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 3158292148660401.5,
+   "photochem_wall_s": 396.61374163627625,
+   "limiting_species": "O2"
+  }
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 23074.59830393914,
+  "target_toa_pressure_dyn_cm2": 1.1566173604738312,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 4036.9775150897476,
+   "H2O": 270000000.0,
+   "CO2": 10000000.0,
+   "CH4": 1392.9822956634862,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 202.42841775947525,
+  "P_surf_bar": 1.9495940324158687,
+  "P_trop_bar": 0.029095819254599167
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "haze": {
+  "enabled": false
+ },
+ "co_experiment": {
+  "start_from": "Sun3Ga_S0368.75_CO2-1.000e01bar",
+  "CO_vdep_cm_s": 0.00012,
+  "CO_flux_cm-2_s-1": 0.0,
+  "baseline_CO_vdep_cm_s": 1e-08,
+  "baseline_CO_flux_cm-2_s-1": 1000000000.0
+ },
+ "saved_inputs": {
+  "directory": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0",
+  "files": {
+   "atmosphere": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0_photochem_atmosphere.txt",
+   "settings": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0_photochem_settings.yaml",
+   "flux": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0_flux.txt",
+   "profile": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0_PTKzz_profile.txt",
+   "climate": "Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0_climate_profile.txt"
+  }
+ }
+}

@@ -39,7 +39,9 @@ Each run folder `saved_inputs/<run name>/` holds these files, each starting with
 
 **Haze runs.** A name ending in `_haze` is a rerun with Photochem's haze chemistry switched on (`haze=True`): the reactions `C2H + C4H2 -> HCaer1 + H`, `H2CN + HCN -> HCaer2` and `C4H + HCCCN -> HCaer3` are kept, so hydrocarbons and nitriles are removed as haze particles (`HCaer1-3`, default radius 1e-4 cm). `_hazeR1e-5cm` means the same with an explicit haze particle radius of 1e-5 cm. Haze acts in the photochemistry only; the climate model ignores haze optical effects. These reruns replace the no-haze GJ 876 runs that had no steady state (same star and instellation, no suffix). Haze carbon-loss rates are in `haze_diagnostics.csv`.
 
-The photochemical profile (`_PTKzz_profile.txt`) and the final climate profile (`_climate_profile.txt`) can differ. The photochemistry ran on the profile computed *before* its final composition was known; the climate profile is then recomputed for the final composition, and its surface temperature is the one reported as `T_surf`. For the 31 runs that hold 288 K the two surface temperatures agree to within 0.70 K (median 0.10 K). For the 8 steady runs where 288 K is not reachable they differ by up to 31 K (6 of them by more than 1 K): the CO2 is pinned at the cap, so the loop stops changing CO2 and counts as converged while the climate recomputed for the final composition is still moving. Treat the compositions of those runs as indicative only.
+**CO deposition experiments.** A name ending in `_COvdep0_COflux0` or `_COvdep1.2e-4_COflux0` is a rerun of the run with the same star and instellation (and the same haze setting) with a changed CO surface boundary condition: `COvdep` is the CO deposition velocity in cm/s (the baseline runs use 1e-8; `1.2e-4` is the abiotic maximum) and `COflux0` means the surface CO flux (baseline 1e9 molecules/cm^2/s) is set to zero. Each starts from the converged saved state of its baseline run, then repeats the full coupled loop (CO2 re-solved for 288 K). The starting run is named in the `co_experiment` entry of `_run.json`. Comparison notebook: `archean_co_deposition.ipynb`.
+
+The photochemical profile (`_PTKzz_profile.txt`) and the final climate profile (`_climate_profile.txt`) can differ. The photochemistry ran on the profile computed *before* its final composition was known; the climate profile is then recomputed for the final composition, and its surface temperature is the one reported as `T_surf`. For the 88 runs that hold 288 K the two surface temperatures agree to within 0.70 K (median 0.09 K). For the 25 steady runs where 288 K is not reachable they differ by up to 31 K (14 of them by more than 1 K): the CO2 is pinned at the cap, so the loop stops changing CO2 and counts as converged while the climate recomputed for the final composition is still moving. Treat the compositions of those runs as indicative only.
 
 ## Restarting a run
 
@@ -69,44 +71,118 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 | `GJ876_S1102.08_CO2-1.358e-03bar` | GJ876 | 1102.08 | 1.358e-03 | -- | -- | NO STEADY STATE |
 | `GJ876_S1079.17_CO2-2.278e-03bar` | GJ876 | 1079.17 | 2.278e-03 | -- | -- | NO STEADY STATE |
 | `GJ876_S1067.71_CO2-3.204e-03bar` | GJ876 | 1067.71 | 3.204e-03 | 288.2 | 1.089 | holds 288 K |
+| `GJ876_S1067.71_CO2-3.167e-03bar_COvdep0_COflux0` | GJ876 | 1067.71 | 3.167e-03 | 288.3 | 1.095 | holds 288 K |
+| `GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0` | GJ876 | 1067.71 | 3.765e-03 | 288.3 | 1.057 | holds 288 K |
 | `GJ876_S1056.25_CO2-4.052e-03bar` | GJ876 | 1056.25 | 4.052e-03 | 288.2 | 1.091 | holds 288 K |
+| `GJ876_S1056.25_CO2-4.001e-03bar_COvdep0_COflux0` | GJ876 | 1056.25 | 4.001e-03 | 288.2 | 1.097 | holds 288 K |
+| `GJ876_S1056.25_CO2-4.638e-03bar_COvdep1.2e-4_COflux0` | GJ876 | 1056.25 | 4.638e-03 | 288.2 | 1.058 | holds 288 K |
 | `GJ876_S0987.50_CO2-1.352e-02bar` | GJ876 | 987.5 | 1.352e-02 | 287.9 | 1.106 | holds 288 K |
+| `GJ876_S0987.50_CO2-1.338e-02bar_COvdep0_COflux0` | GJ876 | 987.5 | 1.338e-02 | 287.9 | 1.113 | holds 288 K |
+| `GJ876_S0987.50_CO2-1.427e-02bar_COvdep1.2e-4_COflux0` | GJ876 | 987.5 | 1.427e-02 | 288.0 | 1.068 | holds 288 K |
 | `GJ876_S0918.75_CO2-3.792e-02bar` | GJ876 | 918.75 | 3.792e-02 | 288.2 | 1.135 | holds 288 K |
+| `GJ876_S0918.75_CO2-3.768e-02bar_COvdep0_COflux0` | GJ876 | 918.75 | 3.768e-02 | 288.2 | 1.135 | holds 288 K |
+| `GJ876_S0918.75_CO2-3.768e-02bar_COvdep1.2e-4_COflux0` | GJ876 | 918.75 | 3.768e-02 | 287.8 | 1.092 | holds 288 K |
 | `GJ876_S0850.00_CO2-9.146e-02bar` | GJ876 | 850 | 9.146e-02 | 287.6 | 1.192 | holds 288 K |
+| `GJ876_S0850.00_CO2-9.569e-02bar_COvdep0_COflux0` | GJ876 | 850 | 9.569e-02 | 288.3 | 1.207 | holds 288 K |
+| `GJ876_S0850.00_CO2-9.569e-02bar_COvdep1.2e-4_COflux0` | GJ876 | 850 | 9.569e-02 | 288.1 | 1.152 | holds 288 K |
 | `GJ876_S0781.25_CO2-2.152e-01bar` | GJ876 | 781.25 | 2.152e-01 | 287.6 | 1.323 | holds 288 K |
+| `GJ876_S0781.25_CO2-2.213e-01bar_COvdep0_COflux0` | GJ876 | 781.25 | 2.213e-01 | 288.2 | 1.339 | holds 288 K |
+| `GJ876_S0781.25_CO2-2.213e-01bar_COvdep1.2e-4_COflux0` | GJ876 | 781.25 | 2.213e-01 | 287.9 | 1.283 | holds 288 K |
 | `GJ876_S0712.50_CO2-4.720e-01bar` | GJ876 | 712.5 | 4.720e-01 | 287.7 | 1.593 | holds 288 K |
+| `GJ876_S0712.50_CO2-4.787e-01bar_COvdep0_COflux0` | GJ876 | 712.5 | 4.787e-01 | 288.0 | 1.610 | holds 288 K |
+| `GJ876_S0712.50_CO2-4.787e-01bar_COvdep1.2e-4_COflux0` | GJ876 | 712.5 | 4.787e-01 | 287.7 | 1.553 | holds 288 K |
 | `GJ876_S0643.75_CO2-9.800e-01bar` | GJ876 | 643.75 | 9.800e-01 | 288.1 | 2.127 | holds 288 K |
+| `GJ876_S0643.75_CO2-9.800e-01bar_COvdep0_COflux0` | GJ876 | 643.75 | 9.800e-01 | 288.1 | 2.136 | holds 288 K |
+| `GJ876_S0643.75_CO2-9.800e-01bar_COvdep1.2e-4_COflux0` | GJ876 | 643.75 | 9.800e-01 | 287.7 | 2.080 | holds 288 K |
 | `GJ876_S0575.00_CO2-1.857e00bar` | GJ876 | 575 | 1.857e+00 | 288.0 | 3.048 | holds 288 K |
+| `GJ876_S0575.00_CO2-1.852e00bar_COvdep0_COflux0` | GJ876 | 575 | 1.852e+00 | 287.9 | 3.052 | holds 288 K |
+| `GJ876_S0575.00_CO2-1.852e00bar_COvdep1.2e-4_COflux0` | GJ876 | 575 | 1.852e+00 | 287.4 | 2.998 | holds 288 K |
 | `GJ876_S0506.25_CO2-3.330e00bar` | GJ876 | 506.25 | 3.330e+00 | 287.3 | 4.595 | holds 288 K |
+| `GJ876_S0506.25_CO2-3.383e00bar_COvdep0_COflux0` | GJ876 | 506.25 | 3.383e+00 | 288.2 | 4.659 | holds 288 K |
+| `GJ876_S0506.25_CO2-3.383e00bar_COvdep1.2e-4_COflux0` | GJ876 | 506.25 | 3.383e+00 | 287.6 | 4.609 | holds 288 K |
 | `GJ876_S0437.50_CO2-6.003e00bar` | GJ876 | 437.5 | 6.003e+00 | 288.0 | 7.402 | holds 288 K |
+| `GJ876_S0437.50_CO2-6.007e00bar_COvdep0_COflux0` | GJ876 | 437.5 | 6.007e+00 | 288.1 | 7.414 | holds 288 K |
+| `GJ876_S0437.50_CO2-6.007e00bar_COvdep1.2e-4_COflux0` | GJ876 | 437.5 | 6.007e+00 | 287.4 | 7.368 | holds 288 K |
 | `GJ876_S0368.75_CO2-1.000e01bar` | GJ876 | 368.75 | 1.000e+01 | 192.0 | 11.696 | 288 K NOT REACHABLE |
+| `GJ876_S0368.75_CO2-1.000e01bar_COvdep0_COflux0` | GJ876 | 368.75 | 1.000e+01 | 197.3 | 2.647 | 288 K NOT REACHABLE |
+| `GJ876_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0` | GJ876 | 368.75 | 1.000e+01 | 198.2 | 2.490 | 288 K NOT REACHABLE |
 | `GJ876_S0300.00_CO2-1.000e01bar` | GJ876 | 300 | 1.000e+01 | 174.7 | 2.892 | 288 K NOT REACHABLE |
+| `GJ876_S0300.00_CO2-1.000e01bar_COvdep0_COflux0` | GJ876 | 300 | 1.000e+01 | 181.6 | 1.328 | 288 K NOT REACHABLE |
+| `GJ876_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0` | GJ876 | 300 | 1.000e+01 | 182.3 | 1.256 | 288 K NOT REACHABLE |
 | `GJ876_S1400.00_CO2-1.000e-05bar_haze` | GJ876 | 1400 | 1.000e-05 | 305.7 | 1.060 | 288 K NOT REACHABLE |
+| `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep0_COflux0` | GJ876 | 1400 | 1.000e-05 | 305.3 | 1.059 | 288 K NOT REACHABLE |
+| `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1400 | 1.000e-05 | 305.0 | 1.059 | 288 K NOT REACHABLE |
 | `GJ876_S1331.25_CO2-1.000e-05bar_haze` | GJ876 | 1331.25 | 1.000e-05 | 294.1 | 1.055 | 288 K NOT REACHABLE |
+| `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep0_COflux0` | GJ876 | 1331.25 | 1.000e-05 | 293.8 | 1.055 | 288 K NOT REACHABLE |
+| `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1331.25 | 1.000e-05 | 293.5 | 1.054 | 288 K NOT REACHABLE |
 | `GJ876_S1262.50_CO2-2.207e-05bar_haze` | GJ876 | 1262.5 | 2.207e-05 | 287.9 | 1.054 | holds 288 K |
+| `GJ876_S1262.50_CO2-2.226e-05bar_haze_COvdep0_COflux0` | GJ876 | 1262.5 | 2.226e-05 | 287.9 | 1.054 | holds 288 K |
+| `GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1262.5 | 2.511e-05 | 287.9 | 1.053 | holds 288 K |
 | `GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm` | GJ876 | 1193.75 | 1.657e-04 | 288.1 | 1.060 | holds 288 K |
 | `GJ876_S1193.75_CO2-1.738e-04bar_haze` | GJ876 | 1193.75 | 1.738e-04 | 288.3 | 1.059 | holds 288 K |
+| `GJ876_S1193.75_CO2-1.689e-04bar_haze_COvdep0_COflux0` | GJ876 | 1193.75 | 1.689e-04 | 288.2 | 1.059 | holds 288 K |
+| `GJ876_S1193.75_CO2-2.198e-04bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1193.75 | 2.198e-04 | 287.9 | 1.054 | holds 288 K |
 | `GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm` | GJ876 | 1125 | 9.660e-04 | 288.4 | 1.075 | holds 288 K |
 | `GJ876_S1125.00_CO2-8.944e-04bar_haze` | GJ876 | 1125 | 8.944e-04 | 288.1 | 1.074 | holds 288 K |
+| `GJ876_S1125.00_CO2-9.089e-04bar_haze_COvdep0_COflux0` | GJ876 | 1125 | 9.089e-04 | 288.2 | 1.074 | holds 288 K |
+| `GJ876_S1125.00_CO2-1.227e-03bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1125 | 1.227e-03 | 288.4 | 1.054 | holds 288 K |
 | `GJ876_S1102.08_CO2-1.540e-03bar_haze` | GJ876 | 1102.08 | 1.540e-03 | 288.4 | 1.082 | holds 288 K |
+| `GJ876_S1102.08_CO2-1.477e-03bar_haze_COvdep0_COflux0` | GJ876 | 1102.08 | 1.477e-03 | 288.2 | 1.084 | holds 288 K |
+| `GJ876_S1102.08_CO2-1.963e-03bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1102.08 | 1.963e-03 | 288.4 | 1.055 | holds 288 K |
 | `GJ876_S1079.17_CO2-2.475e-03bar_haze` | GJ876 | 1079.17 | 2.475e-03 | 288.2 | 1.087 | holds 288 K |
+| `GJ876_S1079.17_CO2-2.464e-03bar_haze_COvdep0_COflux0` | GJ876 | 1079.17 | 2.464e-03 | 288.3 | 1.094 | holds 288 K |
+| `GJ876_S1079.17_CO2-3.046e-03bar_haze_COvdep1.2e-4_COflux0` | GJ876 | 1079.17 | 3.046e-03 | 288.3 | 1.056 | holds 288 K |
 | `Sun3Ga_S1400.00_CO2-4.651e-05bar` | Sun3Ga | 1400 | 4.651e-05 | 287.9 | 1.051 | holds 288 K |
+| `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep0_COflux0` | Sun3Ga | 1400 | 4.571e-05 | 287.8 | 1.051 | holds 288 K |
+| `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1400 | 4.571e-05 | 287.8 | 1.050 | holds 288 K |
 | `Sun3Ga_S1331.25_CO2-2.637e-04bar` | Sun3Ga | 1331.25 | 2.637e-04 | 287.9 | 1.050 | holds 288 K |
+| `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep0_COflux0` | Sun3Ga | 1331.25 | 2.579e-04 | 287.8 | 1.050 | holds 288 K |
+| `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1331.25 | 2.579e-04 | 287.8 | 1.050 | holds 288 K |
 | `Sun3Ga_S1262.50_CO2-1.092e-03bar` | Sun3Ga | 1262.5 | 1.092e-03 | 287.7 | 1.051 | holds 288 K |
+| `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep0_COflux0` | Sun3Ga | 1262.5 | 1.138e-03 | 287.9 | 1.051 | holds 288 K |
+| `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1262.5 | 1.138e-03 | 287.8 | 1.050 | holds 288 K |
 | `Sun3Ga_S1193.75_CO2-3.971e-03bar` | Sun3Ga | 1193.75 | 3.971e-03 | 287.7 | 1.054 | holds 288 K |
+| `Sun3Ga_S1193.75_CO2-4.020e-03bar_COvdep0_COflux0` | Sun3Ga | 1193.75 | 4.020e-03 | 287.8 | 1.054 | holds 288 K |
+| `Sun3Ga_S1193.75_CO2-4.236e-03bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1193.75 | 4.236e-03 | 287.8 | 1.052 | holds 288 K |
 | `Sun3Ga_S1125.00_CO2-1.294e-02bar` | Sun3Ga | 1125 | 1.294e-02 | 288.3 | 1.064 | holds 288 K |
+| `Sun3Ga_S1125.00_CO2-1.276e-02bar_COvdep0_COflux0` | Sun3Ga | 1125 | 1.276e-02 | 288.2 | 1.063 | holds 288 K |
+| `Sun3Ga_S1125.00_CO2-1.388e-02bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1125 | 1.388e-02 | 288.3 | 1.062 | holds 288 K |
 | `Sun3Ga_S1056.25_CO2-3.250e-02bar` | Sun3Ga | 1056.25 | 3.250e-02 | 288.3 | 1.084 | holds 288 K |
+| `Sun3Ga_S1056.25_CO2-3.214e-02bar_COvdep0_COflux0` | Sun3Ga | 1056.25 | 3.214e-02 | 288.1 | 1.084 | holds 288 K |
+| `Sun3Ga_S1056.25_CO2-3.559e-02bar_COvdep1.2e-4_COflux0` | Sun3Ga | 1056.25 | 3.559e-02 | 288.2 | 1.083 | holds 288 K |
 | `Sun3Ga_S0987.50_CO2-7.320e-02bar` | Sun3Ga | 987.5 | 7.320e-02 | 288.2 | 1.126 | holds 288 K |
+| `Sun3Ga_S0987.50_CO2-7.252e-02bar_COvdep0_COflux0` | Sun3Ga | 987.5 | 7.252e-02 | 288.1 | 1.125 | holds 288 K |
+| `Sun3Ga_S0987.50_CO2-8.219e-02bar_COvdep1.2e-4_COflux0` | Sun3Ga | 987.5 | 8.219e-02 | 288.2 | 1.131 | holds 288 K |
 | `Sun3Ga_S0918.75_CO2-1.538e-01bar` | Sun3Ga | 918.75 | 1.538e-01 | 288.1 | 1.213 | holds 288 K |
+| `Sun3Ga_S0918.75_CO2-1.526e-01bar_COvdep0_COflux0` | Sun3Ga | 918.75 | 1.526e-01 | 288.0 | 1.211 | holds 288 K |
+| `Sun3Ga_S0918.75_CO2-1.780e-01bar_COvdep1.2e-4_COflux0` | Sun3Ga | 918.75 | 1.780e-01 | 288.1 | 1.230 | holds 288 K |
 | `Sun3Ga_S0850.00_CO2-3.064e-01bar` | Sun3Ga | 850 | 3.064e-01 | 287.4 | 1.388 | holds 288 K |
+| `Sun3Ga_S0850.00_CO2-3.167e-01bar_COvdep0_COflux0` | Sun3Ga | 850 | 3.167e-01 | 288.1 | 1.403 | holds 288 K |
+| `Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0` | Sun3Ga | 850 | 3.724e-01 | 288.1 | 1.433 | holds 288 K |
 | `Sun3Ga_S0781.25_CO2-6.139e-01bar` | Sun3Ga | 781.25 | 6.139e-01 | 287.6 | 1.721 | holds 288 K |
+| `Sun3Ga_S0781.25_CO2-6.254e-01bar_COvdep0_COflux0` | Sun3Ga | 781.25 | 6.254e-01 | 288.1 | 1.740 | holds 288 K |
+| `Sun3Ga_S0781.25_CO2-7.437e-01bar_COvdep1.2e-4_COflux0` | Sun3Ga | 781.25 | 7.437e-01 | 288.2 | 1.820 | holds 288 K |
 | `Sun3Ga_S0712.50_CO2-1.158e00bar` | Sun3Ga | 712.5 | 1.158e+00 | 287.8 | 2.294 | holds 288 K |
+| `Sun3Ga_S0712.50_CO2-1.167e00bar_COvdep0_COflux0` | Sun3Ga | 712.5 | 1.167e+00 | 288.0 | 2.311 | holds 288 K |
+| `Sun3Ga_S0712.50_CO2-1.414e00bar_COvdep1.2e-4_COflux0` | Sun3Ga | 712.5 | 1.414e+00 | 288.5 | 2.520 | holds 288 K |
 | `Sun3Ga_S0643.75_CO2-2.044e00bar` | Sun3Ga | 643.75 | 2.044e+00 | 288.1 | 3.221 | holds 288 K |
+| `Sun3Ga_S0643.75_CO2-2.042e00bar_COvdep0_COflux0` | Sun3Ga | 643.75 | 2.042e+00 | 288.1 | 3.227 | holds 288 K |
+| `Sun3Ga_S0643.75_CO2-2.461e00bar_COvdep1.2e-4_COflux0` | Sun3Ga | 643.75 | 2.461e+00 | 288.4 | 3.614 | holds 288 K |
 | `Sun3Ga_S0575.00_CO2-3.425e00bar` | Sun3Ga | 575 | 3.425e+00 | 288.0 | 4.672 | holds 288 K |
+| `Sun3Ga_S0575.00_CO2-3.408e00bar_COvdep0_COflux0` | Sun3Ga | 575 | 3.408e+00 | 287.9 | 4.662 | holds 288 K |
+| `Sun3Ga_S0575.00_CO2-8.097e00bar_COvdep1.2e-4_COflux0` | Sun3Ga | 575 | 8.097e+00 | 290.8 | 9.523 | 288 K NOT REACHABLE |
 | `Sun3Ga_S0506.25_CO2-5.309e00bar` | Sun3Ga | 506.25 | 5.309e+00 | 268.7 | 6.654 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0506.25_CO2-5.309e00bar_COvdep0_COflux0` | Sun3Ga | 506.25 | 5.309e+00 | 268.8 | 6.664 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0506.25_CO2-3.162e00bar_COvdep1.2e-4_COflux0` | Sun3Ga | 506.25 | 3.162e+00 | 249.1 | 4.370 | 288 K NOT REACHABLE |
 | `Sun3Ga_S0437.50_CO2-1.000e01bar` | Sun3Ga | 437.5 | 1.000e+01 | 222.5 | 11.646 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0437.50_CO2-1.000e01bar_COvdep0_COflux0` | Sun3Ga | 437.5 | 1.000e+01 | 222.5 | 11.660 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0437.50_CO2-1.000e00bar_COvdep1.2e-4_COflux0` | Sun3Ga | 437.5 | 1.000e+00 | 221.5 | 2.105 | 288 K NOT REACHABLE |
 | `Sun3Ga_S0368.75_CO2-1.000e01bar` | Sun3Ga | 368.75 | 1.000e+01 | 203.9 | 8.577 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep0_COflux0` | Sun3Ga | 368.75 | 1.000e+01 | 204.0 | 7.844 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0` | Sun3Ga | 368.75 | 1.000e+01 | 202.4 | 7.683 | 288 K NOT REACHABLE |
 | `Sun3Ga_S0300.00_CO2-1.000e01bar` | Sun3Ga | 300 | 1.000e+01 | 188.1 | 1.957 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep0_COflux0` | Sun3Ga | 300 | 1.000e+01 | 187.8 | 1.948 | 288 K NOT REACHABLE |
+| `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0` | Sun3Ga | 300 | 1.000e+01 | 188.2 | 1.819 | 288 K NOT REACHABLE |
 
 ## Each simulation in detail
 
@@ -167,6 +243,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.20 K (the photochemistry ran on a profile whose surface temperature is 288.13 K), total surface pressure 1.089 bar, tropopause near 0.336 bar. Surface mixing ratios: CO2 3.06e-03, CO 2.89e-02, O2 1.49e-15, H2O 8.82e-03, CH4 3.76e-05, H2 4.15e-03.
 - **Files:** `GJ876_S1067.71_CO2-3.204e-03bar/` (see the file-name table above).
 
+### `GJ876_S1067.71_CO2-3.167e-03bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1067.71_CO2-3.204e-03bar`), spectrum scaled to 1067.71 W/m^2 at the planet; CO2 fixed at 3.167e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.167e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.26 K (the photochemistry ran on a profile whose surface temperature is 288.14 K), total surface pressure 1.095 bar, tropopause near 0.336 bar. Surface mixing ratios: CO2 3.01e-03, CO 3.46e-02, O2 1.23e-15, H2O 8.95e-03, CH4 3.96e-05, H2 4.14e-03.
+- **Files:** `GJ876_S1067.71_CO2-3.167e-03bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1067.71_CO2-3.204e-03bar`), spectrum scaled to 1067.71 W/m^2 at the planet; CO2 fixed at 3.765e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 3.167e-03, 3.765e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 4 min.
+- **Result:** surface temperature 288.26 K (the photochemistry ran on a profile whose surface temperature is 288.10 K), total surface pressure 1.057 bar, tropopause near 0.336 bar. Surface mixing ratios: CO2 3.71e-03, CO 1.70e-05, O2 2.22e-15, H2O 8.18e-03, CH4 2.67e-05, H2 3.68e-03.
+- **Files:** `GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S1056.25_CO2-4.052e-03bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 1056.25 W/m^2 at the planet; CO2 fixed at 4.052e-03 bar, N2 at 1 bar.
@@ -174,6 +266,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 6.656e-03, 3.689e-03, 4.052e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
 - **Result:** surface temperature 288.20 K (the photochemistry ran on a profile whose surface temperature is 288.12 K), total surface pressure 1.091 bar, tropopause near 0.334 bar. Surface mixing ratios: CO2 3.86e-03, CO 2.99e-02, O2 1.62e-15, H2O 8.83e-03, CH4 4.11e-05, H2 4.13e-03.
 - **Files:** `GJ876_S1056.25_CO2-4.052e-03bar/` (see the file-name table above).
+
+### `GJ876_S1056.25_CO2-4.001e-03bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1056.25_CO2-4.052e-03bar`), spectrum scaled to 1056.25 W/m^2 at the planet; CO2 fixed at 4.001e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.001e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.22 K (the photochemistry ran on a profile whose surface temperature is 288.13 K), total surface pressure 1.097 bar, tropopause near 0.334 bar. Surface mixing ratios: CO2 3.79e-03, CO 3.56e-02, O2 1.46e-15, H2O 8.96e-03, CH4 4.27e-05, H2 4.12e-03.
+- **Files:** `GJ876_S1056.25_CO2-4.001e-03bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1056.25_CO2-4.638e-03bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1056.25_CO2-4.052e-03bar`), spectrum scaled to 1056.25 W/m^2 at the planet; CO2 fixed at 4.638e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 4.001e-03, 4.638e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 288.24 K (the photochemistry ran on a profile whose surface temperature is 288.10 K), total surface pressure 1.058 bar, tropopause near 0.335 bar. Surface mixing ratios: CO2 4.56e-03, CO 1.73e-05, O2 2.24e-15, H2O 8.17e-03, CH4 3.05e-05, H2 3.66e-03.
+- **Files:** `GJ876_S1056.25_CO2-4.638e-03bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0987.50_CO2-1.352e-02bar`
 
@@ -183,6 +291,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.95 K (the photochemistry ran on a profile whose surface temperature is 287.86 K), total surface pressure 1.106 bar, tropopause near 0.326 bar. Surface mixing ratios: CO2 1.27e-02, CO 3.44e-02, O2 1.77e-15, H2O 8.71e-03, CH4 6.63e-05, H2 4.06e-03.
 - **Files:** `GJ876_S0987.50_CO2-1.352e-02bar/` (see the file-name table above).
 
+### `GJ876_S0987.50_CO2-1.338e-02bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0987.50_CO2-1.352e-02bar`), spectrum scaled to 987.5 W/m^2 at the planet; CO2 fixed at 1.338e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.338e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 287.92 K (the photochemistry ran on a profile whose surface temperature is 287.85 K), total surface pressure 1.113 bar, tropopause near 0.326 bar. Surface mixing ratios: CO2 1.25e-02, CO 4.09e-02, O2 1.66e-15, H2O 8.86e-03, CH4 6.80e-05, H2 4.07e-03.
+- **Files:** `GJ876_S0987.50_CO2-1.338e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0987.50_CO2-1.427e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0987.50_CO2-1.352e-02bar`), spectrum scaled to 987.5 W/m^2 at the planet; CO2 fixed at 1.427e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.338e-02, 1.427e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 287.96 K (the photochemistry ran on a profile whose surface temperature is 287.89 K), total surface pressure 1.068 bar, tropopause near 0.326 bar. Surface mixing ratios: CO2 1.39e-02, CO 1.92e-05, O2 2.48e-15, H2O 7.99e-03, CH4 5.69e-05, H2 3.57e-03.
+- **Files:** `GJ876_S0987.50_CO2-1.427e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S0918.75_CO2-3.792e-02bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 918.75 W/m^2 at the planet; CO2 fixed at 3.792e-02 bar, N2 at 1 bar.
@@ -190,6 +314,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 6.151e-02, 3.572e-02, 3.792e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 10 min.
 - **Result:** surface temperature 288.23 K (the photochemistry ran on a profile whose surface temperature is 288.16 K), total surface pressure 1.135 bar, tropopause near 0.315 bar. Surface mixing ratios: CO2 3.47e-02, CO 3.70e-02, O2 1.78e-15, H2O 8.73e-03, CH4 9.58e-05, H2 3.88e-03.
 - **Files:** `GJ876_S0918.75_CO2-3.792e-02bar/` (see the file-name table above).
+
+### `GJ876_S0918.75_CO2-3.768e-02bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0918.75_CO2-3.792e-02bar`), spectrum scaled to 918.75 W/m^2 at the planet; CO2 fixed at 3.768e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.768e-02 bar. Photochemistry stopped by: max wall time. Wall time 91 min.
+- **Result:** surface temperature 288.16 K (the photochemistry ran on a profile whose surface temperature is 288.16 K), total surface pressure 1.135 bar, tropopause near 0.316 bar. Surface mixing ratios: CO2 3.45e-02, CO 3.70e-02, O2 1.78e-15, H2O 8.73e-03, CH4 9.58e-05, H2 3.88e-03.
+- **Files:** `GJ876_S0918.75_CO2-3.768e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0918.75_CO2-3.768e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0918.75_CO2-3.792e-02bar`), spectrum scaled to 918.75 W/m^2 at the planet; CO2 fixed at 3.768e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.768e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 13 min.
+- **Result:** surface temperature 287.83 K (the photochemistry ran on a profile whose surface temperature is 288.16 K), total surface pressure 1.092 bar, tropopause near 0.317 bar. Surface mixing ratios: CO2 3.59e-02, CO 2.01e-05, O2 2.81e-15, H2O 7.94e-03, CH4 8.65e-05, H2 3.42e-03.
+- **Files:** `GJ876_S0918.75_CO2-3.768e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0850.00_CO2-9.146e-02bar`
 
@@ -199,6 +339,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.61 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 1.192 bar, tropopause near 0.309 bar. Surface mixing ratios: CO2 7.97e-02, CO 3.68e-02, O2 1.11e-13, H2O 8.36e-03, CH4 1.29e-04, H2 3.54e-03.
 - **Files:** `GJ876_S0850.00_CO2-9.146e-02bar/` (see the file-name table above).
 
+### `GJ876_S0850.00_CO2-9.569e-02bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0850.00_CO2-9.146e-02bar`), spectrum scaled to 850 W/m^2 at the planet; CO2 fixed at 9.569e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 9.569e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.34 K (the photochemistry ran on a profile whose surface temperature is 288.24 K), total surface pressure 1.207 bar, tropopause near 0.307 bar. Surface mixing ratios: CO2 8.24e-02, CO 4.44e-02, O2 4.50e-14, H2O 8.49e-03, CH4 1.35e-04, H2 3.50e-03.
+- **Files:** `GJ876_S0850.00_CO2-9.569e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0850.00_CO2-9.569e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0850.00_CO2-9.146e-02bar`), spectrum scaled to 850 W/m^2 at the planet; CO2 fixed at 9.569e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 9.569e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 288.06 K (the photochemistry ran on a profile whose surface temperature is 288.24 K), total surface pressure 1.152 bar, tropopause near 0.308 bar. Surface mixing ratios: CO2 8.64e-02, CO 1.99e-05, O2 4.41e-15, H2O 7.57e-03, CH4 1.23e-04, H2 3.09e-03.
+- **Files:** `GJ876_S0850.00_CO2-9.569e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S0781.25_CO2-2.152e-01bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 781.25 W/m^2 at the planet; CO2 fixed at 2.152e-01 bar, N2 at 1 bar.
@@ -206,6 +362,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 3.059e-01, 2.152e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 65 min.
 - **Result:** surface temperature 287.63 K (the photochemistry ran on a profile whose surface temperature is 288.10 K), total surface pressure 1.323 bar, tropopause near 0.308 bar. Surface mixing ratios: CO2 1.69e-01, CO 3.44e-02, O2 1.03e-10, H2O 7.44e-03, CH4 1.79e-04, H2 3.21e-03.
 - **Files:** `GJ876_S0781.25_CO2-2.152e-01bar/` (see the file-name table above).
+
+### `GJ876_S0781.25_CO2-2.213e-01bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0781.25_CO2-2.152e-01bar`), spectrum scaled to 781.25 W/m^2 at the planet; CO2 fixed at 2.213e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.213e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.19 K (the photochemistry ran on a profile whose surface temperature is 288.13 K), total surface pressure 1.339 bar, tropopause near 0.306 bar. Surface mixing ratios: CO2 1.72e-01, CO 4.13e-02, O2 7.74e-11, H2O 7.54e-03, CH4 1.86e-04, H2 3.19e-03.
+- **Files:** `GJ876_S0781.25_CO2-2.213e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0781.25_CO2-2.213e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0781.25_CO2-2.152e-01bar`), spectrum scaled to 781.25 W/m^2 at the planet; CO2 fixed at 2.213e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.213e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 287.94 K (the photochemistry ran on a profile whose surface temperature is 288.13 K), total surface pressure 1.283 bar, tropopause near 0.308 bar. Surface mixing ratios: CO2 1.79e-01, CO 1.84e-05, O2 1.13e-14, H2O 6.76e-03, CH4 1.72e-04, H2 2.78e-03.
+- **Files:** `GJ876_S0781.25_CO2-2.213e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0712.50_CO2-4.720e-01bar`
 
@@ -215,6 +387,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.69 K (the photochemistry ran on a profile whose surface temperature is 287.91 K), total surface pressure 1.593 bar, tropopause near 0.319 bar. Surface mixing ratios: CO2 3.08e-01, CO 2.90e-02, O2 5.81e-10, H2O 6.02e-03, CH4 2.57e-04, H2 2.89e-03.
 - **Files:** `GJ876_S0712.50_CO2-4.720e-01bar/` (see the file-name table above).
 
+### `GJ876_S0712.50_CO2-4.787e-01bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0712.50_CO2-4.720e-01bar`), spectrum scaled to 712.5 W/m^2 at the planet; CO2 fixed at 4.787e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.787e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.03 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 1.610 bar, tropopause near 0.318 bar. Surface mixing ratios: CO2 3.10e-01, CO 3.47e-02, O2 5.25e-10, H2O 6.12e-03, CH4 2.62e-04, H2 2.88e-03.
+- **Files:** `GJ876_S0712.50_CO2-4.787e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0712.50_CO2-4.787e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0712.50_CO2-4.720e-01bar`), spectrum scaled to 712.5 W/m^2 at the planet; CO2 fixed at 4.787e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.787e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 287.74 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 1.553 bar, tropopause near 0.320 bar. Surface mixing ratios: CO2 3.21e-01, CO 1.56e-05, O2 8.25e-14, H2O 5.57e-03, CH4 2.43e-04, H2 2.47e-03.
+- **Files:** `GJ876_S0712.50_CO2-4.787e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S0643.75_CO2-9.800e-01bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 643.75 W/m^2 at the planet; CO2 fixed at 9.800e-01 bar, N2 at 1 bar.
@@ -222,6 +410,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 1.142e+00, 9.800e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
 - **Result:** surface temperature 288.11 K (the photochemistry ran on a profile whose surface temperature is 288.12 K), total surface pressure 2.127 bar, tropopause near 0.344 bar. Surface mixing ratios: CO2 4.81e-01, CO 2.14e-02, O2 1.04e-09, H2O 4.47e-03, CH4 3.64e-04, H2 2.56e-03.
 - **Files:** `GJ876_S0643.75_CO2-9.800e-01bar/` (see the file-name table above).
+
+### `GJ876_S0643.75_CO2-9.800e-01bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0643.75_CO2-9.800e-01bar`), spectrum scaled to 643.75 W/m^2 at the planet; CO2 fixed at 9.800e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 9.800e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.12 K (the photochemistry ran on a profile whose surface temperature is 288.11 K), total surface pressure 2.136 bar, tropopause near 0.343 bar. Surface mixing ratios: CO2 4.79e-01, CO 2.57e-02, O2 1.18e-09, H2O 4.52e-03, CH4 3.66e-04, H2 2.56e-03.
+- **Files:** `GJ876_S0643.75_CO2-9.800e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0643.75_CO2-9.800e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0643.75_CO2-9.800e-01bar`), spectrum scaled to 643.75 W/m^2 at the planet; CO2 fixed at 9.800e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 9.800e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 287.72 K (the photochemistry ran on a profile whose surface temperature is 288.11 K), total surface pressure 2.080 bar, tropopause near 0.348 bar. Surface mixing ratios: CO2 4.92e-01, CO 1.18e-05, O2 8.38e-12, H2O 4.20e-03, CH4 3.35e-04, H2 2.17e-03.
+- **Files:** `GJ876_S0643.75_CO2-9.800e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0575.00_CO2-1.857e00bar`
 
@@ -231,6 +435,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.01 K (the photochemistry ran on a profile whose surface temperature is 287.87 K), total surface pressure 3.048 bar, tropopause near 0.365 bar. Surface mixing ratios: CO2 6.37e-01, CO 1.45e-02, O2 3.95e-10, H2O 3.01e-03, CH4 4.74e-04, H2 2.26e-03.
 - **Files:** `GJ876_S0575.00_CO2-1.857e00bar/` (see the file-name table above).
 
+### `GJ876_S0575.00_CO2-1.852e00bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0575.00_CO2-1.857e00bar`), spectrum scaled to 575 W/m^2 at the planet; CO2 fixed at 1.852e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.852e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 287.90 K (the photochemistry ran on a profile whose surface temperature is 287.89 K), total surface pressure 3.052 bar, tropopause near 0.365 bar. Surface mixing ratios: CO2 6.34e-01, CO 1.74e-02, O2 1.01e-09, H2O 3.04e-03, CH4 4.76e-04, H2 2.26e-03.
+- **Files:** `GJ876_S0575.00_CO2-1.852e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0575.00_CO2-1.852e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0575.00_CO2-1.857e00bar`), spectrum scaled to 575 W/m^2 at the planet; CO2 fixed at 1.852e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.852e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 287.38 K (the photochemistry ran on a profile whose surface temperature is 287.89 K), total surface pressure 2.998 bar, tropopause near 0.363 bar. Surface mixing ratios: CO2 6.46e-01, CO 8.16e-06, O2 4.67e-11, H2O 2.89e-03, CH4 4.25e-04, H2 1.90e-03.
+- **Files:** `GJ876_S0575.00_CO2-1.852e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S0506.25_CO2-3.330e00bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 506.25 W/m^2 at the planet; CO2 fixed at 3.330e+00 bar, N2 at 1 bar.
@@ -238,6 +458,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 1 iteration; CO2 pressures tried: 3.330e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 5 min.
 - **Result:** surface temperature 287.28 K (the photochemistry ran on a profile whose surface temperature is 287.98 K), total surface pressure 4.595 bar, tropopause near 0.184 bar. Surface mixing ratios: CO2 7.59e-01, CO 9.03e-03, O2 4.26e-10, H2O 1.99e-03, CH4 5.83e-04, H2 1.94e-03.
 - **Files:** `GJ876_S0506.25_CO2-3.330e00bar/` (see the file-name table above).
+
+### `GJ876_S0506.25_CO2-3.383e00bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0506.25_CO2-3.330e00bar`), spectrum scaled to 506.25 W/m^2 at the planet; CO2 fixed at 3.383e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.383e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 5 min.
+- **Result:** surface temperature 288.16 K (the photochemistry ran on a profile whose surface temperature is 288.05 K), total surface pressure 4.659 bar, tropopause near 0.184 bar. Surface mixing ratios: CO2 7.60e-01, CO 1.07e-02, O2 2.60e-10, H2O 1.97e-03, CH4 5.70e-04, H2 1.96e-03.
+- **Files:** `GJ876_S0506.25_CO2-3.383e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0506.25_CO2-3.383e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0506.25_CO2-3.330e00bar`), spectrum scaled to 506.25 W/m^2 at the planet; CO2 fixed at 3.383e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.383e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 4 min.
+- **Result:** surface temperature 287.63 K (the photochemistry ran on a profile whose surface temperature is 288.05 K), total surface pressure 4.609 bar, tropopause near 0.183 bar. Surface mixing ratios: CO2 7.69e-01, CO 5.20e-06, O2 5.98e-11, H2O 1.91e-03, CH4 5.00e-04, H2 1.63e-03.
+- **Files:** `GJ876_S0506.25_CO2-3.383e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0437.50_CO2-6.003e00bar`
 
@@ -247,6 +483,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.03 K (the photochemistry ran on a profile whose surface temperature is 288.08 K), total surface pressure 7.402 bar, tropopause near 0.086 bar. Surface mixing ratios: CO2 8.50e-01, CO 5.01e-03, O2 2.20e-10, H2O 1.22e-03, CH4 6.22e-04, H2 1.63e-03.
 - **Files:** `GJ876_S0437.50_CO2-6.003e00bar/` (see the file-name table above).
 
+### `GJ876_S0437.50_CO2-6.007e00bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0437.50_CO2-6.003e00bar`), spectrum scaled to 437.5 W/m^2 at the planet; CO2 fixed at 6.007e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 6.007e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 288.06 K (the photochemistry ran on a profile whose surface temperature is 288.07 K), total surface pressure 7.414 bar, tropopause near 0.086 bar. Surface mixing ratios: CO2 8.49e-01, CO 5.99e-03, O2 2.01e-10, H2O 1.22e-03, CH4 6.26e-04, H2 1.64e-03.
+- **Files:** `GJ876_S0437.50_CO2-6.007e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0437.50_CO2-6.007e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0437.50_CO2-6.003e00bar`), spectrum scaled to 437.5 W/m^2 at the planet; CO2 fixed at 6.007e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 6.007e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 287.41 K (the photochemistry ran on a profile whose surface temperature is 288.07 K), total surface pressure 7.368 bar, tropopause near 0.085 bar. Surface mixing ratios: CO2 8.55e-01, CO 3.06e-06, O2 6.58e-11, H2O 1.20e-03, CH4 5.47e-04, H2 1.36e-03.
+- **Files:** `GJ876_S0437.50_CO2-6.007e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S0368.75_CO2-1.000e01bar`
 
 - **Setup:** the M dwarf GJ 876, spectrum scaled to 368.75 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
@@ -254,6 +506,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 43 min.
 - **Result:** surface temperature 191.95 K (the photochemistry ran on a profile whose surface temperature is 222.87 K), total surface pressure 11.696 bar, tropopause near 0.035 bar. Surface mixing ratios: CO2 9.04e-01, CO 3.38e-03, O2 1.82e-10, H2O 2.19e-05, CH4 7.08e-04, H2 1.42e-03.
 - **Files:** `GJ876_S0368.75_CO2-1.000e01bar/` (see the file-name table above).
+
+### `GJ876_S0368.75_CO2-1.000e01bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0368.75_CO2-1.000e01bar`), spectrum scaled to 368.75 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 197 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
+- **Result:** surface temperature 197.30 K (the photochemistry ran on a profile whose surface temperature is 191.95 K), total surface pressure 2.647 bar, tropopause near 0.035 bar. Surface mixing ratios: CO2 5.79e-01, CO 2.50e-02, O2 1.77e-10, H2O 2.80e-07, CH4 6.82e-04, H2 2.31e-03.
+- **Files:** `GJ876_S0368.75_CO2-1.000e01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0368.75_CO2-1.000e01bar`), spectrum scaled to 368.75 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 198 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 10 min.
+- **Result:** surface temperature 198.16 K (the photochemistry ran on a profile whose surface temperature is 191.95 K), total surface pressure 2.490 bar, tropopause near 0.035 bar. Surface mixing ratios: CO2 5.79e-01, CO 6.63e-06, O2 1.06e-10, H2O 2.63e-07, CH4 5.81e-04, H2 2.02e-03.
+- **Files:** `GJ876_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S0300.00_CO2-1.000e01bar`
 
@@ -263,6 +531,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 174.72 K (the photochemistry ran on a profile whose surface temperature is 193.34 K), total surface pressure 2.892 bar, tropopause near 0.022 bar. Surface mixing ratios: CO2 6.25e-01, CO 1.66e-02, O2 2.66e-13, H2O 3.62e-07, CH4 8.45e-04, H2 2.07e-03.
 - **Files:** `GJ876_S0300.00_CO2-1.000e01bar/` (see the file-name table above).
 
+### `GJ876_S0300.00_CO2-1.000e01bar_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S0300.00_CO2-1.000e01bar`), spectrum scaled to 300 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 182 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: photochem criterion. Wall time 10 min.
+- **Result:** surface temperature 181.57 K (the photochemistry ran on a profile whose surface temperature is 174.72 K), total surface pressure 1.328 bar, tropopause near 0.021 bar. Surface mixing ratios: CO2 1.63e-01, CO 3.74e-02, O2 4.06e-13, H2O 1.13e-08, CH4 4.29e-04, H2 3.12e-03.
+- **Files:** `GJ876_S0300.00_CO2-1.000e01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S0300.00_CO2-1.000e01bar`), spectrum scaled to 300 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 182 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
+- **Result:** surface temperature 182.34 K (the photochemistry ran on a profile whose surface temperature is 174.72 K), total surface pressure 1.256 bar, tropopause near 0.022 bar. Surface mixing ratios: CO2 1.54e-01, CO 1.11e-05, O2 9.80e-11, H2O 9.61e-09, CH4 3.70e-04, H2 2.93e-03.
+- **Files:** `GJ876_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S1400.00_CO2-1.000e-05bar_haze`
 
 - **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
@@ -270,6 +554,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 11 min.
 - **Result:** surface temperature 305.68 K (the photochemistry ran on a profile whose surface temperature is 306.68 K), total surface pressure 1.060 bar, tropopause near 0.268 bar. Surface mixing ratios: CO2 9.71e-06, CO 8.69e-05, O2 1.74e-17, H2O 2.43e-02, CH4 5.73e-06, H2 4.25e-03.
 - **Files:** `GJ876_S1400.00_CO2-1.000e-05bar_haze/` (see the file-name table above).
+
+### `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1400.00_CO2-1.000e-05bar_haze`), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 305 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: photochem criterion. Wall time 5 min.
+- **Result:** surface temperature 305.29 K (the photochemistry ran on a profile whose surface temperature is 305.68 K), total surface pressure 1.059 bar, tropopause near 0.271 bar. Surface mixing ratios: CO2 9.73e-06, CO 8.09e-05, O2 1.17e-17, H2O 2.28e-02, CH4 4.93e-06, H2 4.18e-03.
+- **Files:** `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1400.00_CO2-1.000e-05bar_haze`), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 305 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 6 min.
+- **Result:** surface temperature 305.01 K (the photochemistry ran on a profile whose surface temperature is 305.68 K), total surface pressure 1.059 bar, tropopause near 0.272 bar. Surface mixing ratios: CO2 9.73e-06, CO 6.56e-06, O2 1.64e-16, H2O 2.28e-02, CH4 4.51e-06, H2 3.88e-03.
+- **Files:** `GJ876_S1400.00_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S1331.25_CO2-1.000e-05bar_haze`
 
@@ -279,6 +579,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 294.09 K (the photochemistry ran on a profile whose surface temperature is 295.09 K), total surface pressure 1.055 bar, tropopause near 0.334 bar. Surface mixing ratios: CO2 9.83e-06, CO 9.23e-05, O2 2.85e-17, H2O 1.27e-02, CH4 4.55e-06, H2 4.22e-03.
 - **Files:** `GJ876_S1331.25_CO2-1.000e-05bar_haze/` (see the file-name table above).
 
+### `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1331.25_CO2-1.000e-05bar_haze`), spectrum scaled to 1331.25 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 294 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 293.78 K (the photochemistry ran on a profile whose surface temperature is 294.09 K), total surface pressure 1.055 bar, tropopause near 0.335 bar. Surface mixing ratios: CO2 9.84e-06, CO 9.06e-05, O2 2.41e-17, H2O 1.18e-02, CH4 3.80e-06, H2 4.12e-03.
+- **Files:** `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1331.25_CO2-1.000e-05bar_haze`), spectrum scaled to 1331.25 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 294 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 293.54 K (the photochemistry ran on a profile whose surface temperature is 294.09 K), total surface pressure 1.054 bar, tropopause near 0.337 bar. Surface mixing ratios: CO2 9.84e-06, CO 6.25e-06, O2 1.55e-16, H2O 1.18e-02, CH4 3.35e-06, H2 3.81e-03.
+- **Files:** `GJ876_S1331.25_CO2-1.000e-05bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S1262.50_CO2-2.207e-05bar_haze`
 
 - **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 2.207e-05 bar, N2 at 1 bar.
@@ -286,6 +602,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 1.659e-05, 2.356e-05, 2.207e-05 bar. Photochemistry stopped by: photochem criterion. Wall time 10 min.
 - **Result:** surface temperature 287.89 K (the photochemistry ran on a profile whose surface temperature is 287.92 K), total surface pressure 1.054 bar, tropopause near 0.363 bar. Surface mixing ratios: CO2 2.18e-05, CO 2.39e-04, O2 5.21e-17, H2O 8.12e-03, CH4 3.68e-06, H2 4.17e-03.
 - **Files:** `GJ876_S1262.50_CO2-2.207e-05bar_haze/` (see the file-name table above).
+
+### `GJ876_S1262.50_CO2-2.226e-05bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1262.50_CO2-2.207e-05bar_haze`), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 2.226e-05 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.226e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 287.89 K (the photochemistry ran on a profile whose surface temperature is 287.92 K), total surface pressure 1.054 bar, tropopause near 0.363 bar. Surface mixing ratios: CO2 2.20e-05, CO 2.11e-04, O2 5.33e-17, H2O 8.12e-03, CH4 3.61e-06, H2 4.16e-03.
+- **Files:** `GJ876_S1262.50_CO2-2.226e-05bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1262.50_CO2-2.207e-05bar_haze`), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 2.511e-05 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 2.226e-05, 2.511e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 3 min.
+- **Result:** surface temperature 287.87 K (the photochemistry ran on a profile whose surface temperature is 287.91 K), total surface pressure 1.053 bar, tropopause near 0.363 bar. Surface mixing ratios: CO2 2.48e-05, CO 9.32e-06, O2 1.91e-16, H2O 8.12e-03, CH4 2.72e-06, H2 3.79e-03.
+- **Files:** `GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm`
 
@@ -303,6 +635,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.33 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 1.059 bar, tropopause near 0.352 bar. Surface mixing ratios: CO2 1.71e-04, CO 6.06e-03, O2 1.02e-17, H2O 8.40e-03, CH4 1.05e-05, H2 3.98e-03.
 - **Files:** `GJ876_S1193.75_CO2-1.738e-04bar_haze/` (see the file-name table above).
 
+### `GJ876_S1193.75_CO2-1.689e-04bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1193.75_CO2-1.738e-04bar_haze`), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 1.689e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.689e-04 bar. Photochemistry stopped by: photochem criterion. Wall time 1 min.
+- **Result:** surface temperature 288.21 K (the photochemistry ran on a profile whose surface temperature is 288.22 K), total surface pressure 1.059 bar, tropopause near 0.353 bar. Surface mixing ratios: CO2 1.66e-04, CO 5.95e-03, O2 1.03e-17, H2O 8.40e-03, CH4 1.04e-05, H2 4.00e-03.
+- **Files:** `GJ876_S1193.75_CO2-1.689e-04bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1193.75_CO2-2.198e-04bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1193.75_CO2-1.738e-04bar_haze`), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 2.198e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.689e-04, 2.198e-04 bar. Photochemistry stopped by: photochem criterion. Wall time 5 min.
+- **Result:** surface temperature 287.86 K (the photochemistry ran on a profile whose surface temperature is 287.92 K), total surface pressure 1.054 bar, tropopause near 0.356 bar. Surface mixing ratios: CO2 2.17e-04, CO 1.14e-05, O2 2.15e-15, H2O 8.11e-03, CH4 4.31e-06, H2 4.59e-03.
+- **Files:** `GJ876_S1193.75_CO2-2.198e-04bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm`
 
 - **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 1e-05 cm), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 9.660e-04 bar, N2 at 1 bar.
@@ -319,6 +667,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.11 K (the photochemistry ran on a profile whose surface temperature is 288.19 K), total surface pressure 1.074 bar, tropopause near 0.344 bar. Surface mixing ratios: CO2 8.66e-04, CO 1.85e-02, O2 4.34e-18, H2O 8.64e-03, CH4 2.24e-05, H2 3.88e-03.
 - **Files:** `GJ876_S1125.00_CO2-8.944e-04bar_haze/` (see the file-name table above).
 
+### `GJ876_S1125.00_CO2-9.089e-04bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1125.00_CO2-8.944e-04bar_haze`), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 9.089e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 9.089e-04 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.20 K (the photochemistry ran on a profile whose surface temperature is 288.18 K), total surface pressure 1.074 bar, tropopause near 0.344 bar. Surface mixing ratios: CO2 8.80e-04, CO 1.86e-02, O2 4.40e-18, H2O 8.64e-03, CH4 2.26e-05, H2 3.88e-03.
+- **Files:** `GJ876_S1125.00_CO2-9.089e-04bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1125.00_CO2-1.227e-03bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1125.00_CO2-8.944e-04bar_haze`), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 1.227e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 9.089e-04, 1.227e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 288.38 K (the photochemistry ran on a profile whose surface temperature is 288.17 K), total surface pressure 1.054 bar, tropopause near 0.344 bar. Surface mixing ratios: CO2 1.21e-03, CO 1.49e-05, O2 2.12e-15, H2O 8.23e-03, CH4 1.27e-05, H2 3.96e-03.
+- **Files:** `GJ876_S1125.00_CO2-1.227e-03bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `GJ876_S1102.08_CO2-1.540e-03bar_haze`
 
 - **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1102.08 W/m^2 at the planet; CO2 fixed at 1.540e-03 bar, N2 at 1 bar.
@@ -326,6 +690,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 2.498e-03, 1.359e-03, 1.540e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
 - **Result:** surface temperature 288.36 K (the photochemistry ran on a profile whose surface temperature is 288.15 K), total surface pressure 1.082 bar, tropopause near 0.340 bar. Surface mixing ratios: CO2 1.48e-03, CO 2.51e-02, O2 9.06e-18, H2O 8.76e-03, CH4 2.97e-05, H2 3.91e-03.
 - **Files:** `GJ876_S1102.08_CO2-1.540e-03bar_haze/` (see the file-name table above).
+
+### `GJ876_S1102.08_CO2-1.477e-03bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1102.08_CO2-1.540e-03bar_haze`), spectrum scaled to 1102.08 W/m^2 at the planet; CO2 fixed at 1.477e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.477e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.15 K (the photochemistry ran on a profile whose surface temperature is 288.16 K), total surface pressure 1.084 bar, tropopause near 0.341 bar. Surface mixing ratios: CO2 1.42e-03, CO 2.73e-02, O2 7.88e-18, H2O 8.81e-03, CH4 2.98e-05, H2 3.88e-03.
+- **Files:** `GJ876_S1102.08_CO2-1.477e-03bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1102.08_CO2-1.963e-03bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1102.08_CO2-1.540e-03bar_haze`), spectrum scaled to 1102.08 W/m^2 at the planet; CO2 fixed at 1.963e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.477e-03, 1.963e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 4 min.
+- **Result:** surface temperature 288.36 K (the photochemistry ran on a profile whose surface temperature is 288.13 K), total surface pressure 1.055 bar, tropopause near 0.341 bar. Surface mixing ratios: CO2 1.94e-03, CO 1.58e-05, O2 2.16e-15, H2O 8.21e-03, CH4 1.75e-05, H2 3.82e-03.
+- **Files:** `GJ876_S1102.08_CO2-1.963e-03bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `GJ876_S1079.17_CO2-2.475e-03bar_haze`
 
@@ -335,6 +715,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.16 K (the photochemistry ran on a profile whose surface temperature is 288.14 K), total surface pressure 1.087 bar, tropopause near 0.338 bar. Surface mixing ratios: CO2 2.37e-03, CO 2.81e-02, O2 1.15e-15, H2O 8.81e-03, CH4 3.50e-05, H2 4.17e-03.
 - **Files:** `GJ876_S1079.17_CO2-2.475e-03bar_haze/` (see the file-name table above).
 
+### `GJ876_S1079.17_CO2-2.464e-03bar_haze_COvdep0_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0 cm/s and CO surface flux 0 (started from `GJ876_S1079.17_CO2-2.475e-03bar_haze`), spectrum scaled to 1079.17 W/m^2 at the planet; CO2 fixed at 2.464e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.464e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 288.34 K (the photochemistry ran on a profile whose surface temperature is 288.14 K), total surface pressure 1.094 bar, tropopause near 0.337 bar. Surface mixing ratios: CO2 2.34e-03, CO 3.42e-02, O2 6.82e-16, H2O 8.95e-03, CH4 3.81e-05, H2 4.12e-03.
+- **Files:** `GJ876_S1079.17_CO2-2.464e-03bar_haze_COvdep0_COflux0/` (see the file-name table above).
+
+### `GJ876_S1079.17_CO2-3.046e-03bar_haze_COvdep1.2e-4_COflux0`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `GJ876_S1079.17_CO2-2.475e-03bar_haze`), spectrum scaled to 1079.17 W/m^2 at the planet; CO2 fixed at 3.046e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 2.464e-03, 3.046e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 288.30 K (the photochemistry ran on a profile whose surface temperature is 288.10 K), total surface pressure 1.056 bar, tropopause near 0.338 bar. Surface mixing ratios: CO2 3.00e-03, CO 1.66e-05, O2 2.20e-15, H2O 8.19e-03, CH4 2.34e-05, H2 3.72e-03.
+- **Files:** `GJ876_S1079.17_CO2-3.046e-03bar_haze_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S1400.00_CO2-4.651e-05bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 4.651e-05 bar, N2 at 1 bar.
@@ -342,6 +738,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 3.065e-05, 4.651e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 36 min.
 - **Result:** surface temperature 287.88 K (the photochemistry ran on a profile whose surface temperature is 287.82 K), total surface pressure 1.051 bar, tropopause near 0.364 bar. Surface mixing ratios: CO2 4.59e-05, CO 1.66e-06, O2 9.68e-15, H2O 8.06e-03, CH4 1.69e-06, H2 5.75e-03.
 - **Files:** `Sun3Ga_S1400.00_CO2-4.651e-05bar/` (see the file-name table above).
+
+### `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1400.00_CO2-4.651e-05bar`), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 4.571e-05 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.571e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 287.81 K (the photochemistry ran on a profile whose surface temperature is 287.82 K), total surface pressure 1.051 bar, tropopause near 0.364 bar. Surface mixing ratios: CO2 4.51e-05, CO 1.60e-06, O2 9.78e-15, H2O 8.06e-03, CH4 1.68e-06, H2 5.73e-03.
+- **Files:** `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1400.00_CO2-4.651e-05bar`), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 4.571e-05 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.571e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 10 min.
+- **Result:** surface temperature 287.79 K (the photochemistry ran on a profile whose surface temperature is 287.82 K), total surface pressure 1.050 bar, tropopause near 0.364 bar. Surface mixing ratios: CO2 4.51e-05, CO 1.48e-06, O2 9.96e-15, H2O 8.05e-03, CH4 1.68e-06, H2 5.55e-03.
+- **Files:** `Sun3Ga_S1400.00_CO2-4.571e-05bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S1331.25_CO2-2.637e-04bar`
 
@@ -351,6 +763,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.91 K (the photochemistry ran on a profile whose surface temperature is 287.83 K), total surface pressure 1.050 bar, tropopause near 0.357 bar. Surface mixing ratios: CO2 2.60e-04, CO 6.26e-06, O2 6.26e-15, H2O 8.06e-03, CH4 4.45e-06, H2 5.62e-03.
 - **Files:** `Sun3Ga_S1331.25_CO2-2.637e-04bar/` (see the file-name table above).
 
+### `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1331.25_CO2-2.637e-04bar`), spectrum scaled to 1331.25 W/m^2 at the planet; CO2 fixed at 2.579e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.579e-04 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 287.82 K (the photochemistry ran on a profile whose surface temperature is 287.83 K), total surface pressure 1.050 bar, tropopause near 0.358 bar. Surface mixing ratios: CO2 2.54e-04, CO 6.04e-06, O2 6.32e-15, H2O 8.06e-03, CH4 4.39e-06, H2 5.58e-03.
+- **Files:** `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1331.25_CO2-2.637e-04bar`), spectrum scaled to 1331.25 W/m^2 at the planet; CO2 fixed at 2.579e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.579e-04 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 287.75 K (the photochemistry ran on a profile whose surface temperature is 287.83 K), total surface pressure 1.050 bar, tropopause near 0.358 bar. Surface mixing ratios: CO2 2.54e-04, CO 4.85e-06, O2 6.71e-15, H2O 8.05e-03, CH4 4.37e-06, H2 5.05e-03.
+- **Files:** `Sun3Ga_S1331.25_CO2-2.579e-04bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S1262.50_CO2-1.092e-03bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 1.092e-03 bar, N2 at 1 bar.
@@ -358,6 +786,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 1.327e-03, 1.092e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 14 min.
 - **Result:** surface temperature 287.70 K (the photochemistry ran on a profile whose surface temperature is 287.87 K), total surface pressure 1.051 bar, tropopause near 0.351 bar. Surface mixing ratios: CO2 1.08e-03, CO 1.58e-05, O2 5.02e-15, H2O 8.08e-03, CH4 1.14e-05, H2 5.44e-03.
 - **Files:** `Sun3Ga_S1262.50_CO2-1.092e-03bar/` (see the file-name table above).
+
+### `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1262.50_CO2-1.092e-03bar`), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 1.138e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.138e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 287.90 K (the photochemistry ran on a profile whose surface temperature is 287.87 K), total surface pressure 1.051 bar, tropopause near 0.350 bar. Surface mixing ratios: CO2 1.12e-03, CO 1.61e-05, O2 4.99e-15, H2O 8.08e-03, CH4 1.17e-05, H2 5.41e-03.
+- **Files:** `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1262.50_CO2-1.092e-03bar`), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 1.138e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.138e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 4 min.
+- **Result:** surface temperature 287.76 K (the photochemistry ran on a profile whose surface temperature is 287.87 K), total surface pressure 1.050 bar, tropopause near 0.350 bar. Surface mixing ratios: CO2 1.12e-03, CO 1.02e-05, O2 5.42e-15, H2O 8.06e-03, CH4 1.15e-05, H2 4.31e-03.
+- **Files:** `Sun3Ga_S1262.50_CO2-1.138e-03bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S1193.75_CO2-3.971e-03bar`
 
@@ -367,6 +811,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.71 K (the photochemistry ran on a profile whose surface temperature is 288.10 K), total surface pressure 1.054 bar, tropopause near 0.343 bar. Surface mixing ratios: CO2 3.90e-03, CO 3.64e-05, O2 4.37e-15, H2O 8.17e-03, CH4 2.49e-05, H2 5.48e-03.
 - **Files:** `Sun3Ga_S1193.75_CO2-3.971e-03bar/` (see the file-name table above).
 
+### `Sun3Ga_S1193.75_CO2-4.020e-03bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1193.75_CO2-3.971e-03bar`), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 4.020e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 4.020e-03 bar. Photochemistry stopped by: photochem criterion. Wall time 1 min.
+- **Result:** surface temperature 287.79 K (the photochemistry ran on a profile whose surface temperature is 287.78 K), total surface pressure 1.054 bar, tropopause near 0.343 bar. Surface mixing ratios: CO2 3.95e-03, CO 3.66e-05, O2 4.54e-15, H2O 8.01e-03, CH4 2.52e-05, H2 5.43e-03.
+- **Files:** `Sun3Ga_S1193.75_CO2-4.020e-03bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1193.75_CO2-4.236e-03bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1193.75_CO2-3.971e-03bar`), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 4.236e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 4.020e-03, 4.236e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 287.82 K (the photochemistry ran on a profile whose surface temperature is 287.78 K), total surface pressure 1.052 bar, tropopause near 0.342 bar. Surface mixing ratios: CO2 4.17e-03, CO 1.70e-05, O2 4.88e-15, H2O 8.02e-03, CH4 2.44e-05, H2 3.58e-03.
+- **Files:** `Sun3Ga_S1193.75_CO2-4.236e-03bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S1125.00_CO2-1.294e-02bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 1.294e-02 bar, N2 at 1 bar.
@@ -374,6 +834,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 1.958e-02, 1.195e-02, 1.294e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 10 min.
 - **Result:** surface temperature 288.33 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 1.064 bar, tropopause near 0.333 bar. Surface mixing ratios: CO2 1.26e-02, CO 8.26e-05, O2 4.03e-15, H2O 8.17e-03, CH4 4.66e-05, H2 5.68e-03.
 - **Files:** `Sun3Ga_S1125.00_CO2-1.294e-02bar/` (see the file-name table above).
+
+### `Sun3Ga_S1125.00_CO2-1.276e-02bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1125.00_CO2-1.294e-02bar`), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 1.276e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.276e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 1 min.
+- **Result:** surface temperature 288.21 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 1.063 bar, tropopause near 0.333 bar. Surface mixing ratios: CO2 1.24e-02, CO 8.07e-05, O2 4.04e-15, H2O 8.17e-03, CH4 4.62e-05, H2 5.65e-03.
+- **Files:** `Sun3Ga_S1125.00_CO2-1.276e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1125.00_CO2-1.388e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1125.00_CO2-1.294e-02bar`), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 1.388e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.276e-02, 1.388e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.29 K (the photochemistry ran on a profile whose surface temperature is 288.22 K), total surface pressure 1.062 bar, tropopause near 0.332 bar. Surface mixing ratios: CO2 1.35e-02, CO 2.41e-05, O2 4.61e-15, H2O 8.17e-03, CH4 4.13e-05, H2 2.89e-03.
+- **Files:** `Sun3Ga_S1125.00_CO2-1.388e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S1056.25_CO2-3.250e-02bar`
 
@@ -383,6 +859,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.26 K (the photochemistry ran on a profile whose surface temperature is 288.16 K), total surface pressure 1.084 bar, tropopause near 0.325 bar. Surface mixing ratios: CO2 3.10e-02, CO 1.76e-04, O2 3.85e-15, H2O 7.98e-03, CH4 7.03e-05, H2 5.79e-03.
 - **Files:** `Sun3Ga_S1056.25_CO2-3.250e-02bar/` (see the file-name table above).
 
+### `Sun3Ga_S1056.25_CO2-3.214e-02bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S1056.25_CO2-3.250e-02bar`), spectrum scaled to 1056.25 W/m^2 at the planet; CO2 fixed at 3.214e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.214e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.13 K (the photochemistry ran on a profile whose surface temperature is 288.15 K), total surface pressure 1.084 bar, tropopause near 0.325 bar. Surface mixing ratios: CO2 3.07e-02, CO 1.71e-04, O2 3.87e-15, H2O 7.98e-03, CH4 6.97e-05, H2 5.75e-03.
+- **Files:** `Sun3Ga_S1056.25_CO2-3.214e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S1056.25_CO2-3.559e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S1056.25_CO2-3.250e-02bar`), spectrum scaled to 1056.25 W/m^2 at the planet; CO2 fixed at 3.559e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 3.214e-02, 3.559e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 288.18 K (the photochemistry ran on a profile whose surface temperature is 288.09 K), total surface pressure 1.083 bar, tropopause near 0.325 bar. Surface mixing ratios: CO2 3.40e-02, CO 2.94e-05, O2 5.76e-15, H2O 7.95e-03, CH4 5.57e-05, H2 2.24e-03.
+- **Files:** `Sun3Ga_S1056.25_CO2-3.559e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0987.50_CO2-7.320e-02bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 987.5 W/m^2 at the planet; CO2 fixed at 7.320e-02 bar, N2 at 1 bar.
@@ -390,6 +882,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 1.110e-01, 6.869e-02, 7.320e-02 bar. Photochemistry stopped by: composition steady over last decade. Wall time 12 min.
 - **Result:** surface temperature 288.19 K (the photochemistry ran on a profile whose surface temperature is 288.08 K), total surface pressure 1.126 bar, tropopause near 0.320 bar. Surface mixing ratios: CO2 6.73e-02, CO 4.23e-04, O2 3.51e-15, H2O 7.66e-03, CH4 9.77e-05, H2 5.55e-03.
 - **Files:** `Sun3Ga_S0987.50_CO2-7.320e-02bar/` (see the file-name table above).
+
+### `Sun3Ga_S0987.50_CO2-7.252e-02bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0987.50_CO2-7.320e-02bar`), spectrum scaled to 987.5 W/m^2 at the planet; CO2 fixed at 7.252e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 7.252e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 1 min.
+- **Result:** surface temperature 288.06 K (the photochemistry ran on a profile whose surface temperature is 288.08 K), total surface pressure 1.125 bar, tropopause near 0.321 bar. Surface mixing ratios: CO2 6.67e-02, CO 4.07e-04, O2 3.55e-15, H2O 7.66e-03, CH4 9.68e-05, H2 5.52e-03.
+- **Files:** `Sun3Ga_S0987.50_CO2-7.252e-02bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0987.50_CO2-8.219e-02bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0987.50_CO2-7.320e-02bar`), spectrum scaled to 987.5 W/m^2 at the planet; CO2 fixed at 8.219e-02 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 7.252e-02, 8.219e-02 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 288.17 K (the photochemistry ran on a profile whose surface temperature is 288.07 K), total surface pressure 1.131 bar, tropopause near 0.322 bar. Surface mixing ratios: CO2 7.52e-02, CO 3.24e-05, O2 8.58e-15, H2O 7.61e-03, CH4 6.80e-05, H2 1.64e-03.
+- **Files:** `Sun3Ga_S0987.50_CO2-8.219e-02bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S0918.75_CO2-1.538e-01bar`
 
@@ -399,6 +907,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.08 K (the photochemistry ran on a profile whose surface temperature is 287.97 K), total surface pressure 1.213 bar, tropopause near 0.321 bar. Surface mixing ratios: CO2 1.31e-01, CO 3.14e-03, O2 1.32e-15, H2O 7.14e-03, CH4 1.41e-04, H2 5.01e-03.
 - **Files:** `Sun3Ga_S0918.75_CO2-1.538e-01bar/` (see the file-name table above).
 
+### `Sun3Ga_S0918.75_CO2-1.526e-01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0918.75_CO2-1.538e-01bar`), spectrum scaled to 918.75 W/m^2 at the planet; CO2 fixed at 1.526e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.526e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 287.95 K (the photochemistry ran on a profile whose surface temperature is 287.97 K), total surface pressure 1.211 bar, tropopause near 0.322 bar. Surface mixing ratios: CO2 1.30e-01, CO 3.01e-03, O2 1.37e-15, H2O 7.14e-03, CH4 1.39e-04, H2 5.01e-03.
+- **Files:** `Sun3Ga_S0918.75_CO2-1.526e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0918.75_CO2-1.780e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0918.75_CO2-1.538e-01bar`), spectrum scaled to 918.75 W/m^2 at the planet; CO2 fixed at 1.780e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.526e-01, 1.780e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 4 min.
+- **Result:** surface temperature 288.10 K (the photochemistry ran on a profile whose surface temperature is 287.97 K), total surface pressure 1.230 bar, tropopause near 0.327 bar. Surface mixing ratios: CO2 1.50e-01, CO 3.25e-05, O2 1.13e-14, H2O 6.96e-03, CH4 8.07e-05, H2 1.19e-03.
+- **Files:** `Sun3Ga_S0918.75_CO2-1.780e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0850.00_CO2-3.064e-01bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 850 W/m^2 at the planet; CO2 fixed at 3.064e-01 bar, N2 at 1 bar.
@@ -406,6 +930,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 4.401e-01, 3.064e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 12 min.
 - **Result:** surface temperature 287.45 K (the photochemistry ran on a profile whose surface temperature is 288.00 K), total surface pressure 1.388 bar, tropopause near 0.334 bar. Surface mixing ratios: CO2 2.29e-01, CO 1.52e-02, O2 2.20e-16, H2O 6.55e-03, CH4 1.98e-04, H2 3.91e-03.
 - **Files:** `Sun3Ga_S0850.00_CO2-3.064e-01bar/` (see the file-name table above).
+
+### `Sun3Ga_S0850.00_CO2-3.167e-01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0850.00_CO2-3.064e-01bar`), spectrum scaled to 850 W/m^2 at the planet; CO2 fixed at 3.167e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.167e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.06 K (the photochemistry ran on a profile whose surface temperature is 287.99 K), total surface pressure 1.403 bar, tropopause near 0.333 bar. Surface mixing ratios: CO2 2.34e-01, CO 1.82e-02, O2 1.76e-16, H2O 6.54e-03, CH4 2.05e-04, H2 3.88e-03.
+- **Files:** `Sun3Ga_S0850.00_CO2-3.167e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0850.00_CO2-3.064e-01bar`), spectrum scaled to 850 W/m^2 at the planet; CO2 fixed at 3.724e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 3.167e-01, 3.724e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 4 min.
+- **Result:** surface temperature 288.11 K (the photochemistry ran on a profile whose surface temperature is 287.98 K), total surface pressure 1.433 bar, tropopause near 0.346 bar. Surface mixing ratios: CO2 2.69e-01, CO 2.92e-05, O2 9.15e-15, H2O 6.00e-03, CH4 9.55e-05, H2 9.16e-04.
+- **Files:** `Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S0781.25_CO2-6.139e-01bar`
 
@@ -415,6 +955,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 287.64 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 1.721 bar, tropopause near 0.362 bar. Surface mixing ratios: CO2 3.70e-01, CO 1.93e-02, O2 6.38e-17, H2O 5.40e-03, CH4 2.85e-04, H2 3.09e-03.
 - **Files:** `Sun3Ga_S0781.25_CO2-6.139e-01bar/` (see the file-name table above).
 
+### `Sun3Ga_S0781.25_CO2-6.254e-01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0781.25_CO2-6.139e-01bar`), spectrum scaled to 781.25 W/m^2 at the planet; CO2 fixed at 6.254e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 6.254e-01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.06 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 1.740 bar, tropopause near 0.362 bar. Surface mixing ratios: CO2 3.73e-01, CO 2.29e-02, O2 5.02e-17, H2O 5.41e-03, CH4 2.91e-04, H2 3.08e-03.
+- **Files:** `Sun3Ga_S0781.25_CO2-6.254e-01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0781.25_CO2-7.437e-01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0781.25_CO2-6.139e-01bar`), spectrum scaled to 781.25 W/m^2 at the planet; CO2 fixed at 7.437e-01 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 6.254e-01, 7.437e-01 bar. Photochemistry stopped by: photochem criterion. Wall time 5 min.
+- **Result:** surface temperature 288.16 K (the photochemistry ran on a profile whose surface temperature is 288.00 K), total surface pressure 1.820 bar, tropopause near 0.386 bar. Surface mixing ratios: CO2 4.24e-01, CO 2.33e-05, O2 3.65e-15, H2O 4.75e-03, CH4 1.14e-04, H2 7.84e-04.
+- **Files:** `Sun3Ga_S0781.25_CO2-7.437e-01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0712.50_CO2-1.158e00bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 712.5 W/m^2 at the planet; CO2 fixed at 1.158e+00 bar, N2 at 1 bar.
@@ -422,6 +978,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 1.504e+00, 1.158e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 16 min.
 - **Result:** surface temperature 287.81 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 2.294 bar, tropopause near 0.407 bar. Surface mixing ratios: CO2 5.24e-01, CO 1.65e-02, O2 1.29e-17, H2O 4.03e-03, CH4 3.88e-04, H2 2.60e-03.
 - **Files:** `Sun3Ga_S0712.50_CO2-1.158e00bar/` (see the file-name table above).
+
+### `Sun3Ga_S0712.50_CO2-1.167e00bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0712.50_CO2-1.158e00bar`), spectrum scaled to 712.5 W/m^2 at the planet; CO2 fixed at 1.167e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.167e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 2 min.
+- **Result:** surface temperature 288.04 K (the photochemistry ran on a profile whose surface temperature is 288.01 K), total surface pressure 2.311 bar, tropopause near 0.405 bar. Surface mixing ratios: CO2 5.24e-01, CO 1.97e-02, O2 1.02e-17, H2O 4.05e-03, CH4 3.92e-04, H2 2.60e-03.
+- **Files:** `Sun3Ga_S0712.50_CO2-1.167e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0712.50_CO2-1.414e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0712.50_CO2-1.158e00bar`), spectrum scaled to 712.5 W/m^2 at the planet; CO2 fixed at 1.414e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.167e+00, 1.414e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 7 min.
+- **Result:** surface temperature 288.45 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 2.520 bar, tropopause near 0.350 bar. Surface mixing ratios: CO2 5.83e-01, CO 1.67e-05, O2 6.14e-16, H2O 3.50e-03, CH4 1.36e-04, H2 7.16e-04.
+- **Files:** `Sun3Ga_S0712.50_CO2-1.414e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S0643.75_CO2-2.044e00bar`
 
@@ -431,6 +1003,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 288.13 K (the photochemistry ran on a profile whose surface temperature is 288.09 K), total surface pressure 3.221 bar, tropopause near 0.188 bar. Surface mixing ratios: CO2 6.60e-01, CO 1.21e-02, O2 2.37e-18, H2O 2.85e-03, CH4 4.91e-04, H2 2.26e-03.
 - **Files:** `Sun3Ga_S0643.75_CO2-2.044e00bar/` (see the file-name table above).
 
+### `Sun3Ga_S0643.75_CO2-2.042e00bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0643.75_CO2-2.044e00bar`), spectrum scaled to 643.75 W/m^2 at the planet; CO2 fixed at 2.042e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 2.042e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 288.11 K (the photochemistry ran on a profile whose surface temperature is 288.09 K), total surface pressure 3.227 bar, tropopause near 0.188 bar. Surface mixing ratios: CO2 6.58e-01, CO 1.45e-02, O2 1.98e-18, H2O 2.87e-03, CH4 4.94e-04, H2 2.26e-03.
+- **Files:** `Sun3Ga_S0643.75_CO2-2.042e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0643.75_CO2-2.461e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0643.75_CO2-2.044e00bar`), spectrum scaled to 643.75 W/m^2 at the planet; CO2 fixed at 2.461e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 2.042e+00, 2.461e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 5 min.
+- **Result:** surface temperature 288.41 K (the photochemistry ran on a profile whose surface temperature is 288.05 K), total surface pressure 3.614 bar, tropopause near 0.160 bar. Surface mixing ratios: CO2 7.09e-01, CO 1.15e-05, O2 1.29e-16, H2O 2.42e-03, CH4 1.56e-04, H2 6.55e-04.
+- **Files:** `Sun3Ga_S0643.75_CO2-2.461e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0575.00_CO2-3.425e00bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 575 W/m^2 at the planet; CO2 fixed at 3.425e+00 bar, N2 at 1 bar.
@@ -438,6 +1026,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 3 iterations; CO2 pressures tried: 8.097e+00, 3.596e+00, 3.425e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 19 min.
 - **Result:** surface temperature 288.01 K (the photochemistry ran on a profile whose surface temperature is 287.94 K), total surface pressure 4.672 bar, tropopause near 0.082 bar. Surface mixing ratios: CO2 7.64e-01, CO 8.08e-03, O2 1.19e-18, H2O 1.93e-03, CH4 5.91e-04, H2 1.97e-03.
 - **Files:** `Sun3Ga_S0575.00_CO2-3.425e00bar/` (see the file-name table above).
+
+### `Sun3Ga_S0575.00_CO2-3.408e00bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0575.00_CO2-3.425e00bar`), spectrum scaled to 575 W/m^2 at the planet; CO2 fixed at 3.408e+00 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 1 iteration; CO2 pressures tried: 3.408e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 2 min.
+- **Result:** surface temperature 287.87 K (the photochemistry ran on a profile whose surface temperature is 287.84 K), total surface pressure 4.662 bar, tropopause near 0.082 bar. Surface mixing ratios: CO2 7.62e-01, CO 9.72e-03, O2 1.18e-18, H2O 1.93e-03, CH4 5.94e-04, H2 1.98e-03.
+- **Files:** `Sun3Ga_S0575.00_CO2-3.408e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0575.00_CO2-8.097e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0575.00_CO2-3.425e00bar`), spectrum scaled to 575 W/m^2 at the planet; CO2 fixed at 8.097e+00 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 291 K (part of the CO2 may condense).
+- **Coupling:** 4 iterations; CO2 pressures tried: 3.408e+00, 5.089e+00, 8.913e+00, 8.097e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 16 min.
+- **Result:** surface temperature 290.75 K (the photochemistry ran on a profile whose surface temperature is 288.60 K), total surface pressure 9.523 bar, tropopause near 0.040 bar. Surface mixing ratios: CO2 8.89e-01, CO 4.79e-06, O2 3.22e-14, H2O 9.59e-04, CH4 4.44e-05, H2 1.20e-04.
+- **Files:** `Sun3Ga_S0575.00_CO2-8.097e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S0506.25_CO2-5.309e00bar`
 
@@ -447,6 +1051,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 268.73 K (the photochemistry ran on a profile whose surface temperature is 270.54 K), total surface pressure 6.654 bar, tropopause near 0.033 bar. Surface mixing ratios: CO2 8.34e-01, CO 5.80e-03, O2 1.72e-18, H2O 4.02e-04, CH4 6.54e-04, H2 1.68e-03.
 - **Files:** `Sun3Ga_S0506.25_CO2-5.309e00bar/` (see the file-name table above).
 
+### `Sun3Ga_S0506.25_CO2-5.309e00bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0506.25_CO2-5.309e00bar`), spectrum scaled to 506.25 W/m^2 at the planet; CO2 fixed at 5.309e+00 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 269 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 5.309e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 1 min.
+- **Result:** surface temperature 268.76 K (the photochemistry ran on a profile whose surface temperature is 268.73 K), total surface pressure 6.664 bar, tropopause near 0.033 bar. Surface mixing ratios: CO2 8.33e-01, CO 7.06e-03, O2 1.87e-18, H2O 3.46e-04, CH4 6.57e-04, H2 1.68e-03.
+- **Files:** `Sun3Ga_S0506.25_CO2-5.309e00bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0506.25_CO2-3.162e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0506.25_CO2-5.309e00bar`), spectrum scaled to 506.25 W/m^2 at the planet; CO2 fixed at 3.162e+00 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 249 K (part of the CO2 may condense).
+- **Coupling:** 6 iterations; CO2 pressures tried: 5.309e+00, 3.162e+00, 3.981e+00, 3.162e+00, 3.981e+00, 3.162e+00 bar. Photochemistry stopped by: photochem criterion. Wall time 16 min.
+- **Result:** surface temperature 249.09 K (the photochemistry ran on a profile whose surface temperature is 247.69 K), total surface pressure 4.370 bar, tropopause near 0.044 bar. Surface mixing ratios: CO2 7.59e-01, CO 8.08e-06, O2 2.55e-15, H2O 7.22e-05, CH4 1.88e-04, H2 6.48e-04.
+- **Files:** `Sun3Ga_S0506.25_CO2-3.162e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0437.50_CO2-1.000e01bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 437.5 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
@@ -454,6 +1074,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 2 iterations; CO2 pressures tried: 1.000e+00, 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 21 min.
 - **Result:** surface temperature 222.47 K (the photochemistry ran on a profile whose surface temperature is 224.97 K), total surface pressure 11.646 bar, tropopause near 0.025 bar. Surface mixing ratios: CO2 9.04e-01, CO 3.40e-03, O2 1.53e-18, H2O 2.38e-05, CH4 6.94e-04, H2 1.41e-03.
 - **Files:** `Sun3Ga_S0437.50_CO2-1.000e01bar/` (see the file-name table above).
+
+### `Sun3Ga_S0437.50_CO2-1.000e01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0437.50_CO2-1.000e01bar`), spectrum scaled to 437.5 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 222 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: photochem criterion. Wall time 3 min.
+- **Result:** surface temperature 222.49 K (the photochemistry ran on a profile whose surface temperature is 222.47 K), total surface pressure 11.660 bar, tropopause near 0.025 bar. Surface mixing ratios: CO2 9.03e-01, CO 4.40e-03, O2 1.16e-18, H2O 2.14e-05, CH4 7.00e-04, H2 1.41e-03.
+- **Files:** `Sun3Ga_S0437.50_CO2-1.000e01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0437.50_CO2-1.000e00bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0437.50_CO2-1.000e01bar`), spectrum scaled to 437.5 W/m^2 at the planet; CO2 fixed at 1.000e+00 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 222 K (part of the CO2 may condense).
+- **Coupling:** 6 iterations; CO2 pressures tried: 1.000e+01, 1.000e+00, 1.000e+01, 1.000e+00, 1.000e+01, 1.000e+00 bar. Photochemistry stopped by: composition steady over last decade. Wall time 45 min.
+- **Result:** surface temperature 221.55 K (the photochemistry ran on a profile whose surface temperature is 218.72 K), total surface pressure 2.105 bar, tropopause near 0.055 bar. Surface mixing ratios: CO2 4.99e-01, CO 1.21e-05, O2 1.07e-13, H2O 5.62e-06, CH4 3.19e-04, H2 1.42e-03.
+- **Files:** `Sun3Ga_S0437.50_CO2-1.000e00bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
 ### `Sun3Ga_S0368.75_CO2-1.000e01bar`
 
@@ -463,6 +1099,22 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Result:** surface temperature 203.95 K (the photochemistry ran on a profile whose surface temperature is 206.22 K), total surface pressure 8.577 bar, tropopause near 0.023 bar. Surface mixing ratios: CO2 8.69e-01, CO 5.26e-03, O2 5.92e-18, H2O 2.82e-06, CH4 9.37e-04, H2 1.60e-03.
 - **Files:** `Sun3Ga_S0368.75_CO2-1.000e01bar/` (see the file-name table above).
 
+### `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0368.75_CO2-1.000e01bar`), spectrum scaled to 368.75 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 204 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 3 min.
+- **Result:** surface temperature 204.02 K (the photochemistry ran on a profile whose surface temperature is 203.95 K), total surface pressure 7.844 bar, tropopause near 0.023 bar. Surface mixing ratios: CO2 8.54e-01, CO 8.06e-03, O2 4.86e-18, H2O 2.25e-06, CH4 9.48e-04, H2 1.67e-03.
+- **Files:** `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0368.75_CO2-1.000e01bar`), spectrum scaled to 368.75 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 202 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 7 min.
+- **Result:** surface temperature 202.43 K (the photochemistry ran on a profile whose surface temperature is 203.95 K), total surface pressure 7.683 bar, tropopause near 0.029 bar. Surface mixing ratios: CO2 8.61e-01, CO 4.51e-06, O2 1.32e-14, H2O 2.21e-06, CH4 1.27e-04, H2 3.67e-04.
+- **Files:** `Sun3Ga_S0368.75_CO2-1.000e01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
+
 ### `Sun3Ga_S0300.00_CO2-1.000e01bar`
 
 - **Setup:** the Sun at 3 Ga, spectrum scaled to 300 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
@@ -470,4 +1122,20 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 12 min.
 - **Result:** surface temperature 188.09 K (the photochemistry ran on a profile whose surface temperature is 188.67 K), total surface pressure 1.957 bar, tropopause near 0.029 bar. Surface mixing ratios: CO2 4.62e-01, CO 2.41e-02, O2 1.48e-14, H2O 1.37e-07, CH4 5.31e-04, H2 1.98e-03.
 - **Files:** `Sun3Ga_S0300.00_CO2-1.000e01bar/` (see the file-name table above).
+
+### `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep0_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0 cm/s and CO surface flux 0 (started from `Sun3Ga_S0300.00_CO2-1.000e01bar`), spectrum scaled to 300 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 188 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 5 min.
+- **Result:** surface temperature 187.76 K (the photochemistry ran on a profile whose surface temperature is 188.09 K), total surface pressure 1.948 bar, tropopause near 0.027 bar. Surface mixing ratios: CO2 4.44e-01, CO 3.32e-02, O2 8.23e-16, H2O 1.25e-07, CH4 8.37e-04, H2 2.30e-03.
+- **Files:** `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep0_COflux0/` (see the file-name table above).
+
+### `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0`
+
+- **Setup:** the Sun at 3 Ga, CO deposition velocity 0.00012 cm/s and CO surface flux 0 (started from `Sun3Ga_S0300.00_CO2-1.000e01bar`), spectrum scaled to 300 W/m^2 at the planet; CO2 fixed at 1.000e+01 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 188 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 6 min.
+- **Result:** surface temperature 188.17 K (the photochemistry ran on a profile whose surface temperature is 188.09 K), total surface pressure 1.819 bar, tropopause near 0.032 bar. Surface mixing ratios: CO2 4.42e-01, CO 1.16e-05, O2 5.10e-13, H2O 1.15e-07, CH4 3.44e-04, H2 1.46e-03.
+- **Files:** `Sun3Ga_S0300.00_CO2-1.000e01bar_COvdep1.2e-4_COflux0/` (see the file-name table above).
 
