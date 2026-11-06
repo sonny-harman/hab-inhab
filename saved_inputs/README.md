@@ -35,9 +35,11 @@ Each run folder `saved_inputs/<run name>/` holds these files, each starting with
 | `_PTKzz_profile.txt` | the pressure-based temperature and eddy-diffusion profile the last photochemical solve ran on: pressure (dyn/cm^2, surface first), temperature (K), Kzz (cm^2/s); the header records the tropopause pressure and target top-of-atmosphere pressure |
 | `_climate_profile.txt` | the final radiative-convective profile from the climate model for the final composition: layer pressure (bar), temperature (K), altitude (km), whether the layer convects with the one below, and the mixing ratio of each climate species; the header gives the surface temperature, surface pressure and tropopause pressure |
 
-`saved_inputs/shared/` holds files common to all runs: `mechanism.yaml`, `climate_species.yaml`, `climate_settings.yaml`, and the downloaded GJ 876 spectrum (`GJ876_muscles_raw.npz`, so the flux can be rebuilt offline).
+`saved_inputs/shared/` holds files common to all runs: `mechanism.yaml`, `climate_species.yaml`, `climate_settings.yaml`, and the downloaded GJ 876 spectrum (`GJ876_muscles_raw.npz`, so the flux can be rebuilt offline). `mechanism_haze.yaml` is the same network with the haze-forming reactions kept (used by the `_haze` runs).
 
-The photochemical profile (`_PTKzz_profile.txt`) and the final climate profile (`_climate_profile.txt`) can differ. The photochemistry ran on the profile computed *before* its final composition was known; the climate profile is then recomputed for the final composition, and its surface temperature is the one reported as `T_surf`. For the 24 runs that hold 288 K the two surface temperatures agree to within 0.70 K (median 0.11 K). For the 6 steady runs where 288 K is not reachable they differ by up to 31 K (5 of them by more than 1 K): the CO2 is pinned at the cap, so the loop stops changing CO2 and counts as converged while the climate recomputed for the final composition is still moving. Treat the compositions of those runs as indicative only.
+**Haze runs.** A name ending in `_haze` is a rerun with Photochem's haze chemistry switched on (`haze=True`): the reactions `C2H + C4H2 -> HCaer1 + H`, `H2CN + HCN -> HCaer2` and `C4H + HCCCN -> HCaer3` are kept, so hydrocarbons and nitriles are removed as haze particles (`HCaer1-3`, default radius 1e-4 cm). `_hazeR1e-5cm` means the same with an explicit haze particle radius of 1e-5 cm. Haze acts in the photochemistry only; the climate model ignores haze optical effects. These reruns replace the no-haze GJ 876 runs that had no steady state (same star and instellation, no suffix). Haze carbon-loss rates are in `haze_diagnostics.csv`.
+
+The photochemical profile (`_PTKzz_profile.txt`) and the final climate profile (`_climate_profile.txt`) can differ. The photochemistry ran on the profile computed *before* its final composition was known; the climate profile is then recomputed for the final composition, and its surface temperature is the one reported as `T_surf`. For the 31 runs that hold 288 K the two surface temperatures agree to within 0.70 K (median 0.10 K). For the 8 steady runs where 288 K is not reachable they differ by up to 31 K (6 of them by more than 1 K): the CO2 is pinned at the cap, so the loop stops changing CO2 and counts as converged while the climate recomputed for the final composition is still moving. Treat the compositions of those runs as indicative only.
 
 ## Restarting a run
 
@@ -79,6 +81,15 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 | `GJ876_S0437.50_CO2-6.003e00bar` | GJ876 | 437.5 | 6.003e+00 | 288.0 | 7.402 | holds 288 K |
 | `GJ876_S0368.75_CO2-1.000e01bar` | GJ876 | 368.75 | 1.000e+01 | 192.0 | 11.696 | 288 K NOT REACHABLE |
 | `GJ876_S0300.00_CO2-1.000e01bar` | GJ876 | 300 | 1.000e+01 | 174.7 | 2.892 | 288 K NOT REACHABLE |
+| `GJ876_S1400.00_CO2-1.000e-05bar_haze` | GJ876 | 1400 | 1.000e-05 | 305.7 | 1.060 | 288 K NOT REACHABLE |
+| `GJ876_S1331.25_CO2-1.000e-05bar_haze` | GJ876 | 1331.25 | 1.000e-05 | 294.1 | 1.055 | 288 K NOT REACHABLE |
+| `GJ876_S1262.50_CO2-2.207e-05bar_haze` | GJ876 | 1262.5 | 2.207e-05 | 287.9 | 1.054 | holds 288 K |
+| `GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm` | GJ876 | 1193.75 | 1.657e-04 | 288.1 | 1.060 | holds 288 K |
+| `GJ876_S1193.75_CO2-1.738e-04bar_haze` | GJ876 | 1193.75 | 1.738e-04 | 288.3 | 1.059 | holds 288 K |
+| `GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm` | GJ876 | 1125 | 9.660e-04 | 288.4 | 1.075 | holds 288 K |
+| `GJ876_S1125.00_CO2-8.944e-04bar_haze` | GJ876 | 1125 | 8.944e-04 | 288.1 | 1.074 | holds 288 K |
+| `GJ876_S1102.08_CO2-1.540e-03bar_haze` | GJ876 | 1102.08 | 1.540e-03 | 288.4 | 1.082 | holds 288 K |
+| `GJ876_S1079.17_CO2-2.475e-03bar_haze` | GJ876 | 1079.17 | 2.475e-03 | 288.2 | 1.087 | holds 288 K |
 | `Sun3Ga_S1400.00_CO2-4.651e-05bar` | Sun3Ga | 1400 | 4.651e-05 | 287.9 | 1.051 | holds 288 K |
 | `Sun3Ga_S1331.25_CO2-2.637e-04bar` | Sun3Ga | 1331.25 | 2.637e-04 | 287.9 | 1.050 | holds 288 K |
 | `Sun3Ga_S1262.50_CO2-1.092e-03bar` | Sun3Ga | 1262.5 | 1.092e-03 | 287.7 | 1.051 | holds 288 K |
@@ -251,6 +262,78 @@ Runs flagged `NO STEADY STATE` have nothing to converge to: restarting one simpl
 - **Coupling:** 1 iteration; CO2 pressures tried: 1.000e+01 bar. Photochemistry stopped by: composition steady over last decade. Wall time 11 min.
 - **Result:** surface temperature 174.72 K (the photochemistry ran on a profile whose surface temperature is 193.34 K), total surface pressure 2.892 bar, tropopause near 0.022 bar. Surface mixing ratios: CO2 6.25e-01, CO 1.66e-02, O2 2.66e-13, H2O 3.62e-07, CH4 8.45e-04, H2 2.07e-03.
 - **Files:** `GJ876_S0300.00_CO2-1.000e01bar/` (see the file-name table above).
+
+### `GJ876_S1400.00_CO2-1.000e-05bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1400 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 306 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 11 min.
+- **Result:** surface temperature 305.68 K (the photochemistry ran on a profile whose surface temperature is 306.68 K), total surface pressure 1.060 bar, tropopause near 0.268 bar. Surface mixing ratios: CO2 9.71e-06, CO 8.69e-05, O2 1.74e-17, H2O 2.43e-02, CH4 5.73e-06, H2 4.25e-03.
+- **Files:** `GJ876_S1400.00_CO2-1.000e-05bar_haze/` (see the file-name table above).
+
+### `GJ876_S1331.25_CO2-1.000e-05bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1331.25 W/m^2 at the planet; CO2 fixed at 1.000e-05 bar, N2 at 1 bar.
+- **State:** 288 K NOT REACHABLE: the model could not reach 288 K with CO2 up to the 10 bar cap, so it used the CO2 pressure giving the warmest surface; the surface settles at 294 K (part of the CO2 may condense).
+- **Coupling:** 1 iteration; CO2 pressures tried: 1.000e-05 bar. Photochemistry stopped by: composition steady over last decade. Wall time 6 min.
+- **Result:** surface temperature 294.09 K (the photochemistry ran on a profile whose surface temperature is 295.09 K), total surface pressure 1.055 bar, tropopause near 0.334 bar. Surface mixing ratios: CO2 9.83e-06, CO 9.23e-05, O2 2.85e-17, H2O 1.27e-02, CH4 4.55e-06, H2 4.22e-03.
+- **Files:** `GJ876_S1331.25_CO2-1.000e-05bar_haze/` (see the file-name table above).
+
+### `GJ876_S1262.50_CO2-2.207e-05bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1262.5 W/m^2 at the planet; CO2 fixed at 2.207e-05 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 3 iterations; CO2 pressures tried: 1.659e-05, 2.356e-05, 2.207e-05 bar. Photochemistry stopped by: photochem criterion. Wall time 10 min.
+- **Result:** surface temperature 287.89 K (the photochemistry ran on a profile whose surface temperature is 287.92 K), total surface pressure 1.054 bar, tropopause near 0.363 bar. Surface mixing ratios: CO2 2.18e-05, CO 2.39e-04, O2 5.21e-17, H2O 8.12e-03, CH4 3.68e-06, H2 4.17e-03.
+- **Files:** `GJ876_S1262.50_CO2-2.207e-05bar_haze/` (see the file-name table above).
+
+### `GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 1e-05 cm), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 1.657e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 2 iterations; CO2 pressures tried: 1.927e-04, 1.657e-04 bar. Photochemistry stopped by: photochem criterion. Wall time 10 min.
+- **Result:** surface temperature 288.07 K (the photochemistry ran on a profile whose surface temperature is 288.22 K), total surface pressure 1.060 bar, tropopause near 0.354 bar. Surface mixing ratios: CO2 1.63e-04, CO 6.37e-03, O2 4.10e-16, H2O 8.41e-03, CH4 1.01e-05, H2 3.85e-03.
+- **Files:** `GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm/` (see the file-name table above).
+
+### `GJ876_S1193.75_CO2-1.738e-04bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1193.75 W/m^2 at the planet; CO2 fixed at 1.738e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 3 iterations; CO2 pressures tried: 1.927e-04, 1.640e-04, 1.738e-04 bar. Photochemistry stopped by: composition steady over last decade. Wall time 11 min.
+- **Result:** surface temperature 288.33 K (the photochemistry ran on a profile whose surface temperature is 288.23 K), total surface pressure 1.059 bar, tropopause near 0.352 bar. Surface mixing ratios: CO2 1.71e-04, CO 6.06e-03, O2 1.02e-17, H2O 8.40e-03, CH4 1.05e-05, H2 3.98e-03.
+- **Files:** `GJ876_S1193.75_CO2-1.738e-04bar_haze/` (see the file-name table above).
+
+### `GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 1e-05 cm), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 9.660e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 3 iterations; CO2 pressures tried: 1.398e-03, 8.410e-04, 9.660e-04 bar. Photochemistry stopped by: composition steady over last decade. Wall time 10 min.
+- **Result:** surface temperature 288.35 K (the photochemistry ran on a profile whose surface temperature is 288.18 K), total surface pressure 1.075 bar, tropopause near 0.343 bar. Surface mixing ratios: CO2 9.34e-04, CO 1.96e-02, O2 1.76e-16, H2O 8.66e-03, CH4 2.16e-05, H2 3.70e-03.
+- **Files:** `GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm/` (see the file-name table above).
+
+### `GJ876_S1125.00_CO2-8.944e-04bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1125 W/m^2 at the planet; CO2 fixed at 8.944e-04 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 4 iterations; CO2 pressures tried: 1.398e-03, 7.914e-04, 9.436e-04, 8.944e-04 bar. Photochemistry stopped by: composition steady over last decade. Wall time 11 min.
+- **Result:** surface temperature 288.11 K (the photochemistry ran on a profile whose surface temperature is 288.19 K), total surface pressure 1.074 bar, tropopause near 0.344 bar. Surface mixing ratios: CO2 8.66e-04, CO 1.85e-02, O2 4.34e-18, H2O 8.64e-03, CH4 2.24e-05, H2 3.88e-03.
+- **Files:** `GJ876_S1125.00_CO2-8.944e-04bar_haze/` (see the file-name table above).
+
+### `GJ876_S1102.08_CO2-1.540e-03bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1102.08 W/m^2 at the planet; CO2 fixed at 1.540e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 3 iterations; CO2 pressures tried: 2.498e-03, 1.359e-03, 1.540e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
+- **Result:** surface temperature 288.36 K (the photochemistry ran on a profile whose surface temperature is 288.15 K), total surface pressure 1.082 bar, tropopause near 0.340 bar. Surface mixing ratios: CO2 1.48e-03, CO 2.51e-02, O2 9.06e-18, H2O 8.76e-03, CH4 2.97e-05, H2 3.91e-03.
+- **Files:** `GJ876_S1102.08_CO2-1.540e-03bar_haze/` (see the file-name table above).
+
+### `GJ876_S1079.17_CO2-2.475e-03bar_haze`
+
+- **Setup:** the M dwarf GJ 876, haze chemistry on (haze particle radius 0.0001 cm), spectrum scaled to 1079.17 W/m^2 at the planet; CO2 fixed at 2.475e-03 bar, N2 at 1 bar.
+- **State:** holds 288 K: the coupled model holds the surface at the target temperature in a steady state.
+- **Coupling:** 3 iterations; CO2 pressures tried: 4.249e-03, 2.278e-03, 2.475e-03 bar. Photochemistry stopped by: composition steady over last decade. Wall time 8 min.
+- **Result:** surface temperature 288.16 K (the photochemistry ran on a profile whose surface temperature is 288.14 K), total surface pressure 1.087 bar, tropopause near 0.338 bar. Surface mixing ratios: CO2 2.37e-03, CO 2.81e-02, O2 1.15e-15, H2O 8.81e-03, CH4 3.50e-05, H2 4.17e-03.
+- **Files:** `GJ876_S1079.17_CO2-2.475e-03bar_haze/` (see the file-name table above).
 
 ### `Sun3Ga_S1400.00_CO2-4.651e-05bar`
 

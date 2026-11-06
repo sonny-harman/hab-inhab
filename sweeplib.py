@@ -325,7 +325,7 @@ def make_readme(saved_dir="saved_inputs"):
     saved simulation) and <saved_dir>/run_index.csv, generated from the *_run.json files."""
     import csv, glob
     metas = [json.load(open(p)) for p in sorted(glob.glob(f"{saved_dir}/*/*_run.json"))]
-    metas.sort(key=lambda m: (m["star"], -m["S_Wm2"]))
+    metas.sort(key=lambda m: (m["star"], m.get("haze", {}).get("enabled", False), -m["S_Wm2"], m.get("haze", {}).get("particle_radius_cm", 0)))
     if not metas: raise RuntimeError("no saved runs found")
     ex = metas[0]; pl = ex["planet"]; v = ex["versions"]
     sci = lambda x: f"{x:.2e}"
@@ -374,7 +374,11 @@ def make_readme(saved_dir="saved_inputs"):
     A("| `_flux.txt` | stellar flux used (wavelength in nm, flux in mW/m^2/nm) |")
     A("| `_PTKzz_profile.txt` | the pressure-based temperature and eddy-diffusion profile the last photochemical solve ran on: pressure (dyn/cm^2, surface first), temperature (K), Kzz (cm^2/s); the header records the tropopause pressure and target top-of-atmosphere pressure |")
     A("| `_climate_profile.txt` | the final radiative-convective profile from the climate model for the final composition: layer pressure (bar), temperature (K), altitude (km), whether the layer convects with the one below, and the mixing ratio of each climate species; the header gives the surface temperature, surface pressure and tropopause pressure |\n")
-    A("`saved_inputs/shared/` holds files common to all runs: `mechanism.yaml`, `climate_species.yaml`, `climate_settings.yaml`, and the downloaded GJ 876 spectrum (`GJ876_muscles_raw.npz`, so the flux can be rebuilt offline).\n")
+    A("`saved_inputs/shared/` holds files common to all runs: `mechanism.yaml`, `climate_species.yaml`, `climate_settings.yaml`, and the downloaded GJ 876 spectrum (`GJ876_muscles_raw.npz`, so the flux can be rebuilt offline). `mechanism_haze.yaml` is the same network with the haze-forming reactions kept (used by the `_haze` runs).\n")
+    A("**Haze runs.** A name ending in `_haze` is a rerun with Photochem's haze chemistry switched on (`haze=True`): the reactions `C2H + C4H2 -> HCaer1 + H`, "
+      "`H2CN + HCN -> HCaer2` and `C4H + HCCCN -> HCaer3` are kept, so hydrocarbons and nitriles are removed as haze particles (`HCaer1-3`, default radius 1e-4 cm). "
+      "`_hazeR1e-5cm` means the same with an explicit haze particle radius of 1e-5 cm. Haze acts in the photochemistry only; the climate model ignores haze optical effects. "
+      "These reruns replace the no-haze GJ 876 runs that had no steady state (same star and instellation, no suffix). Haze carbon-loss rates are in `haze_diagnostics.csv`.\n")
     dT_hold, dT_unreach = [], []
     for m in metas:
         if m["photochem_stop"].startswith("runaway"): continue
@@ -410,6 +414,8 @@ def make_readme(saved_dir="saved_inputs"):
     for m in metas:
         st, note = status(m); star_name = "the Sun at 3 Ga" if m["star"] == "Sun" else "the M dwarf GJ 876"
         A(f"### `{m['run_id']}`\n")
+        hz = m.get("haze", {})
+        if hz.get("enabled"): star_name += f", haze chemistry on (haze particle radius {hz['particle_radius_cm']:g} cm)"
         A(f"- **Setup:** {star_name}, spectrum scaled to {m['S_Wm2']:g} W/m^2 at the planet; CO2 fixed at {m['pCO2_bar']:.3e} bar, N2 at {m['N2_bar']:g} bar.")
         A(f"- **State:** {st}: {note}")
         it = m["iterations"]
