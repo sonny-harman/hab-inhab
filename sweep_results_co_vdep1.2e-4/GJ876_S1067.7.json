@@ -1,0 +1,107 @@
+{
+ "run_id": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0",
+ "star": "GJ876",
+ "S_Wm2": 1067.71,
+ "T_surf_K": 288.257102641571,
+ "rce_converged": true,
+ "pCO2_bar": 0.003765384373926783,
+ "P_total_bar": 1.0568552664190645,
+ "vmr": {
+  "CO2": 0.003706605303704516,
+  "CO": 1.6996678217524128e-05,
+  "O2": 2.221495422087189e-15,
+  "H2O": 0.008178729407326907,
+  "CH4": 2.6729382592448155e-05,
+  "H2": 0.0036813138825034803,
+  "N2": 0.9843896228418859
+ },
+ "target_status": "ok",
+ "coupling_converged": true,
+ "iterations": 2,
+ "photochem_stop": "photochem criterion",
+ "photochem_steady": true,
+ "wall_s": 225.40465378761292,
+ "history": [
+  {
+   "pCO2_bar": 0.003166859064704018,
+   "T_rce_K": 288.1363761405737,
+   "photochem_stop": "photochem criterion",
+   "photochem_t_s": 2.8917227166196186e+17,
+   "photochem_wall_s": 109.53290343284607,
+   "limiting_species": "H2"
+  },
+  {
+   "pCO2_bar": 0.003765384373926783,
+   "T_rce_K": 288.0982335086615,
+   "photochem_stop": "photochem criterion",
+   "photochem_t_s": 1.325715750853248e+17,
+   "photochem_wall_s": 34.09334349632263,
+   "limiting_species": "H2"
+  }
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 337307.4166077974,
+  "target_toa_pressure_dyn_cm2": 1.1483374548831433,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 3708.9283109161943,
+   "H2O": 270000000.0,
+   "CO2": 3765.3843739267827,
+   "CH4": 26.929886175047653,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 288.257102641571,
+  "P_surf_bar": 1.0161077660022746,
+  "P_trop_bar": 0.3364146831050288
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "haze": {
+  "enabled": false
+ },
+ "co_experiment": {
+  "start_from": "GJ876_S1067.71_CO2-3.204e-03bar",
+  "CO_vdep_cm_s": 0.00012,
+  "CO_flux_cm-2_s-1": 0.0,
+  "baseline_CO_vdep_cm_s": 1e-08,
+  "baseline_CO_flux_cm-2_s-1": 1000000000.0
+ },
+ "saved_inputs": {
+  "directory": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0",
+  "files": {
+   "atmosphere": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0_photochem_atmosphere.txt",
+   "settings": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0_photochem_settings.yaml",
+   "flux": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0_flux.txt",
+   "profile": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0_PTKzz_profile.txt",
+   "climate": "GJ876_S1067.71_CO2-3.765e-03bar_COvdep1.2e-4_COflux0_climate_profile.txt"
+  }
+ }
+}
