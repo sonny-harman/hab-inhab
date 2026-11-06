@@ -197,12 +197,13 @@ def surface_summary(pc):
 # ---------------------------------------------------------------------------
 # Saving and reproducing runs
 # ---------------------------------------------------------------------------
-def run_id(star, S, pCO2_bar, haze=False, haze_radius_cm=None):
+def run_id(star, S, pCO2_bar, haze=False, haze_radius_cm=None, tag=""):
     """Name that identifies a run, e.g. Sun3Ga_S1400.00_CO2-4.651e-05bar
     (star and spectrum, instellation in W/m^2, CO2 surface partial pressure in bar; e6.003e00 means 6.003 bar).
     Haze runs end in _haze (default haze particle radius) or _hazeR<radius in cm> (explicit radius)."""
     rid = f"{STAR_TAG[star]}_S{S:07.2f}_CO2-{pCO2_bar:.3e}bar".replace("e+", "e")
     if haze: rid += "_haze" + ("" if haze_radius_cm is None else f"R{haze_radius_cm:.0e}cm".replace("e-0", "e-"))
+    if tag: rid += "_" + tag        # e.g. COvdep0_COflux0 (CO deposition-velocity experiment)
     return rid
 
 def is_done(star, S, results_dir, saved_dir, haze=False):
@@ -438,7 +439,8 @@ def make_readme(saved_dir="saved_inputs"):
     return len(metas)
 
 def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall_s=10800, log=print,
-              saved_dir="saved_inputs", haze=False, haze_radius_cm=None):
+              saved_dir="saved_inputs", haze=False, haze_radius_cm=None,
+              start_from=None, co_vdep=None, co_flux=None, tag=""):
     """One sweep point: find the CO2 that gives T_surf = T_target for a coupled
     climate-photochemistry model at instellation S, starting from scratch.
     Result is checkpointed to results_dir/{star}_S{S}.json and returned."""
@@ -447,15 +449,33 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
     if is_done(star, S, results_dir, saved_dir):
         return json.load(open(path))
     t_point = time.time()
-    tag = f"{star} S={S:.1f}" + (" haze" if haze else "")
+    base = None
+    if start_from:        # CO experiment: begin from a converged saved run, with a changed CO surface boundary condition
+        bd = f"{saved_dir}/{start_from}"; base = json.load(open(f"{bd}/{start_from}_run.json")); bf = base["saved_inputs"]["files"]
+        haze = base.get("haze", {}).get("enabled", False)
+        haze_radius_cm = None if base.get("haze", {}).get("radius_is_photochem_default", True) else base["haze"]["particle_radius_cm"]
+    label = f"{star} S={S:.1f}" + (" haze" if haze else "") + (f" {tag}" if tag else "")
     pdir = f"{workdir}/{star}_S{S:.1f}"; os.makedirs(pdir, exist_ok=True)
     for f in [mech_name(haze), "photochem_settings.yaml", "climate_species.yaml", "climate_settings.yaml"]:
         if not os.path.exists(f"{pdir}/{f}"): os.symlink(os.path.abspath(f"{workdir}/{f}"), f"{pdir}/{f}")
-    flux_file = f"{pdir}/flux.txt"; write_flux_file(star, S, flux_file, workdir)
+    flux_file = f"{pdir}/flux.txt"
+    if base:
+        shutil.copy(f"{bd}/{bf['flux']}", flux_file)      # the exact spectrum of the saved run
+        st = yaml.safe_load(open(f"{bd}/{bf['settings']}"))
+        for bc in st["boundary-conditions"]:
+            if bc["name"] == "CO": bc["lower-boundary"] = {"type": "vdep + dist flux", "vdep": float(co_vdep), "flux": float(co_flux), "height": -1.0}
+        os.remove(f"{pdir}/photochem_settings.yaml")
+        with open(f"{pdir}/photochem_settings.yaml", "w") as fh: yaml.safe_dump(st, fh, sort_keys=False)
+    else:
+        write_flux_file(star, S, flux_file, workdir)
     pt = Point(pdir, flux_file)
     tracked = TRACKED
     f_CH4, f_H2 = 1.0e-5, 1.0e-3          # first guess for the radiatively active trace gases
     pc = None; history = []
+    if base:
+        f_CH4, f_H2 = base["vmr"]["CH4"], base["vmr"]["H2"]
+        pc = EvoAtmosphere(f"{pdir}/{mech_name(haze)}", f"{pdir}/photochem_settings.yaml", flux_file, f"{bd}/{bf['atmosphere']}")
+        pc.var.verbose = 0; pc.var.atol = ATOL
     for it in range(max_iter):
         pCO2, status = pt.solve_pCO2(f_CH4, f_H2)
         T_rce, rce_ok = pt.rce_T(pCO2, f_CH4, f_H2)
@@ -482,7 +502,7 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
         steady = reason in ("photochem criterion", "composition steady over last decade")
         sm = surface_summary(pc); f_CH4, f_H2 = sm["CH4"], sm["H2"]
         history.append({"pCO2_bar": pCO2, "T_rce_K": T_rce, "photochem_stop": reason, "photochem_t_s": tn, "photochem_wall_s": wall, "limiting_species": worst})
-        log(f"[{tag}] iter {it}: pCO2={pCO2:.4g} bar ({status}), T(RCE)={T_rce:.2f} K, photochem: {reason} "
+        log(f"[{label}] iter {it}: pCO2={pCO2:.4g} bar ({status}), T(RCE)={T_rce:.2f} K, photochem: {reason} "
             f"(t={tn:.1e} s, {wall:.0f} s wall, limiting: {worst}), CO={sm['CO']:.2e} CH4={sm['CH4']:.2e} H2={sm['H2']:.2e}")
         if reason.startswith("runaway"):
             pCO2_next = pCO2; break          # no steady state exists, so there is nothing to iterate on
@@ -491,7 +511,7 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
     converged = (not reason.startswith("runaway")) and abs(np.log10(pCO2_next/pCO2)) < dlog_tol
     T_final, rce_ok = pt.rce_T(pCO2, f_CH4, f_H2)      # climate for the final composition, at the CO2 used
     sm = surface_summary(pc)
-    rid = run_id(star, S, pCO2, haze, haze_radius_cm)
+    rid = run_id(star, S, pCO2, haze, haze_radius_cm, tag)
     files = write_saved_inputs(saved_dir, rid, star, S, pCO2, pc, pt, workdir, pdir, flux_file, P_used, T_used, trop_used, haze)
     hz = {"enabled": bool(haze)}
     if haze:
@@ -512,15 +532,17 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
                           "T_surf_K": float(c.T_surf), "P_surf_bar": float(c.P_surf / 1e6), "P_trop_bar": float(c.P_trop / 1e6)},
               "versions": {"photochem": __import__("photochem").__version__, "python": sys.version.split()[0]},
               "haze": hz,
+              "co_experiment": ({"start_from": start_from, "CO_vdep_cm_s": float(co_vdep), "CO_flux_cm-2_s-1": float(co_flux),
+                                 "baseline_CO_vdep_cm_s": 1.0e-8, "baseline_CO_flux_cm-2_s-1": 1.0e9} if base else None),
               "saved_inputs": {"directory": rid, "files": files}}
     json.dump(result, open(path, "w"), indent=1)
     json.dump(result, open(f"{saved_dir}/{rid}/{rid}_run.json", "w"), indent=1)
-    log(f"[{tag}] DONE: T={T_final:.2f} K pCO2={pCO2:.4g} bar Ptot={pc.wrk.surface_pressure:.3f} bar "
+    log(f"[{label}] DONE: T={T_final:.2f} K pCO2={pCO2:.4g} bar Ptot={pc.wrk.surface_pressure:.3f} bar "
         f"converged={converged} ({time.time()-t_point:.0f} s)")
     return result
 
 def worker(args):
-    "args = (star, S, workdir, results_dir[, saved_dir[, haze[, haze_radius_cm]]])"
+    "args = (star, S, workdir, results_dir[, saved_dir[, haze[, haze_radius_cm[, start_from, co_vdep, co_flux, tag]]]])"
     "Run one (star, S) point in a worker process; progress is appended to <workdir>/sweep.log."
     os.environ["OMP_NUM_THREADS"] = "1"
     star, S, workdir, results_dir = args[:4]
@@ -530,4 +552,6 @@ def worker(args):
         with open(f"{workdir}/sweep.log", "a") as f: f.write(msg + "\n")
     haze = bool(args[5]) if len(args) > 5 else False
     hr = args[6] if len(args) > 6 else None
-    return run_point(star, S, workdir, results_dir, log=log, saved_dir=saved_dir, haze=haze, haze_radius_cm=hr)
+    co = args[7:11] if len(args) > 7 else (None, None, None, "")
+    return run_point(star, S, workdir, results_dir, log=log, saved_dir=saved_dir, haze=haze, haze_radius_cm=hr,
+                     start_from=co[0], co_vdep=co[1], co_flux=co[2], tag=co[3], max_wall_s=5400 if co[0] else 10800)
