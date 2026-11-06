@@ -1,0 +1,95 @@
+{
+ "run_id": "GJ876_S1331.25_CO2-1.000e-05bar_haze",
+ "star": "GJ876",
+ "S_Wm2": 1331.25,
+ "T_surf_K": 294.09164651744203,
+ "rce_converged": true,
+ "pCO2_bar": 1e-05,
+ "P_total_bar": 1.054934112329551,
+ "vmr": {
+  "CO2": 9.830036482981748e-06,
+  "CO": 9.225166830438176e-05,
+  "O2": 2.853683885488253e-17,
+  "H2O": 0.0126644459896877,
+  "CH4": 4.547541258138797e-06,
+  "H2": 0.004216622290098106,
+  "N2": 0.9830036482981748
+ },
+ "target_status": "target not reachable: too warm even at minimum CO2",
+ "coupling_converged": true,
+ "iterations": 1,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 371.2561378479004,
+ "history": [
+  {
+   "pCO2_bar": 1e-05,
+   "T_rce_K": 295.0865783748742,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 161352491876818.62,
+   "photochem_wall_s": 294.8030126094818,
+   "limiting_species": "CO"
+  }
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 326455.23929161066,
+  "target_toa_pressure_dyn_cm2": 1.1483151057674934,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 4234.539165295248,
+   "H2O": 270000000.0,
+   "CO2": 10.0,
+   "CH4": 4.566864243118329,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 294.09164651744203,
+  "P_surf_bar": 1.0166215882116765,
+  "P_trop_bar": 0.33363372165653127
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "haze": {
+  "enabled": true,
+  "particle_radius_cm": 0.0001,
+  "radius_is_photochem_default": true,
+  "note": "haze formation/settling/optics are in the photochemistry only; the climate model ignores haze"
+ },
+ "saved_inputs": {
+  "directory": "GJ876_S1331.25_CO2-1.000e-05bar_haze",
+  "files": {
+   "atmosphere": "GJ876_S1331.25_CO2-1.000e-05bar_haze_photochem_atmosphere.txt",
+   "settings": "GJ876_S1331.25_CO2-1.000e-05bar_haze_photochem_settings.yaml",
+   "flux": "GJ876_S1331.25_CO2-1.000e-05bar_haze_flux.txt",
+   "profile": "GJ876_S1331.25_CO2-1.000e-05bar_haze_PTKzz_profile.txt",
+   "climate": "GJ876_S1331.25_CO2-1.000e-05bar_haze_climate_profile.txt"
+  }
+ }
+}

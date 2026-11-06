@@ -19,6 +19,15 @@ GJ876_S0506.25_CO2-3.330e00bar,GJ876,506.25,3.3304578806796568,287.284,4.5954,ho
 GJ876_S0437.50_CO2-6.003e00bar,GJ876,437.5,6.002556975205175,288.035,7.4022,holds 288 K,2,composition steady over last decade
 GJ876_S0368.75_CO2-1.000e01bar,GJ876,368.75,10.0,191.955,11.696,288 K NOT REACHABLE,1,composition steady over last decade
 GJ876_S0300.00_CO2-1.000e01bar,GJ876,300.0,10.0,174.725,2.8918,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1400.00_CO2-1.000e-05bar_haze,GJ876,1400.0,1e-05,305.677,1.0597,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1331.25_CO2-1.000e-05bar_haze,GJ876,1331.25,1e-05,294.092,1.0549,288 K NOT REACHABLE,1,composition steady over last decade
+GJ876_S1262.50_CO2-2.207e-05bar_haze,GJ876,1262.5,2.2073670605764136e-05,287.89,1.0541,holds 288 K,3,photochem criterion
+GJ876_S1193.75_CO2-1.657e-04bar_hazeR1e-5cm,GJ876,1193.75,0.0001656721555951412,288.066,1.0597,holds 288 K,2,photochem criterion
+GJ876_S1193.75_CO2-1.738e-04bar_haze,GJ876,1193.75,0.0001738453767581957,288.328,1.0595,holds 288 K,3,composition steady over last decade
+GJ876_S1125.00_CO2-9.660e-04bar_hazeR1e-5cm,GJ876,1125.0,0.000966008133878604,288.352,1.075,holds 288 K,3,composition steady over last decade
+GJ876_S1125.00_CO2-8.944e-04bar_haze,GJ876,1125.0,0.0008944188337695108,288.112,1.0739,holds 288 K,4,composition steady over last decade
+GJ876_S1102.08_CO2-1.540e-03bar_haze,GJ876,1102.08,0.0015400770374343882,288.359,1.0821,holds 288 K,3,composition steady over last decade
+GJ876_S1079.17_CO2-2.475e-03bar_haze,GJ876,1079.17,0.0024748484766207012,288.161,1.0869,holds 288 K,3,composition steady over last decade
 Sun3Ga_S1400.00_CO2-4.651e-05bar,Sun,1400.0,4.650803656537028e-05,287.875,1.0506,holds 288 K,2,composition steady over last decade
 Sun3Ga_S1331.25_CO2-2.637e-04bar,Sun,1331.25,0.0002636973566514961,287.913,1.0503,holds 288 K,2,composition steady over last decade
 Sun3Ga_S1262.50_CO2-1.092e-03bar,Sun,1262.5,0.0010915420051272147,287.695,1.0508,holds 288 K,2,composition steady over last decade
