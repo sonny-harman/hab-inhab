@@ -20,13 +20,18 @@ TRACKED = ["CO", "O2", "H2O", "CH4", "H2", "CO2"]   # species whose surface valu
 STAR_TAG = {"Sun": "Sun3Ga", "GJ876": "GJ876"}
 SHARED_FILES = ["mechanism.yaml", "climate_species.yaml", "climate_settings.yaml"]
 pN2_bar = 1.0
+HAZE_PARTICLES = ["HCaer1", "HCaer2", "HCaer3"]
+def mech_name(haze): return "mechanism_haze.yaml" if haze else "mechanism.yaml"
 pCO2_min_bar, pCO2_max_bar = 1.0e-5, 10.0
 
-def setup_files(workdir):
+def setup_files(workdir, haze=False):
+    """Write the model input files. With haze=True the mechanism keeps Photochem's haze-forming reactions
+    (hydrocarbon/nitrile precursors -> HCaer1, HCaer2, HCaer3) and is written to mechanism_haze.yaml; the
+    default mechanism (mechanism.yaml) has them removed."""
     os.makedirs(workdir, exist_ok=True)
-    mech = f"{workdir}/mechanism.yaml"
+    mech = f"{workdir}/{mech_name(haze)}"
     zahnle_rx_and_thermo_files(atoms_names=["H","He","N","O","C","S"], rxns_filename=mech,
-                               thermo_filename=None, remove_reaction_particles=True)
+                               thermo_filename=None, remove_reaction_particles=not haze)
     def bc(name, lower, upper=None):
         return {"name": name, "lower-boundary": lower, "upper-boundary": upper or {"type":"veff","veff":0.0}}
     def src(vdep, flux): return {"type":"vdep + dist flux","vdep":vdep,"flux":flux,"height":-1.0}
@@ -192,24 +197,27 @@ def surface_summary(pc):
 # ---------------------------------------------------------------------------
 # Saving and reproducing runs
 # ---------------------------------------------------------------------------
-def run_id(star, S, pCO2_bar):
+def run_id(star, S, pCO2_bar, haze=False, haze_radius_cm=None):
     """Name that identifies a run, e.g. Sun3Ga_S1400.00_CO2-4.651e-05bar
-    (star and spectrum, instellation in W/m^2, CO2 surface partial pressure in bar; e6.003e00 means 6.003 bar)."""
-    return f"{STAR_TAG[star]}_S{S:07.2f}_CO2-{pCO2_bar:.3e}bar".replace("e+", "e")
+    (star and spectrum, instellation in W/m^2, CO2 surface partial pressure in bar; e6.003e00 means 6.003 bar).
+    Haze runs end in _haze (default haze particle radius) or _hazeR<radius in cm> (explicit radius)."""
+    rid = f"{STAR_TAG[star]}_S{S:07.2f}_CO2-{pCO2_bar:.3e}bar".replace("e+", "e")
+    if haze: rid += "_haze" + ("" if haze_radius_cm is None else f"R{haze_radius_cm:.0e}cm".replace("e-0", "e-"))
+    return rid
 
-def is_done(star, S, results_dir, saved_dir):
+def is_done(star, S, results_dir, saved_dir, haze=False):
     "A point is done when its result file exists and its saved inputs are present."
     p = f"{results_dir}/{star}_S{S:.1f}.json"
     if not os.path.exists(p): return False
     rid = json.load(open(p)).get("run_id")
     return bool(rid) and os.path.exists(f"{saved_dir}/{rid}/{rid}_run.json")
 
-def write_saved_inputs(saved_dir, rid, star, S, pCO2, pc, pt, workdir, pdir, flux_file, P_prof, T_prof, trop_p):
+def write_saved_inputs(saved_dir, rid, star, S, pCO2, pc, pt, workdir, pdir, flux_file, P_prof, T_prof, trop_p, haze=False):
     """Write everything needed to restart this run and to plot its vertical structure.
     Must be called after the final photochemical solve and after the final climate solve."""
     d = f"{saved_dir}/{rid}"; os.makedirs(d, exist_ok=True)
     shared = f"{saved_dir}/shared"; os.makedirs(shared, exist_ok=True)
-    for f in SHARED_FILES:
+    for f in [mech_name(haze) if x == "mechanism.yaml" else x for x in SHARED_FILES]:
         if not os.path.exists(f"{shared}/{f}"): shutil.copy(f"{workdir}/{f}", f"{shared}/{f}")
     raw = f"{workdir}/{star}_muscles_raw.npz"
     if os.path.exists(raw) and not os.path.exists(f"{shared}/{os.path.basename(raw)}"):
@@ -272,7 +280,7 @@ def reproduce_run(rid, saved_dir="saved_inputs", max_wall=1800, log=print):
     d, shared = f"{saved_dir}/{rid}", f"{saved_dir}/shared"
     meta = json.load(open(f"{d}/{rid}_run.json"))
     f = meta["saved_inputs"]["files"]
-    pc = EvoAtmosphere(f"{shared}/mechanism.yaml", f"{d}/{f['settings']}", f"{d}/{f['flux']}", f"{d}/{f['atmosphere']}")
+    pc = EvoAtmosphere(f"{shared}/{mech_name(meta.get('haze', {}).get('enabled', False))}", f"{d}/{f['settings']}", f"{d}/{f['flux']}", f"{d}/{f['atmosphere']}")
     pc.var.verbose = 0
     pc.var.atol = meta["photochem"]["atol"]
     P, T, K, trop_p, target = read_profile(f"{d}/{f['profile']}")
@@ -424,7 +432,7 @@ def make_readme(saved_dir="saved_inputs"):
     return len(metas)
 
 def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall_s=10800, log=print,
-              saved_dir="saved_inputs"):
+              saved_dir="saved_inputs", haze=False, haze_radius_cm=None):
     """One sweep point: find the CO2 that gives T_surf = T_target for a coupled
     climate-photochemistry model at instellation S, starting from scratch.
     Result is checkpointed to results_dir/{star}_S{S}.json and returned."""
@@ -433,9 +441,9 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
     if is_done(star, S, results_dir, saved_dir):
         return json.load(open(path))
     t_point = time.time()
-    tag = f"{star} S={S:.1f}"
+    tag = f"{star} S={S:.1f}" + (" haze" if haze else "")
     pdir = f"{workdir}/{star}_S{S:.1f}"; os.makedirs(pdir, exist_ok=True)
-    for f in ["mechanism.yaml", "photochem_settings.yaml", "climate_species.yaml", "climate_settings.yaml"]:
+    for f in [mech_name(haze), "photochem_settings.yaml", "climate_species.yaml", "climate_settings.yaml"]:
         if not os.path.exists(f"{pdir}/{f}"): os.symlink(os.path.abspath(f"{workdir}/{f}"), f"{pdir}/{f}")
     flux_file = f"{pdir}/flux.txt"; write_flux_file(star, S, flux_file, workdir)
     pt = Point(pdir, flux_file)
@@ -448,14 +456,17 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
         c = pt.clim; P = np.append(c.P_surf, c.P); T = np.append(c.T_surf, c.T)
         P_used, T_used, trop_used = P.copy(), T.copy(), float(c.P_trop)   # profile this iteration's photochemistry runs on
         if pc is None:
-            pc = EvoAtmosphere(f"{pdir}/mechanism.yaml", f"{pdir}/photochem_settings.yaml", flux_file)
+            pc = EvoAtmosphere(f"{pdir}/{mech_name(haze)}", f"{pdir}/photochem_settings.yaml", flux_file)
             pc.var.verbose = 0
             # Absolute tolerance in mixing ratio. The default (1e-23) forces tiny time steps in cold, CO2-rich
             # atmospheres (10^6 times slower to reach steady state); 1e-18 is far below anything reported.
             pc.var.atol = ATOL
             pc.set_lower_bc("CO2", "press", press=pCO2*1e6)
+            radii = {"H2Oaer": np.full(P.size, 1.0e-3)}
+            if haze and haze_radius_cm is not None:      # otherwise Photochem's default (1e-4 cm) is used
+                for hp in HAZE_PARTICLES: radii[hp] = np.full(P.size, float(haze_radius_cm))
             pc.initialize_atmosphere_p(P, T, eddy_diffusion(P/1e6), mix=None,
-                particle_radius={"H2Oaer": np.full(P.size, 1.0e-3)}, persistent=True,
+                particle_radius=radii, persistent=True,
                 tropopause_pressure=float(c.P_trop), target_pressure=P[-1])
         else:
             pc.set_lower_bc("CO2", "press", press=pCO2*1e6)
@@ -474,8 +485,13 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
     converged = (not reason.startswith("runaway")) and abs(np.log10(pCO2_next/pCO2)) < dlog_tol
     T_final, rce_ok = pt.rce_T(pCO2, f_CH4, f_H2)      # climate for the final composition, at the CO2 used
     sm = surface_summary(pc)
-    rid = run_id(star, S, pCO2)
-    files = write_saved_inputs(saved_dir, rid, star, S, pCO2, pc, pt, workdir, pdir, flux_file, P_used, T_used, trop_used)
+    rid = run_id(star, S, pCO2, haze, haze_radius_cm)
+    files = write_saved_inputs(saved_dir, rid, star, S, pCO2, pc, pt, workdir, pdir, flux_file, P_used, T_used, trop_used, haze)
+    hz = {"enabled": bool(haze)}
+    if haze:
+        hz["particle_radius_cm"] = float(haze_radius_cm) if haze_radius_cm is not None else 1.0e-4
+        hz["radius_is_photochem_default"] = haze_radius_cm is None
+        hz["note"] = "haze formation/settling/optics are in the photochemistry only; the climate model ignores haze"
     c = pt.clim
     result = {"run_id": rid, "star": star, "S_Wm2": S, "T_surf_K": float(T_final), "rce_converged": bool(rce_ok),
               "pCO2_bar": float(pCO2), "P_total_bar": float(pc.wrk.surface_pressure), "vmr": sm,
@@ -489,6 +505,7 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
                           "surface_partial_pressures_dyn_cm2": dict(zip(c.species_names, map(float, pt.partial_pressures(pCO2, f_CH4, f_H2)))),
                           "T_surf_K": float(c.T_surf), "P_surf_bar": float(c.P_surf / 1e6), "P_trop_bar": float(c.P_trop / 1e6)},
               "versions": {"photochem": __import__("photochem").__version__, "python": sys.version.split()[0]},
+              "haze": hz,
               "saved_inputs": {"directory": rid, "files": files}}
     json.dump(result, open(path, "w"), indent=1)
     json.dump(result, open(f"{saved_dir}/{rid}/{rid}_run.json", "w"), indent=1)
@@ -497,6 +514,7 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
     return result
 
 def worker(args):
+    "args = (star, S, workdir, results_dir[, saved_dir[, haze[, haze_radius_cm]]])"
     "Run one (star, S) point in a worker process; progress is appended to <workdir>/sweep.log."
     os.environ["OMP_NUM_THREADS"] = "1"
     star, S, workdir, results_dir = args[:4]
@@ -504,4 +522,6 @@ def worker(args):
     def log(msg):
         print(msg, flush=True)
         with open(f"{workdir}/sweep.log", "a") as f: f.write(msg + "\n")
-    return run_point(star, S, workdir, results_dir, log=log, saved_dir=saved_dir)
+    haze = bool(args[5]) if len(args) > 5 else False
+    hr = args[6] if len(args) > 6 else None
+    return run_point(star, S, workdir, results_dir, log=log, saved_dir=saved_dir, haze=haze, haze_radius_cm=hr)
