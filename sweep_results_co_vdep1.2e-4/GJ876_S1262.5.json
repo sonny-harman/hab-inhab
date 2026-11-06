@@ -1,0 +1,110 @@
+{
+ "run_id": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0",
+ "star": "GJ876",
+ "S_Wm2": 1262.5,
+ "T_surf_K": 287.8675934287243,
+ "rce_converged": true,
+ "pCO2_bar": 2.51065001624994e-05,
+ "P_total_bar": 1.0534122067980913,
+ "vmr": {
+  "CO2": 2.4806593545218454e-05,
+  "CO": 9.322841249919452e-06,
+  "O2": 1.9077935755878873e-16,
+  "H2O": 0.008116330869077633,
+  "CH4": 2.72343099547195e-06,
+  "H2": 0.0037887657956820436,
+  "N2": 0.9880546226937317
+ },
+ "target_status": "ok",
+ "coupling_converged": true,
+ "iterations": 2,
+ "photochem_stop": "composition steady over last decade",
+ "photochem_steady": true,
+ "wall_s": 189.4663121700287,
+ "history": [
+  {
+   "pCO2_bar": 2.2260922961047274e-05,
+   "T_rce_K": 287.91578146501047,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 60728983804319.3,
+   "photochem_wall_s": 36.26385831832886,
+   "limiting_species": "CO"
+  },
+  {
+   "pCO2_bar": 2.51065001624994e-05,
+   "T_rce_K": 287.9147047269135,
+   "photochem_stop": "composition steady over last decade",
+   "photochem_t_s": 1195476478274.891,
+   "photochem_wall_s": 17.472445964813232,
+   "limiting_species": "H2"
+  }
+ ],
+ "T_target_K": 288.0,
+ "relative_humidity": 0.5,
+ "N2_bar": 1.0,
+ "planet": {
+  "mass_g": 5.972e+27,
+  "radius_cm": 637100000.0,
+  "surface_albedo": 0.2
+ },
+ "photochem": {
+  "atol": 1e-18,
+  "nsteps_before_giveup": 1000000,
+  "trop_p_dyn_cm2": 362867.13754636806,
+  "target_toa_pressure_dyn_cm2": 1.1482935903794145,
+  "tracked_species": [
+   "CO",
+   "O2",
+   "H2O",
+   "CH4",
+   "H2",
+   "CO2"
+  ]
+ },
+ "climate": {
+  "species": [
+   "H2",
+   "H2O",
+   "CO2",
+   "CH4",
+   "N2"
+  ],
+  "surface_partial_pressures_dyn_cm2": {
+   "H2": 3803.2810173343587,
+   "H2O": 270000000.0,
+   "CO2": 25.106500162499398,
+   "CH4": 2.733864790191886,
+   "N2": 1000000.0
+  },
+  "T_surf_K": 287.8675934287243,
+  "P_surf_bar": 1.0122268409921131,
+  "P_trop_bar": 0.3631597440684603
+ },
+ "versions": {
+  "photochem": "0.9.1",
+  "python": "3.11.18"
+ },
+ "haze": {
+  "enabled": true,
+  "particle_radius_cm": 0.0001,
+  "radius_is_photochem_default": true,
+  "note": "haze formation/settling/optics are in the photochemistry only; the climate model ignores haze"
+ },
+ "co_experiment": {
+  "start_from": "GJ876_S1262.50_CO2-2.207e-05bar_haze",
+  "CO_vdep_cm_s": 0.00012,
+  "CO_flux_cm-2_s-1": 0.0,
+  "baseline_CO_vdep_cm_s": 1e-08,
+  "baseline_CO_flux_cm-2_s-1": 1000000000.0
+ },
+ "saved_inputs": {
+  "directory": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0",
+  "files": {
+   "atmosphere": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0_photochem_atmosphere.txt",
+   "settings": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0_photochem_settings.yaml",
+   "flux": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0_flux.txt",
+   "profile": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0_PTKzz_profile.txt",
+   "climate": "GJ876_S1262.50_CO2-2.511e-05bar_haze_COvdep1.2e-4_COflux0_climate_profile.txt"
+  }
+ }
+}
