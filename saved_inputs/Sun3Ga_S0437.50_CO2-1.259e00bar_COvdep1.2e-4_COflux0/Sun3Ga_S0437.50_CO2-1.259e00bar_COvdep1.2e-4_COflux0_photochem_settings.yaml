@@ -32,7 +32,7 @@ boundary-conditions:
 - name: CO2
   lower-boundary:
     type: press
-    press: 1000000.0
+    press: 1258925.411794167
   upper-boundary:
     type: veff
     veff: 0.0
