@@ -446,7 +446,7 @@ def make_readme(saved_dir="saved_inputs"):
 
 def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall_s=10800, log=print,
               saved_dir="saved_inputs", haze=False, haze_radius_cm=None,
-              start_from=None, co_vdep=None, co_flux=None, tag=""):
+              start_from=None, co_vdep=None, co_flux=None, tag="", damp_cycles=False):
     """One sweep point: find the CO2 that gives T_surf = T_target for a coupled
     climate-photochemistry model at instellation S, starting from scratch.
     Result is checkpointed to results_dir/{star}_S{S}.json and returned."""
@@ -482,8 +482,11 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
         f_CH4, f_H2 = base["vmr"]["CH4"], base["vmr"]["H2"]
         pc = EvoAtmosphere(f"{pdir}/{mech_name(haze)}", f"{pdir}/photochem_settings.yaml", flux_file, f"{bd}/{bf['atmosphere']}")
         pc.var.verbose = 0; pc.var.atol = ATOL
+    override = None
     for it in range(max_iter):
         pCO2, status = pt.solve_pCO2(f_CH4, f_H2)
+        if override is not None:      # damped step: the geometric mean of the two CO2 values the loop was flipping between
+            pCO2, override = override, None
         T_rce, rce_ok = pt.rce_T(pCO2, f_CH4, f_H2)
         c = pt.clim; P = np.append(c.P_surf, c.P); T = np.append(c.T_surf, c.T)
         P_used, T_used, trop_used = P.copy(), T.copy(), float(c.P_trop)   # profile this iteration's photochemistry runs on
@@ -514,6 +517,10 @@ def run_point(star, S, workdir, results_dir, max_iter=6, dlog_tol=0.02, max_wall
             pCO2_next = pCO2; break          # no steady state exists, so there is nothing to iterate on
         pCO2_next, status_next = pt.solve_pCO2(f_CH4, f_H2)
         if abs(np.log10(pCO2_next/pCO2)) < dlog_tol: break
+        if damp_cycles and len(history) >= 2 and abs(np.log10(pCO2_next/history[-2]["pCO2_bar"])) < dlog_tol:
+            # two-cycle: where 288 K is not reachable the maximum-greenhouse CO2 estimate flips with small
+            # composition changes (a 3 K plateau), so step to the geometric mean instead of the other value
+            override = float(np.sqrt(pCO2 * pCO2_next)); log(f"[{label}] CO2 two-cycle detected; damped step to {override:.4g} bar")
     converged = (not reason.startswith("runaway")) and abs(np.log10(pCO2_next/pCO2)) < dlog_tol
     T_final, rce_ok = pt.rce_T(pCO2, f_CH4, f_H2)      # climate for the final composition, at the CO2 used
     sm = surface_summary(pc)
@@ -560,4 +567,5 @@ def worker(args):
     hr = args[6] if len(args) > 6 else None
     co = args[7:11] if len(args) > 7 else (None, None, None, "")
     return run_point(star, S, workdir, results_dir, log=log, saved_dir=saved_dir, haze=haze, haze_radius_cm=hr,
-                     start_from=co[0], co_vdep=co[1], co_flux=co[2], tag=co[3], max_wall_s=5400 if co[0] else 10800)
+                     start_from=co[0], co_vdep=co[1], co_flux=co[2], tag=co[3], max_wall_s=5400 if co[0] else 10800,
+                     damp_cycles=bool(args[11]) if len(args) > 11 else False, max_iter=int(args[12]) if len(args) > 12 else 6)
