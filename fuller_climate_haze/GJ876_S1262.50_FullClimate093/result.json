@@ -1,0 +1,77 @@
+{
+ "S_Wm2": 1262.5,
+ "star": "GJ876",
+ "haze": true,
+ "photochem_version": "0.9.3",
+ "baseline_run": "GJ876_S1262.50_CO2-2.207e-05bar_haze",
+ "baseline_pCO2_bar": 2.2073670605764136e-05,
+ "baseline_T_surf_K": 287.8896311221795,
+ "baseline_vmr": {
+  "CO2": 2.1796268607980276e-05,
+  "CO": 0.0002387756966224643,
+  "O2": 5.2064260126873244e-17,
+  "H2O": 0.00811874722482477,
+  "CH4": 3.6773338894177964e-06,
+  "H2": 0.004173910118952234,
+  "N2": 0.9874329012723683
+ },
+ "final": {
+  "pCO2_bar": 1e-05,
+  "T_surf_K": 299.82709393625134,
+  "fixed_point_converged": true,
+  "chemistry_converged": true,
+  "coupling_iterations": 3,
+  "P_total_bar": 1.0564376529424335,
+  "vmr": {
+   "CO2": 9.806710193036577e-06,
+   "CO": 8.677382873975841e-05,
+   "O2": 6.785492366756506e-17,
+   "H2O": 0.014956007577530326,
+   "CH4": 5.390928473825517e-06,
+   "H2": 0.004260328131836115,
+   "N2": 0.9806710193036577
+  },
+  "wall_s": 608.7264189720154
+ },
+ "reached_288K": false,
+ "history": [
+  {
+   "pCO2_bar": 2.2073670605764136e-05,
+   "T_surf_K": 302.52629006779125,
+   "fixed_point_converged": true,
+   "chemistry_converged": true,
+   "coupling_iterations": 6,
+   "P_total_bar": 1.0577359234754244,
+   "vmr": {
+    "CO2": 2.158432406734466e-05,
+    "CO": 0.00011511686831381961,
+    "O2": 4.585733225168202e-17,
+    "H2O": 0.017563158945862595,
+    "CH4": 5.44576221397852e-06,
+    "H2": 0.004454251305350991,
+    "N2": 0.977831211348615
+   },
+   "wall_s": 507.4810025691986
+  },
+  {
+   "pCO2_bar": 1e-05,
+   "T_surf_K": 299.82709393625134,
+   "fixed_point_converged": true,
+   "chemistry_converged": true,
+   "coupling_iterations": 3,
+   "P_total_bar": 1.0564376529424335,
+   "vmr": {
+    "CO2": 9.806710193036577e-06,
+    "CO": 8.677382873975841e-05,
+    "O2": 6.785492366756506e-17,
+    "H2O": 0.014956007577530326,
+    "CH4": 5.390928473825517e-06,
+    "H2": 0.004260328131836115,
+    "N2": 0.9806710193036577
+   },
+   "wall_s": 608.7264189720154
+  }
+ ],
+ "wall_s": 608.726597070694,
+ "climate": "Photochem 0.9.3 CoupledPhotochemistryClimate: all photochemical gases in the radiative-convective model; tropopause pressure fixed at the baseline run's value"
+}
