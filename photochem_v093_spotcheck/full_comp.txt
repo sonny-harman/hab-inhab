@@ -1,0 +1,21 @@
+GJ876_S1125.00_CO2-8.944e-04bar_haze
+   0.9.1 sweep T=288.11 | coupled-mode climate on the full 0.9.1 composition: T=300.65 ok=True
+   top surface gases: CO 1.8e-02, H2 3.9e-03, CH4 2.2e-05, C3H4 4.7e-06, C2H2 4.5e-06, C2H6 1.4e-06, C4H2 1.2e-06, C2H4 4.2e-07
+Sun3Ga_S0850.00_CO2-3.064e-01bar
+   0.9.1 sweep T=287.45 | coupled-mode climate on the full 0.9.1 composition: T=288.37 ok=True
+   top surface gases: CO 1.5e-02, H2 3.9e-03, CH4 2.0e-04, C2H6 5.7e-09, OCS 4.9e-09, NH2CO 3.7e-09, N2H2 2.5e-09, NH3 4.2e-10
+GJ876_S0643.75_CO2-9.800e-01bar
+   0.9.1 sweep T=288.11 | coupled-mode climate on the full 0.9.1 composition: T=288.14 ok=True
+   top surface gases: CO 2.1e-02, H2 2.6e-03, CH4 3.6e-04, N2O 3.1e-08, O2 1.0e-09, HNO2 5.1e-10, OCS 3.3e-10, NH3 3.0e-10
+Sun3Ga_S1262.50_CO2-1.092e-03bar
+   0.9.1 sweep T=287.70 | coupled-mode climate on the full 0.9.1 composition: T=288.34 ok=True
+   top surface gases: H2 5.4e-03, CO 1.6e-05, CH4 1.1e-05, OCS 3.3e-09, NH3 5.0e-10, H2CO 4.7e-10, H2S 1.2e-10, C2H6 6.6e-11
+Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0
+   0.9.1 sweep T=288.11 | coupled-mode climate on the full 0.9.1 composition: T=288.80 ok=True
+   top surface gases: H2 9.2e-04, CH4 9.5e-05, CO 2.9e-05, C2H6 3.4e-08, OCS 1.1e-09, CH3OH 5.5e-10, NH3 3.7e-10, H2CO 1.5e-10
+Sun3Ga_S0368.75_CO2-1.000e01bar
+   0.9.1 sweep T=203.95 | coupled-mode climate on the full 0.9.1 composition: T=207.22 ok=True
+   top surface gases: CO 5.3e-03, H2 1.6e-03, CH4 9.4e-04, NH2CO 6.5e-06, C2H6 3.4e-08, N2O 1.9e-09, N2H2 1.6e-09, OCS 4.4e-10
+GJ876_S1400.00_CO2-1.000e-05bar_haze
+   0.9.1 sweep T=305.68 | coupled-mode climate on the full 0.9.1 composition: T=555.43 ok=False
+   top surface gases: H2 4.2e-03, CO 8.7e-05, CH4 5.7e-06, C3H4 5.4e-06, C2H2 3.3e-06, C4H2 1.0e-06, C2H6 6.8e-07, C2H4 3.9e-07

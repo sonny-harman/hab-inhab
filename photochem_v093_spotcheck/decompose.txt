@@ -1,0 +1,12 @@
+GJ876_S0643.75_CO2-9.800e-01bar
+   0.9.1 sweep T=288.11  | new coupled mode T=288.26  | climate-only at new composition: 5 gases 290.90, +CO 289.82   (CO vmr new 2.11e-02)
+GJ876_S1125.00_CO2-8.944e-04bar_haze
+   0.9.1 sweep T=288.11  | new coupled mode T=301.69  | climate-only at new composition: 5 gases 288.82, +CO 289.87   (CO vmr new 6.19e-03)
+Sun3Ga_S0368.75_CO2-1.000e01bar
+   0.9.1 sweep T=203.95  | new coupled mode T=205.41  | climate-only at new composition: 5 gases 208.00, +CO 207.16   (CO vmr new 1.42e-02)
+Sun3Ga_S0850.00_CO2-3.064e-01bar
+   0.9.1 sweep T=287.45  | new coupled mode T=289.18  | climate-only at new composition: 5 gases 289.42, +CO 289.70   (CO vmr new 1.71e-02)
+Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0
+   0.9.1 sweep T=288.11  | new coupled mode T=288.87  | climate-only at new composition: 5 gases 289.33, +CO 289.36   (CO vmr new 2.93e-05)
+Sun3Ga_S1262.50_CO2-1.092e-03bar
+   0.9.1 sweep T=287.70  | new coupled mode T=288.41  | climate-only at new composition: 5 gases 288.11, +CO 288.53   (CO vmr new 1.65e-05)

@@ -1,0 +1,76 @@
+{
+ "run_id": "Sun3Ga_S0850.00_CO2-3.724e-01bar_COvdep1.2e-4_COflux0",
+ "photochem_version": "0.9.3",
+ "fixed_point_converged": true,
+ "give_up": false,
+ "chemistry_converged": true,
+ "iterations": 4,
+ "wall_s": 969.6875348091125,
+ "T_surf_K_new": 288.86673782609483,
+ "P_total_bar_new": 1.4342736763795538,
+ "vmr_new": {
+  "CO2": 0.2695083902582792,
+  "CO": 2.930946731362323e-05,
+  "O2": 9.721652055604151e-15,
+  "H2O": 0.005720854252898643,
+  "CH4": 9.776049459854848e-05,
+  "H2": 0.0009065408670792491,
+  "N2": 0.7237371068507265
+ },
+ "T_surf_K_old": 288.11333947318366,
+ "P_total_bar_old": 1.4326254023402558,
+ "vmr_old": {
+  "CO2": 0.26943028693524723,
+  "CO": 2.9224628701194553e-05,
+  "O2": 9.152655162795727e-15,
+  "H2O": 0.006001739325441619,
+  "CH4": 9.546324464340305e-05,
+  "H2": 0.0009158805473691503,
+  "N2": 0.7235273683969721
+ },
+ "pCO2_bar": 0.3723843750820232,
+ "star": "Sun",
+ "S_Wm2": 850.0,
+ "haze": false,
+ "co_experiment": {
+  "start_from": "Sun3Ga_S0850.00_CO2-3.064e-01bar",
+  "CO_vdep_cm_s": 0.00012,
+  "CO_flux_cm-2_s-1": 0.0,
+  "baseline_CO_vdep_cm_s": 1e-08,
+  "baseline_CO_flux_cm-2_s-1": 1000000000.0
+ },
+ "residual_history": [
+  {
+   "iteration": 1,
+   "temperature_residual": 0.023403188613634395,
+   "log10pressure_residual": 0.013062610390786489,
+   "chemistry_converged": false,
+   "step_method": "relaxation",
+   "anderson_reset": "chemistry_unconverged"
+  },
+  {
+   "iteration": 2,
+   "temperature_residual": 0.02404909011544301,
+   "log10pressure_residual": 0.007197588480546635,
+   "chemistry_converged": true,
+   "step_method": "relaxation",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 3,
+   "temperature_residual": 0.011259789225494593,
+   "log10pressure_residual": 0.0033499066428444024,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 4,
+   "temperature_residual": 0.00013518331581123525,
+   "log10pressure_residual": 3.7994232187976706e-05,
+   "chemistry_converged": true,
+   "step_method": null,
+   "anderson_reset": null
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "run_id": "GJ876_S1400.00_CO2-1.000e-05bar_haze",
+ "failed": "ClimaException: Climate did not converge while constructing the initial guess.",
+ "stage": "initial_guess",
+ "T_surf_K_old": 305.6772093412126,
+ "pCO2_bar": 1e-05,
+ "star": "GJ876",
+ "S_Wm2": 1400.0
+}
