@@ -1,0 +1,8 @@
+S,pCO2_sweep,T_sweep,pCO2_fuller,T_fuller,reached_288K,first_T_at_sweep_pCO2,CO_sweep,CO_fuller,CH4_sweep,CH4_fuller,H2O_sweep,H2O_fuller,P_total_fuller,evaluations,note
+1079.17,0.00247485,288.161,0.000279537,288.079,True,292.169,0.028119,0.00339537,3.49556e-05,1.10879e-05,0.00880695,0.00698294,1.06,5,
+1102.08,0.00154008,288.359,0.000167084,288.119,True,303.191,0.0250878,0.00175801,2.97318e-05,8.14659e-06,0.00875843,0.0070281,1.05779,4,
+1125,0.000894419,288.112,9.08025e-05,288.178,True,301.796,0.0184503,0.000725956,2.24353e-05,5.89881e-06,0.00863879,0.00707184,1.05627,4,
+1193.75,0.000173845,288.328,1e-05,289.565,False,300.674,0.00605595,9.94277e-05,1.04526e-05,4.24254e-06,0.00840293,0.00776945,1.05468,4,
+1262.5,2.20737e-05,287.89,1e-05,299.827,False,302.526,0.000238776,8.67738e-05,3.67733e-06,5.39093e-06,0.00811875,0.014956,1.05644,2,
+1331.25,,,,,,,,,,,,,,,"incomplete: one converged evaluation (pCO2 1e-4 bar -> T_surf 306.71 K, CO 1.92e-5); the step to lower CO2 did not finish (first attempt: climate failed to converge during coupling; two later attempts: integrator stalled/lost to a container restart)"
+1400,,,,,,,,,,,,,,,initial_guess failed at all starting CO2 values
