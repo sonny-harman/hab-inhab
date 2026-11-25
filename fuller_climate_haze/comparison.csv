@@ -4,5 +4,5 @@ S,pCO2_sweep,T_sweep,pCO2_fuller,T_fuller,reached_288K,first_T_at_sweep_pCO2,CO_
 1125,0.000894419,288.112,9.08025e-05,288.178,True,301.796,0.0184503,0.000725956,2.24353e-05,5.89881e-06,0.00863879,0.00707184,1.05627,4,
 1193.75,0.000173845,288.328,1e-05,289.565,False,300.674,0.00605595,9.94277e-05,1.04526e-05,4.24254e-06,0.00840293,0.00776945,1.05468,4,
 1262.5,2.20737e-05,287.89,1e-05,299.827,False,302.526,0.000238776,8.67738e-05,3.67733e-06,5.39093e-06,0.00811875,0.014956,1.05644,2,
-1331.25,,,,,,,,,,,,,,,"incomplete: one converged evaluation (pCO2 1e-4 bar -> T_surf 306.71 K, CO 1.92e-5); the step to lower CO2 did not finish (first attempt: climate failed to converge during coupling; two later attempts: integrator stalled/lost to a container restart)"
+1331.25,,,,,,,,,,,,,,,incomplete: 288 K not reached at any CO2 that could be evaluated; each fresh start converged: 2.00e-04 bar -> 313.1 K (CH4 6.1e-06); 1.00e-04 bar -> 306.7 K (CH4 4.8e-06); 5.01e-05 bar -> 326.4 K (CH4 5.2e-05). Temperature is not monotonic in CO2: the 5e-5 bar state is methane-rich with C2H6. The 1e-5 bar floor could not be evaluated (initial climate solve fails; coupled steps failed or stalled).
 1400,,,,,,,,,,,,,,,initial_guess failed at all starting CO2 values

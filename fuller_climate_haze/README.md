@@ -29,7 +29,7 @@ the sweep run's value (it does not follow the changing CO2).
 | 1125.00 | 8.9e-4 | 9.1e-5 | 288.18 | 1.8e-2 -> 7.3e-4 | 2.2e-5 -> 5.9e-6 |
 | 1193.75 | 1.7e-4 | 1e-5 (floor) | 289.57 (288 K not reached) | 6.1e-3 -> 9.9e-5 | 1.0e-5 -> 4.2e-6 |
 | 1262.50 | 2.2e-5 | 1e-5 (floor) | 299.83 (288 K not reached) | 2.4e-4 -> 8.7e-5 | 3.7e-6 -> 5.4e-6 |
-| 1331.25 | 1e-5 (floor) | -- | -- | -- | -- |
+| 1331.25 | 1e-5 (floor) | none found (see below) | 306.7 at 1e-4 bar; 326.4 at 5e-5 bar | -- | -- |
 | 1400.00 | 1e-5 (floor) | -- | -- | -- | -- |
 
 - **The CO2 needed for 288 K is about 9-10 times lower than in the sweep** at 1079-1125 W/m2.
@@ -41,10 +41,19 @@ the sweep run's value (it does not follow the changing CO2).
 
 ## Points without a result
 
-- **1331.25 W/m2: incomplete.** One converged evaluation: 306.71 K at 1e-4 bar CO2 (18.7 K above target). The step to lower CO2 did not finish:
-  the first attempt failed with `Climate did not converge during _fixed_point_map`; two later attempts were lost to a container restart and to an
-  integrator that kept restarting from tiny time steps. Since 1262.5 W/m2 is already at 299.8 K at the floor and 1331.25 W/m2 is warmer, 288 K is
-  very unlikely to be reachable there, but that is an inference, not a result.
+- **1331.25 W/m2: 288 K not reached at any CO2 that could be evaluated.** Fresh starts at three CO2 values all converged:
+
+  | pCO2 (bar) | T_surf (K) | CH4 | H2O | other gases above 1e-7 |
+  |---|---|---|---|---|
+  | 2.0e-4 | 313.1 | 6.1e-6 | 3.2e-2 | none |
+  | 1.0e-4 | 306.7 | 4.8e-6 | 2.2e-2 | none |
+  | 5.0e-5 | 326.4 | 5.2e-5 | 6.2e-2 | C2H6 6.6e-6 |
+
+  Temperature is **not monotonic in CO2**: the 5e-5 bar state (reproduced by a continuation run from 1e-4 bar: 326.3 K) is a methane-rich state, with CH4 about 10 times
+  higher and C2H6 present, so I take it to be a hydrocarbon-greenhouse state, but I did not test that explanation. The 1e-5 bar floor could not be evaluated: the new mode's initial
+  climate solve fails there, and earlier attempts to step down from 1e-4 bar either failed in the coupling iterations (`Climate did not converge during _fixed_point_map`), were
+  lost to a container restart, or stalled with the integrator restarting from tiny time steps. Because of the non-monotonic behaviour I can no longer say whether 288 K is reachable
+  at lower CO2; the evaluated points are all 307 K or warmer.
 - **1400 W/m2: no solution.** The new mode's climate solve failed at every starting CO2 tried (1e-5, 1e-4, 1e-3, 1e-2, 0.1 and 1 bar). I did not establish whether
   this reflects a runaway greenhouse or a solver limitation. The sweep's own solve had converged at 305.7 K (1e-5 bar).
 
@@ -60,5 +69,6 @@ the sweep run's value (it does not follow the changing CO2).
 
 - `GJ876_S<S>_FullClimate093/`: final photochemical atmosphere (`photochem_atmosphere.txt`), climate profile (`climate_profile.txt`) and
   `result.json` (full outer-search history, composition, convergence flags) for each completed point.
-- `solve_fuller.py`: the solver; `summarize.py`: builds the table and figure.
+- `GJ876_S1331.25_FullClimate093_probe*/`: the three single-CO2 fresh evaluations at 1331.25 W/m2 (suffix = log10 of the starting CO2 in bar).
+- `solve_fuller.py`: the solver (environment variables `START_LOG10`, `MAX_STEP_DEX`, `MAX_OUTER`, `TAG` were added for the 1331.25 probes); `summarize.py`: builds the table and figure.
 - `comparison.csv`, `comparison.png`.

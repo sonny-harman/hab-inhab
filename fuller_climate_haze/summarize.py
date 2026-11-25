@@ -3,7 +3,7 @@ import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 OUT = "/tmp/claude-0/-home-user-hab-inhab/e6bce99a-9bee-504b-9b23-ed0404f973d7/scratchpad/fuller/out"
 REPO = "/home/user/hab-inhab/fuller_climate_haze"
 res = {}
-for p in sorted(glob.glob(f"{OUT}/S*.json")):
+for p in sorted(g for g in glob.glob(f"{OUT}/S*.json") if "probe" not in g and "incomplete" not in g):
     r = json.load(open(p)); res[float(p.split("/S")[-1][:-5])] = r
 rows = []
 for S, r in sorted(res.items()):

@@ -49,9 +49,9 @@ for xc in cands:
     m, g = build(10**xc)
     if m is not None: x = xc; break
 if m is None:
-    json.dump({"S": S, "failed": "initial_guess failed at all starting CO2 values", "tried_pCO2_bar": [10**c for c in cands]}, open(f"out/S{S:07.2f}.json", "w"), indent=1); sys.exit(0)
+    json.dump({"S": S, "failed": "initial_guess failed at all starting CO2 values", "tried_pCO2_bar": [10**c for c in cands]}, open(f"out/S{S:07.2f}{os.environ.get('TAG', '')}.json", "w"), indent=1); sys.exit(0)
 state = g
-for it in range(8):
+for it in range(int(os.environ.get("MAX_OUTER", 8))):
     pbar = 10 ** x
     try:
         conv = converge(m, state, pbar)
@@ -64,7 +64,9 @@ for it in range(8):
     a = m.pc.mole_fraction_dict()
     history.append(dict(pCO2_bar=pbar, T_surf_K=T, fixed_point_converged=bool(conv), chemistry_converged=m.solver.chemistry_converged,
                         coupling_iterations=m.solver.niterations, P_total_bar=float(m.pc.wrk.surface_pressure),
-                        vmr={k: float(a[k][0]) for k in ("CO2", "CO", "O2", "H2O", "CH4", "H2", "N2")}, wall_s=time.time() - t0))
+                        vmr={k: float(a[k][0]) for k in ("CO2", "CO", "O2", "H2O", "CH4", "H2", "N2")},
+                        minor_gases_gt_1e7={k: float(a[k][0]) for k in m.pc.dat.species_names[m.pc.dat.np:m.pc.dat.nq] if a[k][0] > 1e-7 and k not in ("N2","CO2","H2O","H2","CO","CH4","He")},
+                        wall_s=time.time() - t0))
     log(f"outer {it}: pCO2={pbar:.4g} bar -> T_surf={T:.2f} K (converged={conv}, {m.solver.niterations} coupling its), CO={a['CO'][0]:.2e}")
     err = T - T_TARGET
     if abs(err) < TOL_K and conv: break
@@ -73,22 +75,23 @@ for it in range(8):
         if not (2.0 < slope < 150.0): slope = 25.0
     else: slope = 25.0                                        # K per decade of CO2, first guess
     xn = float(np.clip(x - err / slope, np.log10(PMIN), np.log10(PMAX)))
-    xn = x + float(np.clip(xn - x, -1.5, 1.5))
+    MAXSTEP = float(os.environ.get("MAX_STEP_DEX", 1.5))      # cap on each CO2 change (dex); smaller steps restart from a closer converged state
+    xn = x + float(np.clip(xn - x, -MAXSTEP, MAXSTEP))
     if abs(xn - x) < 1e-3:
         log(f"at the CO2 bound ({10**x:.3g} bar) with T-288 = {err:+.2f} K: target not reachable"); break
     x = xn
 if not history:
-    json.dump({"S": S, "failed": "no converged coupled state", "tried_pCO2_bar": [10**c for c in cands]}, open(f"out/S{S:07.2f}.json", "w"), indent=1); sys.exit(0)
+    json.dump({"S": S, "failed": "no converged coupled state", "tried_pCO2_bar": [10**c for c in cands]}, open(f"out/S{S:07.2f}{os.environ.get('TAG', '')}.json", "w"), indent=1); sys.exit(0)
 final = history[-1]; reachable = abs(final["T_surf_K"] - T_TARGET) < 1.0
 out = dict(S_Wm2=S, star="GJ876", haze=True, photochem_version=photochem.__version__, baseline_run=rid,
            baseline_pCO2_bar=meta["pCO2_bar"], baseline_T_surf_K=meta["T_surf_K"], baseline_vmr=meta["vmr"],
            final=final, reached_288K=bool(reachable), history=history, wall_s=time.time() - t0,
            climate="Photochem 0.9.3 CoupledPhotochemistryClimate: all photochemical gases in the radiative-convective model; tropopause pressure fixed at the baseline run's value")
-d_out = f"{REPO}/fuller_climate_haze/GJ876_S{S:07.2f}_FullClimate093"; os.makedirs(d_out, exist_ok=True)
+d_out = f"{REPO}/fuller_climate_haze/GJ876_S{S:07.2f}_FullClimate093{os.environ.get('TAG', '')}"; os.makedirs(d_out, exist_ok=True)
 m.pc.out2atmosphere_txt(f"{d_out}/photochem_atmosphere.txt", number_of_decimals=10, overwrite=True)
 c = m.c
 np.savetxt(f"{d_out}/climate_profile.txt", np.c_[c.P / 1e6, c.T, c.z / 1e5], fmt="%.10e",
            header=f"columns: pressure_bar temperature_K altitude_km (top of atmosphere last)\nT_surf_K {c.T_surf:.10f}\nP_surf_bar {c.P_surf/1e6:.10e}")
 json.dump(out, open(f"{d_out}/result.json", "w"), indent=1)
-json.dump(out, open(f"out/S{S:07.2f}.json", "w"), indent=1)
+json.dump(out, open(f"out/S{S:07.2f}{os.environ.get('TAG', '')}.json", "w"), indent=1)
 log(f"DONE T_surf={final['T_surf_K']:.2f} K at pCO2={final['pCO2_bar']:.4g} bar reached_288K={reachable}")
