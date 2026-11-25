@@ -1,0 +1,61 @@
+{
+ "S_Wm2": 1331.25,
+ "star": "GJ876",
+ "haze": true,
+ "photochem_version": "0.9.3",
+ "baseline_run": "GJ876_S1331.25_CO2-1.000e-05bar_haze",
+ "baseline_pCO2_bar": 1e-05,
+ "baseline_T_surf_K": 294.09164651744203,
+ "baseline_vmr": {
+  "CO2": 9.830036482981748e-06,
+  "CO": 9.225166830438176e-05,
+  "O2": 2.853683885488253e-17,
+  "H2O": 0.0126644459896877,
+  "CH4": 4.547541258138797e-06,
+  "H2": 0.004216622290098106,
+  "N2": 0.9830036482981748
+ },
+ "final": {
+  "pCO2_bar": 0.0001,
+  "T_surf_K": 306.71302542113654,
+  "fixed_point_converged": true,
+  "chemistry_converged": true,
+  "coupling_iterations": 4,
+  "P_total_bar": 1.0606058434581296,
+  "vmr": {
+   "CO2": 9.715207767091016e-05,
+   "CO": 1.9194299830354415e-05,
+   "O2": 2.2487861088324897e-16,
+   "H2O": 0.022398550103393717,
+   "CH4": 4.815257605463308e-06,
+   "H2": 0.005959508630828586,
+   "N2": 0.9715207767091014
+  },
+  "minor_gases_gt_1e7": {},
+  "wall_s": 361.7285478115082
+ },
+ "reached_288K": false,
+ "history": [
+  {
+   "pCO2_bar": 0.0001,
+   "T_surf_K": 306.71302542113654,
+   "fixed_point_converged": true,
+   "chemistry_converged": true,
+   "coupling_iterations": 4,
+   "P_total_bar": 1.0606058434581296,
+   "vmr": {
+    "CO2": 9.715207767091016e-05,
+    "CO": 1.9194299830354415e-05,
+    "O2": 2.2487861088324897e-16,
+    "H2O": 0.022398550103393717,
+    "CH4": 4.815257605463308e-06,
+    "H2": 0.005959508630828586,
+    "N2": 0.9715207767091014
+   },
+   "minor_gases_gt_1e7": {},
+   "wall_s": 361.7285478115082
+  }
+ ],
+ "wall_s": 361.7286763191223,
+ "climate": "Photochem 0.9.3 CoupledPhotochemistryClimate: all photochemical gases in the radiative-convective model; tropopause pressure fixed at the baseline run's value"
+}
