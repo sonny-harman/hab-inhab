@@ -1,0 +1,76 @@
+{
+ "run_id": "Sun3Ga_S0918.75_CO2-1.538e-01bar",
+ "star": "Sun",
+ "S_Wm2": 918.75,
+ "haze": false,
+ "pCO2_bar": 0.15375814185130413,
+ "photochem_version": "0.9.3",
+ "old": {
+  "T_surf_K": 288.0805045978466,
+  "P_total_bar": 1.2127801508745275,
+  "vmr": {
+   "CO2": 0.13121111311422717,
+   "CO": 0.0031417840879592335,
+   "O2": 1.323612191329928e-15,
+   "H2O": 0.00713750232040947,
+   "CH4": 0.0001405227937812397,
+   "H2": 0.0050086308085251306,
+   "N2": 0.8533604239385147
+  },
+  "photochem_steady": true,
+  "target_status": "ok"
+ },
+ "settings": {
+  "saved_inputs_run": "Sun3Ga_S0918.75_CO2-1.538e-01bar",
+  "tropopause_pressure_dyn_cm2": 321337.6121068351,
+  "atol": 1e-18,
+  "target_pressure_dyn_cm2": 1.0,
+  "climate_layers": 50,
+  "climate_top_pressure_dyn_cm2": 1.0,
+  "solver": "FixedPointSolver defaults, max_iterations=30"
+ },
+ "status": "converged",
+ "fixed_point_converged": true,
+ "chemistry_converged": true,
+ "iterations": 3,
+ "T_surf_K": 289.57353597935713,
+ "P_total_bar": 1.2163338412017968,
+ "vmr": {
+  "CO2": 0.13116325088817682,
+  "CO": 0.0035032644349142065,
+  "O2": 1.2546878005622796e-15,
+  "H2O": 0.006966376612113321,
+  "CH4": 0.00017741307521208915,
+  "H2": 0.0051405221431016284,
+  "N2": 0.8530491413913008
+ },
+ "minor_gases_gt_1e7": {},
+ "dT_K_vs_0.9.1": 1.4930313815105478,
+ "solver_history": [
+  {
+   "iteration": 1,
+   "temperature_residual": 0.014012824556111032,
+   "log10pressure_residual": 0.015461138439382793,
+   "chemistry_converged": true,
+   "step_method": "relaxation",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 2,
+   "temperature_residual": 0.00715783646403401,
+   "log10pressure_residual": 0.007861780585774802,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 3,
+   "temperature_residual": 0.0003779956873231442,
+   "log10pressure_residual": 0.00016255242044316276,
+   "chemistry_converged": true,
+   "step_method": null,
+   "anderson_reset": null
+  }
+ ],
+ "wall_s": 458.2529709339142
+}
