@@ -1,0 +1,98 @@
+{
+ "run_id": "GJ876_S1125.00_CO2-8.944e-04bar_haze",
+ "star": "GJ876",
+ "S_Wm2": 1125.0,
+ "haze": true,
+ "pCO2_bar": 0.0008944188337695108,
+ "photochem_version": "0.9.3",
+ "old": {
+  "T_surf_K": 288.1119590150662,
+  "P_total_bar": 1.07385681657892,
+  "vmr": {
+   "CO2": 0.0008659123723336506,
+   "CO": 0.018450252177315368,
+   "O2": 4.339033082912098e-18,
+   "H2O": 0.008638788131440714,
+   "CH4": 2.2435274872130646e-05,
+   "H2": 0.0038818066797940316,
+   "N2": 0.9681285094191048
+  },
+  "photochem_steady": true,
+  "target_status": "ok"
+ },
+ "settings": {
+  "saved_inputs_run": "GJ876_S1125.00_CO2-8.944e-04bar_haze",
+  "tropopause_pressure_dyn_cm2": 344338.2723349586,
+  "atol": 1e-18,
+  "target_pressure_dyn_cm2": 1.0,
+  "climate_layers": 50,
+  "climate_top_pressure_dyn_cm2": 1.0,
+  "solver": "FixedPointSolver defaults, max_iterations=30"
+ },
+ "status": "converged",
+ "fixed_point_converged": true,
+ "chemistry_converged": true,
+ "iterations": 5,
+ "T_surf_K": 301.7958414673204,
+ "P_total_bar": 1.0666350302569805,
+ "vmr": {
+  "CO2": 0.0008690025116624437,
+  "CO": 0.006208279046011362,
+  "O2": 1.2783730200340128e-18,
+  "H2O": 0.01651414660033491,
+  "CH4": 2.171080087704056e-05,
+  "H2": 0.004788883305788509,
+  "N2": 0.9715834225002278
+ },
+ "minor_gases_gt_1e7": {
+  "C2H2": 7.247804088528932e-06,
+  "C2H4": 7.259816888053952e-07,
+  "C2H6": 1.4149312962649405e-06,
+  "C3H4": 3.4407606273200935e-06,
+  "C4H2": 1.5380041829858363e-06
+ },
+ "dT_K_vs_0.9.1": 13.683882452254181,
+ "solver_history": [
+  {
+   "iteration": 1,
+   "temperature_residual": 0.09400883112050444,
+   "log10pressure_residual": 0.029309941648196336,
+   "chemistry_converged": true,
+   "step_method": "relaxation",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 2,
+   "temperature_residual": 0.04033505826293235,
+   "log10pressure_residual": 0.011004983965592352,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 3,
+   "temperature_residual": 0.02349708269599327,
+   "log10pressure_residual": 0.0010954739965951532,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 4,
+   "temperature_residual": 0.0027804906484180706,
+   "log10pressure_residual": 0.000670029323833532,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 5,
+   "temperature_residual": 0.0009896148052941233,
+   "log10pressure_residual": 0.00022661167030335605,
+   "chemistry_converged": true,
+   "step_method": null,
+   "anderson_reset": null
+  }
+ ],
+ "wall_s": 704.6471500396729
+}

@@ -1,0 +1,36 @@
+{
+ "run_id": "GJ876_S1331.25_CO2-1.000e-05bar_haze",
+ "star": "GJ876",
+ "S_Wm2": 1331.25,
+ "haze": true,
+ "pCO2_bar": 1e-05,
+ "photochem_version": "0.9.3",
+ "old": {
+  "T_surf_K": 294.09164651744203,
+  "P_total_bar": 1.054934112329551,
+  "vmr": {
+   "CO2": 9.830036482981748e-06,
+   "CO": 9.225166830438176e-05,
+   "O2": 2.853683885488253e-17,
+   "H2O": 0.0126644459896877,
+   "CH4": 4.547541258138797e-06,
+   "H2": 0.004216622290098106,
+   "N2": 0.9830036482981748
+  },
+  "photochem_steady": true,
+  "target_status": "target not reachable: too warm even at minimum CO2"
+ },
+ "settings": {
+  "saved_inputs_run": "GJ876_S1331.25_CO2-1.000e-05bar_haze",
+  "tropopause_pressure_dyn_cm2": 333633.72165653127,
+  "atol": 1e-18,
+  "target_pressure_dyn_cm2": 1.0,
+  "climate_layers": 50,
+  "climate_top_pressure_dyn_cm2": 1.0,
+  "solver": "FixedPointSolver defaults, max_iterations=30"
+ },
+ "status": "failed",
+ "stage": "initial_guess",
+ "error": "ClimaException: Climate did not converge while constructing the initial guess.",
+ "wall_s": 16.33114457130432
+}
