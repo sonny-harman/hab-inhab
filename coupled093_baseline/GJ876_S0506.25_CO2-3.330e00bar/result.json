@@ -1,0 +1,76 @@
+{
+ "run_id": "GJ876_S0506.25_CO2-3.330e00bar",
+ "star": "GJ876",
+ "S_Wm2": 506.25,
+ "haze": false,
+ "pCO2_bar": 3.3304578806796568,
+ "photochem_version": "0.9.3",
+ "old": {
+  "T_surf_K": 287.2840176940222,
+  "P_total_bar": 4.595351320613225,
+  "vmr": {
+   "CO2": 0.758662226352429,
+   "CO": 0.009025838706757636,
+   "O2": 4.255806166748292e-10,
+   "H2O": 0.0019886940218823523,
+   "CH4": 0.0005832832259805128,
+   "H2": 0.0019447539640686832,
+   "N2": 0.22779517217542664
+  },
+  "photochem_steady": true,
+  "target_status": "ok"
+ },
+ "settings": {
+  "saved_inputs_run": "GJ876_S0506.25_CO2-3.330e00bar",
+  "tropopause_pressure_dyn_cm2": 184433.43473316001,
+  "atol": 1e-18,
+  "target_pressure_dyn_cm2": 1.0,
+  "climate_layers": 50,
+  "climate_top_pressure_dyn_cm2": 1.0,
+  "solver": "FixedPointSolver defaults, max_iterations=30"
+ },
+ "status": "converged",
+ "fixed_point_converged": true,
+ "chemistry_converged": true,
+ "iterations": 3,
+ "T_surf_K": 286.29178187151786,
+ "P_total_bar": 4.609468475371331,
+ "vmr": {
+  "CO2": 0.7587852538892295,
+  "CO": 0.009177311040681183,
+  "O2": 3.0987383151719683e-10,
+  "H2O": 0.0016276204109438195,
+  "CH4": 0.0006039977718787652,
+  "H2": 0.001973671905101668,
+  "N2": 0.2278321123023426
+ },
+ "minor_gases_gt_1e7": {},
+ "dT_K_vs_0.9.1": -0.9922358225043695,
+ "solver_history": [
+  {
+   "iteration": 1,
+   "temperature_residual": 0.014247605954937759,
+   "log10pressure_residual": 0.00900195926990488,
+   "chemistry_converged": true,
+   "step_method": "relaxation",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 2,
+   "temperature_residual": 0.0070849973130403514,
+   "log10pressure_residual": 0.004564955624291933,
+   "chemistry_converged": true,
+   "step_method": "anderson",
+   "anderson_reset": null
+  },
+  {
+   "iteration": 3,
+   "temperature_residual": 0.0001711537016741617,
+   "log10pressure_residual": 0.000120268631154552,
+   "chemistry_converged": true,
+   "step_method": null,
+   "anderson_reset": null
+  }
+ ],
+ "wall_s": 322.6660306453705
+}
